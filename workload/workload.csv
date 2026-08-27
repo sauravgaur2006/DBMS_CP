@@ -1,0 +1,44 @@
+query_id,query,frequency
+1,SELECT * FROM Student WHERE student_id = 42;,181
+2,SELECT * FROM Enrollment WHERE student_id = 42;,114
+3,SELECT * FROM Attendance WHERE student_id = 42;,103
+4,SELECT * FROM Course WHERE course_id = 10;,194
+5,SELECT * FROM Attendance WHERE student_id = 42 AND course_id = 10;,135
+6,SELECT * FROM Student WHERE department = 'Computer Science';,67
+7,SELECT * FROM Student WHERE city = 'Pune';,67
+8,SELECT * FROM Student WHERE year = 3;,64
+9,SELECT * FROM Course WHERE department = 'Mathematics';,83
+10,SELECT * FROM Enrollment WHERE semester = 'Fall 2023';,63
+11,SELECT * FROM Enrollment WHERE marks > 90;,81
+12,SELECT * FROM Attendance WHERE percentage < 50;,83
+13,SELECT * FROM Student WHERE name LIKE 'A%';,88
+14,SELECT * FROM Student WHERE department = 'Computer Science' AND city = 'Mumbai';,67
+15,SELECT * FROM Student WHERE year = 3 AND city = 'Pune';,52
+16,SELECT * FROM Enrollment WHERE marks > 85 AND semester = 'Spring 2024';,68
+17,SELECT * FROM Enrollment WHERE course_id = 10 AND marks > 80;,63
+18,SELECT * FROM Attendance WHERE course_id = 15 AND percentage < 40;,51
+19,SELECT * FROM Student WHERE department = 'Physics' AND (city = 'Delhi' OR city = 'Bangalore');,50
+20,"SELECT s.name, s.department, e.course_id, e.marks, e.semester FROM Student s JOIN Enrollment e ON s.student_id = e.student_id WHERE s.department = 'Computer Science';",42
+21,"SELECT s.name, c.course_name, e.marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id JOIN Course c ON e.course_id = c.course_id WHERE s.city = 'Mumbai';",46
+22,"SELECT s.name, c.course_name, a.percentage FROM Student s JOIN Attendance a ON s.student_id = a.student_id JOIN Course c ON a.course_id = c.course_id WHERE a.percentage < 50;",47
+23,"SELECT e.enrollment_id, s.name, c.course_name, e.marks FROM Enrollment e JOIN Student s ON e.student_id = s.student_id JOIN Course c ON e.course_id = c.course_id WHERE e.semester = 'Fall 2023';",56
+24,"SELECT s.name, s.department AS student_dept, c.course_name, c.department AS course_dept FROM Student s JOIN Enrollment e ON s.student_id = e.student_id JOIN Course c ON e.course_id = c.course_id WHERE s.department != c.department;",59
+25,"SELECT s.department, AVG(e.marks) AS avg_marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id GROUP BY s.department;",20
+26,"SELECT c.course_name, COUNT(DISTINCT e.student_id) AS student_count FROM Course c JOIN Enrollment e ON c.course_id = e.course_id GROUP BY c.course_name;",37
+27,"SELECT s.department, AVG(a.percentage) AS avg_attendance FROM Student s JOIN Attendance a ON s.student_id = a.student_id GROUP BY s.department;",26
+28,"SELECT c.course_name, AVG(e.marks) AS avg_marks FROM Course c JOIN Enrollment e ON c.course_id = e.course_id GROUP BY c.course_name ORDER BY avg_marks DESC LIMIT 10;",40
+29,"SELECT s.name, e.semester, COUNT(*) AS enrollment_count FROM Student s JOIN Enrollment e ON s.student_id = e.student_id GROUP BY s.student_id, s.name, e.semester;",37
+30,"SELECT s.name, e.marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id WHERE e.semester = 'Spring 2024' ORDER BY e.marks DESC LIMIT 100;",33
+31,SELECT * FROM Student WHERE department = 'Economics' ORDER BY name;,27
+32,SELECT * FROM Attendance ORDER BY percentage ASC LIMIT 100;,34
+33,SELECT * FROM Enrollment WHERE semester = 'Fall 2023' ORDER BY marks DESC LIMIT 50;,38
+34,"SELECT department, COUNT(*) AS student_count FROM Student GROUP BY department;",23
+35,"SELECT city, COUNT(*) AS student_count FROM Student GROUP BY city;",15
+36,"SELECT semester, AVG(marks) AS avg_marks FROM Enrollment GROUP BY semester;",20
+37,"SELECT department, COUNT(*) AS course_count FROM Course GROUP BY department;",28
+38,"SELECT course_id, AVG(percentage) AS avg_pct FROM Attendance GROUP BY course_id;",25
+39,SELECT * FROM Student;,7
+40,SELECT COUNT(*) AS total_enrollments FROM Enrollment;,5
+41,SELECT s.* FROM Student s LEFT JOIN Enrollment e ON s.student_id = e.student_id WHERE e.enrollment_id IS NULL;,6
+42,SELECT c.* FROM Course c LEFT JOIN Enrollment e ON c.course_id = e.course_id WHERE e.enrollment_id IS NULL;,8
+43,"SELECT s.name, s.department, c.course_name, e.marks, a.percentage FROM Student s JOIN Enrollment e ON s.student_id = e.student_id JOIN Course c ON e.course_id = c.course_id LEFT JOIN Attendance a ON s.student_id = a.student_id AND c.course_id = a.course_id WHERE s.student_id <= 100;",4
