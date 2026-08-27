@@ -1,0 +1,29 @@
+[
+  {
+    "query_id": 1,
+    "table": "Student",
+    "where_columns": ["department", "city"],
+    "join_columns": [],
+    "order_columns": [],
+    "group_columns": [],
+    "frequency": 100
+  },
+  {
+    "query_id": 2,
+    "table": "Enrollment",
+    "where_columns": [],
+    "join_columns": ["student_id"],
+    "order_columns": [],
+    "group_columns": [],
+    "frequency": 40
+  },
+  {
+    "query_id": 3,
+    "table": "Student",
+    "where_columns": ["department"],
+    "join_columns": ["student_id"],
+    "order_columns": ["name"],
+    "group_columns": [],
+    "frequency": 75
+  }
+]

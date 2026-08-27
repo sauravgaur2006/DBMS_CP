@@ -1,0 +1,56 @@
+[
+  {
+    "query_id": 1,
+    "table": "Student",
+    "columns": [
+      "department"
+    ],
+    "score": 100.0,
+    "reason": "Rule-based score based on frequency (100) and usage."
+  },
+  {
+    "query_id": 1,
+    "table": "Student",
+    "columns": [
+      "city"
+    ],
+    "score": 100.0,
+    "reason": "Rule-based score based on frequency (100) and usage."
+  },
+  {
+    "query_id": 2,
+    "table": "Enrollment",
+    "columns": [
+      "student_id"
+    ],
+    "score": 60.0,
+    "reason": "Rule-based score based on frequency (40) and usage."
+  },
+  {
+    "query_id": 3,
+    "table": "Student",
+    "columns": [
+      "department"
+    ],
+    "score": 75.0,
+    "reason": "Rule-based score based on frequency (75) and usage."
+  },
+  {
+    "query_id": 3,
+    "table": "Student",
+    "columns": [
+      "student_id"
+    ],
+    "score": 112.5,
+    "reason": "Rule-based score based on frequency (75) and usage."
+  },
+  {
+    "query_id": 3,
+    "table": "Student",
+    "columns": [
+      "name"
+    ],
+    "score": 37.5,
+    "reason": "Rule-based score based on frequency (75) and usage."
+  }
+]
