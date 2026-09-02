@@ -1,0 +1,27 @@
+{
+  "total_queries": 2,
+  "total_frequency": 2,
+  "unique_tables": 2,
+  "tables": [
+    "Course",
+    "Student"
+  ],
+  "most_frequent_queries": [
+    {
+      "query_id": 1,
+      "frequency": 1,
+      "table": "Student",
+      "query": "SELECT * FROM Student;"
+    },
+    {
+      "query_id": 2,
+      "frequency": 1,
+      "table": "Course",
+      "query": "SELECT * FROM Course;"
+    }
+  ],
+  "most_used_where_columns": [],
+  "most_used_join_columns": [],
+  "most_used_order_columns": [],
+  "most_used_group_columns": []
+}
