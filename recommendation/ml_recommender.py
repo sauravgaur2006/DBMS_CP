@@ -36,12 +36,12 @@ def generate_ml_recommendations(workload, model_path):
         if not table or table == "UNKNOWN":
             continue
 
-        # Collect all unique columns mentioned in this query
-        all_columns = set(
+        # Collect all unique columns mentioned in this query (sorted for determinism)
+        all_columns = sorted(list(set(
             query.get("where_columns", []) +
             query.get("join_columns", []) +
             query.get("order_columns", [])
-        )
+        )))
 
         for col in all_columns:
             # Extract features for the model
