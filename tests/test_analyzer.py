@@ -208,7 +208,7 @@ class TestWorkloadAnalyzer(unittest.TestCase):
 
         out_path = temp_path + ".json"
         try:
-            queries, _ = analyze_workload(temp_path, output_path=out_path)
+            queries, _ = analyze_workload(temp_path, output_path=out_path, summary_path=None)
             self.assertEqual(len(queries), 1)
             self.assertEqual(queries[0]["query_id"], 2)
         finally:
@@ -223,7 +223,7 @@ class TestWorkloadAnalyzer(unittest.TestCase):
 
         out_path = temp_path + ".json"
         try:
-            queries, _ = analyze_workload(temp_path, output_path=out_path)
+            queries, _ = analyze_workload(temp_path, output_path=out_path, summary_path=None)
             self.assertEqual(queries[0]["frequency"], 1)
             self.assertEqual(queries[1]["frequency"], 1)
         finally:
@@ -238,7 +238,7 @@ class TestWorkloadAnalyzer(unittest.TestCase):
 
         out_path = temp_path + ".json"
         try:
-            queries, _ = analyze_workload(temp_path, output_path=out_path)
+            queries, _ = analyze_workload(temp_path, output_path=out_path, summary_path=None)
             self.assertEqual(len(queries), 2)
         finally:
             for p in [temp_path, out_path]:
