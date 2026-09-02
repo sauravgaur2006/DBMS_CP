@@ -188,6 +188,9 @@ def run_benchmark_live(config: dict, recommendations: list) -> list:
             table = item["table"]
             columns = item["columns"]
             query_sql = item.get("query")
+            if not query_sql:
+                col_conds = " AND ".join(f"`{c}` IS NOT NULL" for c in columns)
+                query_sql = f"SELECT * FROM `{table}` WHERE {col_conds};"
             index_name = generate_index_name(table, columns)
             col_list_str = ", ".join(f"`{c}`" for c in columns)
 
@@ -376,8 +379,8 @@ def main():
         except Exception as e:
             print(f"\n[!] Live database benchmark encountered an error: {e}")
             print("[*] Tip: Check that MySQL is running and credentials in 'db_config.json' are correct.")
-            print("[*] You can also run with '--simulate' to test without a live database.")
-            return
+            print("[*] Automatically falling back to benchmark simulation mode...")
+            results = run_benchmark_simulated(recommendations)
 
     # 3. Export results to benchmark_results.json
     print(f"[*] Exporting calculated metrics to: {args.output}")

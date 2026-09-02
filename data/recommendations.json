@@ -1,6 +1,7 @@
 [
   {
     "query_id": 1,
+    "query": "SELECT * FROM Student WHERE student_id = 42;",
     "table": "Student",
     "columns": [
       "student_id"
@@ -10,6 +11,7 @@
   },
   {
     "query_id": 2,
+    "query": "SELECT * FROM Enrollment WHERE student_id = 42;",
     "table": "Enrollment",
     "columns": [
       "student_id"
@@ -19,6 +21,7 @@
   },
   {
     "query_id": 3,
+    "query": "SELECT * FROM Attendance WHERE student_id = 42;",
     "table": "Attendance",
     "columns": [
       "student_id"
@@ -28,6 +31,7 @@
   },
   {
     "query_id": 4,
+    "query": "SELECT * FROM Course WHERE course_id = 10;",
     "table": "Course",
     "columns": [
       "course_id"
@@ -37,6 +41,7 @@
   },
   {
     "query_id": 5,
+    "query": "SELECT * FROM Attendance WHERE student_id = 42 AND course_id = 10;",
     "table": "Attendance",
     "columns": [
       "student_id"
@@ -46,6 +51,7 @@
   },
   {
     "query_id": 5,
+    "query": "SELECT * FROM Attendance WHERE student_id = 42 AND course_id = 10;",
     "table": "Attendance",
     "columns": [
       "course_id"
@@ -55,6 +61,7 @@
   },
   {
     "query_id": 6,
+    "query": "SELECT * FROM Student WHERE department = 'Computer Science';",
     "table": "Student",
     "columns": [
       "department"
@@ -64,6 +71,7 @@
   },
   {
     "query_id": 7,
+    "query": "SELECT * FROM Student WHERE city = 'Pune';",
     "table": "Student",
     "columns": [
       "city"
@@ -73,6 +81,7 @@
   },
   {
     "query_id": 8,
+    "query": "SELECT * FROM Student WHERE year = 3;",
     "table": "Student",
     "columns": [
       "year"
@@ -82,6 +91,7 @@
   },
   {
     "query_id": 9,
+    "query": "SELECT * FROM Course WHERE department = 'Mathematics';",
     "table": "Course",
     "columns": [
       "department"
@@ -91,6 +101,7 @@
   },
   {
     "query_id": 10,
+    "query": "SELECT * FROM Enrollment WHERE semester = 'Fall 2023';",
     "table": "Enrollment",
     "columns": [
       "semester"
@@ -100,6 +111,7 @@
   },
   {
     "query_id": 11,
+    "query": "SELECT * FROM Enrollment WHERE marks > 90;",
     "table": "Enrollment",
     "columns": [
       "marks"
@@ -109,6 +121,7 @@
   },
   {
     "query_id": 12,
+    "query": "SELECT * FROM Attendance WHERE percentage < 50;",
     "table": "Attendance",
     "columns": [
       "percentage"
@@ -118,6 +131,7 @@
   },
   {
     "query_id": 13,
+    "query": "SELECT * FROM Student WHERE name LIKE 'A%';",
     "table": "Student",
     "columns": [
       "name"
@@ -127,6 +141,7 @@
   },
   {
     "query_id": 14,
+    "query": "SELECT * FROM Student WHERE department = 'Computer Science' AND city = 'Mumbai';",
     "table": "Student",
     "columns": [
       "department"
@@ -136,6 +151,7 @@
   },
   {
     "query_id": 14,
+    "query": "SELECT * FROM Student WHERE department = 'Computer Science' AND city = 'Mumbai';",
     "table": "Student",
     "columns": [
       "city"
@@ -145,6 +161,7 @@
   },
   {
     "query_id": 15,
+    "query": "SELECT * FROM Student WHERE year = 3 AND city = 'Pune';",
     "table": "Student",
     "columns": [
       "year"
@@ -154,6 +171,7 @@
   },
   {
     "query_id": 15,
+    "query": "SELECT * FROM Student WHERE year = 3 AND city = 'Pune';",
     "table": "Student",
     "columns": [
       "city"
@@ -163,6 +181,7 @@
   },
   {
     "query_id": 16,
+    "query": "SELECT * FROM Enrollment WHERE marks > 85 AND semester = 'Spring 2024';",
     "table": "Enrollment",
     "columns": [
       "marks"
@@ -172,6 +191,7 @@
   },
   {
     "query_id": 16,
+    "query": "SELECT * FROM Enrollment WHERE marks > 85 AND semester = 'Spring 2024';",
     "table": "Enrollment",
     "columns": [
       "semester"
@@ -181,6 +201,7 @@
   },
   {
     "query_id": 17,
+    "query": "SELECT * FROM Enrollment WHERE course_id = 10 AND marks > 80;",
     "table": "Enrollment",
     "columns": [
       "course_id"
@@ -190,6 +211,7 @@
   },
   {
     "query_id": 17,
+    "query": "SELECT * FROM Enrollment WHERE course_id = 10 AND marks > 80;",
     "table": "Enrollment",
     "columns": [
       "marks"
@@ -199,6 +221,7 @@
   },
   {
     "query_id": 18,
+    "query": "SELECT * FROM Attendance WHERE course_id = 15 AND percentage < 40;",
     "table": "Attendance",
     "columns": [
       "course_id"
@@ -208,6 +231,7 @@
   },
   {
     "query_id": 18,
+    "query": "SELECT * FROM Attendance WHERE course_id = 15 AND percentage < 40;",
     "table": "Attendance",
     "columns": [
       "percentage"
@@ -217,6 +241,7 @@
   },
   {
     "query_id": 19,
+    "query": "SELECT * FROM Student WHERE department = 'Physics' AND (city = 'Delhi' OR city = 'Bangalore');",
     "table": "Student",
     "columns": [
       "department"
@@ -226,6 +251,7 @@
   },
   {
     "query_id": 19,
+    "query": "SELECT * FROM Student WHERE department = 'Physics' AND (city = 'Delhi' OR city = 'Bangalore');",
     "table": "Student",
     "columns": [
       "city"
@@ -235,6 +261,7 @@
   },
   {
     "query_id": 20,
+    "query": "SELECT s.name, s.department, e.course_id, e.marks, e.semester FROM Student s JOIN Enrollment e ON s.student_id = e.student_id WHERE s.department = 'Computer Science';",
     "table": "Student",
     "columns": [
       "department"
@@ -244,6 +271,7 @@
   },
   {
     "query_id": 20,
+    "query": "SELECT s.name, s.department, e.course_id, e.marks, e.semester FROM Student s JOIN Enrollment e ON s.student_id = e.student_id WHERE s.department = 'Computer Science';",
     "table": "Student",
     "columns": [
       "student_id"
@@ -253,6 +281,7 @@
   },
   {
     "query_id": 21,
+    "query": "SELECT s.name, c.course_name, e.marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id JOIN Course c ON e.course_id = c.course_id WHERE s.city = 'Mumbai';",
     "table": "Student",
     "columns": [
       "city"
@@ -262,6 +291,7 @@
   },
   {
     "query_id": 21,
+    "query": "SELECT s.name, c.course_name, e.marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id JOIN Course c ON e.course_id = c.course_id WHERE s.city = 'Mumbai';",
     "table": "Student",
     "columns": [
       "student_id"
@@ -271,6 +301,7 @@
   },
   {
     "query_id": 21,
+    "query": "SELECT s.name, c.course_name, e.marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id JOIN Course c ON e.course_id = c.course_id WHERE s.city = 'Mumbai';",
     "table": "Student",
     "columns": [
       "course_id"
@@ -280,6 +311,7 @@
   },
   {
     "query_id": 22,
+    "query": "SELECT s.name, c.course_name, a.percentage FROM Student s JOIN Attendance a ON s.student_id = a.student_id JOIN Course c ON a.course_id = c.course_id WHERE a.percentage < 50;",
     "table": "Student",
     "columns": [
       "percentage"
@@ -289,6 +321,7 @@
   },
   {
     "query_id": 22,
+    "query": "SELECT s.name, c.course_name, a.percentage FROM Student s JOIN Attendance a ON s.student_id = a.student_id JOIN Course c ON a.course_id = c.course_id WHERE a.percentage < 50;",
     "table": "Student",
     "columns": [
       "student_id"
@@ -298,6 +331,7 @@
   },
   {
     "query_id": 22,
+    "query": "SELECT s.name, c.course_name, a.percentage FROM Student s JOIN Attendance a ON s.student_id = a.student_id JOIN Course c ON a.course_id = c.course_id WHERE a.percentage < 50;",
     "table": "Student",
     "columns": [
       "course_id"
@@ -307,6 +341,7 @@
   },
   {
     "query_id": 23,
+    "query": "SELECT e.enrollment_id, s.name, c.course_name, e.marks FROM Enrollment e JOIN Student s ON e.student_id = s.student_id JOIN Course c ON e.course_id = c.course_id WHERE e.semester = 'Fall 2023';",
     "table": "Enrollment",
     "columns": [
       "semester"
@@ -316,6 +351,7 @@
   },
   {
     "query_id": 23,
+    "query": "SELECT e.enrollment_id, s.name, c.course_name, e.marks FROM Enrollment e JOIN Student s ON e.student_id = s.student_id JOIN Course c ON e.course_id = c.course_id WHERE e.semester = 'Fall 2023';",
     "table": "Enrollment",
     "columns": [
       "student_id"
@@ -325,6 +361,7 @@
   },
   {
     "query_id": 23,
+    "query": "SELECT e.enrollment_id, s.name, c.course_name, e.marks FROM Enrollment e JOIN Student s ON e.student_id = s.student_id JOIN Course c ON e.course_id = c.course_id WHERE e.semester = 'Fall 2023';",
     "table": "Enrollment",
     "columns": [
       "course_id"
@@ -334,6 +371,7 @@
   },
   {
     "query_id": 24,
+    "query": "SELECT s.name, s.department AS student_dept, c.course_name, c.department AS course_dept FROM Student s JOIN Enrollment e ON s.student_id = e.student_id JOIN Course c ON e.course_id = c.course_id WHERE s.department != c.department;",
     "table": "Student",
     "columns": [
       "department"
@@ -343,6 +381,7 @@
   },
   {
     "query_id": 24,
+    "query": "SELECT s.name, s.department AS student_dept, c.course_name, c.department AS course_dept FROM Student s JOIN Enrollment e ON s.student_id = e.student_id JOIN Course c ON e.course_id = c.course_id WHERE s.department != c.department;",
     "table": "Student",
     "columns": [
       "student_id"
@@ -352,6 +391,7 @@
   },
   {
     "query_id": 24,
+    "query": "SELECT s.name, s.department AS student_dept, c.course_name, c.department AS course_dept FROM Student s JOIN Enrollment e ON s.student_id = e.student_id JOIN Course c ON e.course_id = c.course_id WHERE s.department != c.department;",
     "table": "Student",
     "columns": [
       "course_id"
@@ -361,6 +401,7 @@
   },
   {
     "query_id": 25,
+    "query": "SELECT s.department, AVG(e.marks) AS avg_marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id GROUP BY s.department;",
     "table": "Student",
     "columns": [
       "student_id"
@@ -370,6 +411,7 @@
   },
   {
     "query_id": 26,
+    "query": "SELECT c.course_name, COUNT(DISTINCT e.student_id) AS student_count FROM Course c JOIN Enrollment e ON c.course_id = e.course_id GROUP BY c.course_name;",
     "table": "Course",
     "columns": [
       "course_id"
@@ -379,6 +421,7 @@
   },
   {
     "query_id": 27,
+    "query": "SELECT s.department, AVG(a.percentage) AS avg_attendance FROM Student s JOIN Attendance a ON s.student_id = a.student_id GROUP BY s.department;",
     "table": "Student",
     "columns": [
       "student_id"
@@ -388,6 +431,7 @@
   },
   {
     "query_id": 28,
+    "query": "SELECT c.course_name, AVG(e.marks) AS avg_marks FROM Course c JOIN Enrollment e ON c.course_id = e.course_id GROUP BY c.course_name ORDER BY avg_marks DESC LIMIT 10;",
     "table": "Course",
     "columns": [
       "course_id"
@@ -397,6 +441,7 @@
   },
   {
     "query_id": 29,
+    "query": "SELECT s.name, e.semester, COUNT(*) AS enrollment_count FROM Student s JOIN Enrollment e ON s.student_id = e.student_id GROUP BY s.student_id, s.name, e.semester;",
     "table": "Student",
     "columns": [
       "student_id"
@@ -406,6 +451,7 @@
   },
   {
     "query_id": 30,
+    "query": "SELECT s.name, e.marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id WHERE e.semester = 'Spring 2024' ORDER BY e.marks DESC LIMIT 100;",
     "table": "Student",
     "columns": [
       "semester"
@@ -415,6 +461,7 @@
   },
   {
     "query_id": 30,
+    "query": "SELECT s.name, e.marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id WHERE e.semester = 'Spring 2024' ORDER BY e.marks DESC LIMIT 100;",
     "table": "Student",
     "columns": [
       "student_id"
@@ -424,6 +471,7 @@
   },
   {
     "query_id": 31,
+    "query": "SELECT * FROM Student WHERE department = 'Economics' ORDER BY name;",
     "table": "Student",
     "columns": [
       "department"
@@ -433,6 +481,7 @@
   },
   {
     "query_id": 33,
+    "query": "SELECT * FROM Enrollment WHERE semester = 'Fall 2023' ORDER BY marks DESC LIMIT 50;",
     "table": "Enrollment",
     "columns": [
       "semester"

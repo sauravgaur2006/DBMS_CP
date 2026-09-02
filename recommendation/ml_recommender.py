@@ -56,7 +56,8 @@ def generate_ml_recommendations(workload, model_path):
             # If the model is more than 60% confident it's beneficial, recommend it!
             if beneficial_prob > 0.60:
                 recommendations.append({
-                    "query_id": query["query_id"],
+                    "query_id": query.get("query_id", 0),
+                    "query": query.get("query", ""),
                     "table": table,
                     "columns": [col],
                     "confidence_score": round(beneficial_prob * 100, 2),

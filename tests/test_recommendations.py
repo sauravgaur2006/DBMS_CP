@@ -102,10 +102,11 @@ class TestRecommendationPipeline(unittest.TestCase):
         """Verify candidate recommendations adhere to expected structure."""
         recs = generate_and_score_candidates(self.mock_workload)
         self.assertGreater(len(recs), 0)
-        required_keys = {"query_id", "table", "columns", "score", "reason"}
+        required_keys = {"query_id", "table", "columns", "score", "reason", "query"}
         for r in recs:
             self.assertEqual(set(r.keys()), required_keys)
             self.assertIsInstance(r["query_id"], int)
+            self.assertIsInstance(r["query"], str)
             self.assertIsInstance(r["table"], str)
             self.assertIsInstance(r["columns"], list)
             self.assertIsInstance(r["score"], (int, float))
@@ -160,9 +161,10 @@ class TestRecommendationPipeline(unittest.TestCase):
             self.assertIsInstance(ml_recs, list)
             self.assertGreater(len(ml_recs), 0)
 
-            required_keys = {"query_id", "table", "columns", "confidence_score", "reason"}
+            required_keys = {"query_id", "table", "columns", "confidence_score", "reason", "query"}
             for r in ml_recs:
                 self.assertEqual(set(r.keys()), required_keys)
+                self.assertIsInstance(r["query"], str)
                 self.assertGreater(r["confidence_score"], 60.0)
                 self.assertNotEqual(r["table"], "UNKNOWN")
         finally:

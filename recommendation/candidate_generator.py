@@ -35,6 +35,7 @@ def generate_and_score_candidates(workload):
             if score > 20: 
                 recommendations.append({
                     "query_id": query_id,
+                    "query": query.get("query", ""),
                     "table": table,
                     "columns": [col],
                     "score": score,
