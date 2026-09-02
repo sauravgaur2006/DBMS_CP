@@ -1,27 +1,161 @@
 {
-  "total_queries": 2,
-  "total_frequency": 2,
-  "unique_tables": 2,
+  "total_queries": 43,
+  "total_frequency": 2357,
+  "unique_tables": 4,
   "tables": [
+    "Attendance",
     "Course",
+    "Enrollment",
     "Student"
   ],
   "most_frequent_queries": [
     {
+      "query_id": 4,
+      "frequency": 194,
+      "table": "Course",
+      "query": "SELECT * FROM Course WHERE course_id = 10;"
+    },
+    {
       "query_id": 1,
-      "frequency": 1,
+      "frequency": 181,
       "table": "Student",
-      "query": "SELECT * FROM Student;"
+      "query": "SELECT * FROM Student WHERE student_id = 42;"
+    },
+    {
+      "query_id": 5,
+      "frequency": 135,
+      "table": "Attendance",
+      "query": "SELECT * FROM Attendance WHERE student_id = 42 AND course_id = 10;"
     },
     {
       "query_id": 2,
-      "frequency": 1,
-      "table": "Course",
-      "query": "SELECT * FROM Course;"
+      "frequency": 114,
+      "table": "Enrollment",
+      "query": "SELECT * FROM Enrollment WHERE student_id = 42;"
+    },
+    {
+      "query_id": 3,
+      "frequency": 103,
+      "table": "Attendance",
+      "query": "SELECT * FROM Attendance WHERE student_id = 42;"
     }
   ],
-  "most_used_where_columns": [],
-  "most_used_join_columns": [],
-  "most_used_order_columns": [],
-  "most_used_group_columns": []
+  "most_used_where_columns": [
+    {
+      "column": "department",
+      "usage_count": 7,
+      "frequency_sum": 395
+    },
+    {
+      "column": "student_id",
+      "usage_count": 5,
+      "frequency_sum": 537
+    },
+    {
+      "column": "city",
+      "usage_count": 5,
+      "frequency_sum": 282
+    },
+    {
+      "column": "semester",
+      "usage_count": 5,
+      "frequency_sum": 258
+    },
+    {
+      "column": "course_id",
+      "usage_count": 4,
+      "frequency_sum": 443
+    },
+    {
+      "column": "marks",
+      "usage_count": 3,
+      "frequency_sum": 212
+    },
+    {
+      "column": "percentage",
+      "usage_count": 3,
+      "frequency_sum": 181
+    },
+    {
+      "column": "year",
+      "usage_count": 2,
+      "frequency_sum": 116
+    },
+    {
+      "column": "enrollment_id",
+      "usage_count": 2,
+      "frequency_sum": 14
+    },
+    {
+      "column": "name",
+      "usage_count": 1,
+      "frequency_sum": 88
+    }
+  ],
+  "most_used_join_columns": [
+    {
+      "column": "student_id",
+      "usage_count": 11,
+      "frequency_sum": 376
+    },
+    {
+      "column": "course_id",
+      "usage_count": 8,
+      "frequency_sum": 297
+    }
+  ],
+  "most_used_order_columns": [
+    {
+      "column": "marks",
+      "usage_count": 2,
+      "frequency_sum": 71
+    },
+    {
+      "column": "percentage",
+      "usage_count": 1,
+      "frequency_sum": 34
+    },
+    {
+      "column": "name",
+      "usage_count": 1,
+      "frequency_sum": 27
+    }
+  ],
+  "most_used_group_columns": [
+    {
+      "column": "department",
+      "usage_count": 4,
+      "frequency_sum": 97
+    },
+    {
+      "column": "course_name",
+      "usage_count": 2,
+      "frequency_sum": 77
+    },
+    {
+      "column": "semester",
+      "usage_count": 2,
+      "frequency_sum": 57
+    },
+    {
+      "column": "name",
+      "usage_count": 1,
+      "frequency_sum": 37
+    },
+    {
+      "column": "student_id",
+      "usage_count": 1,
+      "frequency_sum": 37
+    },
+    {
+      "column": "course_id",
+      "usage_count": 1,
+      "frequency_sum": 25
+    },
+    {
+      "column": "city",
+      "usage_count": 1,
+      "frequency_sum": 15
+    }
+  ]
 }
