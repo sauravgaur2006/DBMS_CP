@@ -1,0 +1,688 @@
+[
+  {
+    "query_id": 1,
+    "table": "Student",
+    "columns": [
+      "student_id"
+    ],
+    "index_name": "idx_Student_student_id",
+    "query": "SELECT * FROM Student WHERE student_id = 42;",
+    "before_ms": 478.08,
+    "after_ms": 135.73,
+    "improvement_percent": 71.61,
+    "storage_overhead_mb": 1.967,
+    "timestamp": "2026-09-03T00:13:38.779124"
+  },
+  {
+    "query_id": 2,
+    "table": "Enrollment",
+    "columns": [
+      "student_id"
+    ],
+    "index_name": "idx_Enrollment_student_id",
+    "query": "SELECT * FROM Enrollment WHERE student_id = 42;",
+    "before_ms": 419.41,
+    "after_ms": 58.63,
+    "improvement_percent": 86.02,
+    "storage_overhead_mb": 0.6032,
+    "timestamp": "2026-09-03T00:13:38.779134"
+  },
+  {
+    "query_id": 3,
+    "table": "Attendance",
+    "columns": [
+      "student_id"
+    ],
+    "index_name": "idx_Attendance_student_id",
+    "query": "SELECT * FROM Attendance WHERE student_id = 42;",
+    "before_ms": 396.7,
+    "after_ms": 81.47,
+    "improvement_percent": 79.46,
+    "storage_overhead_mb": 0.6404,
+    "timestamp": "2026-09-03T00:13:38.779137"
+  },
+  {
+    "query_id": 4,
+    "table": "Course",
+    "columns": [
+      "course_id"
+    ],
+    "index_name": "idx_Course_course_id",
+    "query": "SELECT * FROM Course WHERE course_id = 10;",
+    "before_ms": 558.34,
+    "after_ms": 84.8,
+    "improvement_percent": 84.81,
+    "storage_overhead_mb": 1.8638,
+    "timestamp": "2026-09-03T00:13:38.779139"
+  },
+  {
+    "query_id": 5,
+    "table": "Attendance",
+    "columns": [
+      "student_id"
+    ],
+    "index_name": "idx_Attendance_student_id",
+    "query": "SELECT * FROM Attendance WHERE student_id = 42 AND course_id = 10;",
+    "before_ms": 697.63,
+    "after_ms": 150.17,
+    "improvement_percent": 78.47,
+    "storage_overhead_mb": 1.7564,
+    "timestamp": "2026-09-03T00:13:38.779141"
+  },
+  {
+    "query_id": 5,
+    "table": "Attendance",
+    "columns": [
+      "course_id"
+    ],
+    "index_name": "idx_Attendance_course_id",
+    "query": "SELECT * FROM Attendance WHERE student_id = 42 AND course_id = 10;",
+    "before_ms": 504.38,
+    "after_ms": 102.74,
+    "improvement_percent": 79.63,
+    "storage_overhead_mb": 1.4717,
+    "timestamp": "2026-09-03T00:13:38.779143"
+  },
+  {
+    "query_id": 6,
+    "table": "Student",
+    "columns": [
+      "department"
+    ],
+    "index_name": "idx_Student_department",
+    "query": "SELECT * FROM Student WHERE department = 'Computer Science';",
+    "before_ms": 340.77,
+    "after_ms": 62.28,
+    "improvement_percent": 81.72,
+    "storage_overhead_mb": 0.8701,
+    "timestamp": "2026-09-03T00:13:38.779145"
+  },
+  {
+    "query_id": 7,
+    "table": "Student",
+    "columns": [
+      "city"
+    ],
+    "index_name": "idx_Student_city",
+    "query": "SELECT * FROM Student WHERE city = 'Pune';",
+    "before_ms": 343.69,
+    "after_ms": 75.05,
+    "improvement_percent": 78.16,
+    "storage_overhead_mb": 1.5653,
+    "timestamp": "2026-09-03T00:13:38.779147"
+  },
+  {
+    "query_id": 8,
+    "table": "Student",
+    "columns": [
+      "year"
+    ],
+    "index_name": "idx_Student_year",
+    "query": "SELECT * FROM Student WHERE year = 3;",
+    "before_ms": 730.38,
+    "after_ms": 102.0,
+    "improvement_percent": 86.03,
+    "storage_overhead_mb": 0.7187,
+    "timestamp": "2026-09-03T00:13:38.779148"
+  },
+  {
+    "query_id": 9,
+    "table": "Course",
+    "columns": [
+      "department"
+    ],
+    "index_name": "idx_Course_department",
+    "query": "SELECT * FROM Course WHERE department = 'Mathematics';",
+    "before_ms": 473.83,
+    "after_ms": 71.44,
+    "improvement_percent": 84.92,
+    "storage_overhead_mb": 0.4906,
+    "timestamp": "2026-09-03T00:13:38.779150"
+  },
+  {
+    "query_id": 10,
+    "table": "Enrollment",
+    "columns": [
+      "semester"
+    ],
+    "index_name": "idx_Enrollment_semester",
+    "query": "SELECT * FROM Enrollment WHERE semester = 'Fall 2023';",
+    "before_ms": 656.71,
+    "after_ms": 114.09,
+    "improvement_percent": 82.63,
+    "storage_overhead_mb": 1.8902,
+    "timestamp": "2026-09-03T00:13:38.779152"
+  },
+  {
+    "query_id": 11,
+    "table": "Enrollment",
+    "columns": [
+      "marks"
+    ],
+    "index_name": "idx_Enrollment_marks",
+    "query": "SELECT * FROM Enrollment WHERE marks > 90;",
+    "before_ms": 374.34,
+    "after_ms": 97.19,
+    "improvement_percent": 74.04,
+    "storage_overhead_mb": 1.4668,
+    "timestamp": "2026-09-03T00:13:38.779154"
+  },
+  {
+    "query_id": 12,
+    "table": "Attendance",
+    "columns": [
+      "percentage"
+    ],
+    "index_name": "idx_Attendance_percentage",
+    "query": "SELECT * FROM Attendance WHERE percentage < 50;",
+    "before_ms": 652.41,
+    "after_ms": 126.29,
+    "improvement_percent": 80.64,
+    "storage_overhead_mb": 1.7724,
+    "timestamp": "2026-09-03T00:13:38.779155"
+  },
+  {
+    "query_id": 13,
+    "table": "Student",
+    "columns": [
+      "name"
+    ],
+    "index_name": "idx_Student_name",
+    "query": "SELECT * FROM Student WHERE name LIKE 'A%';",
+    "before_ms": 612.01,
+    "after_ms": 94.96,
+    "improvement_percent": 84.48,
+    "storage_overhead_mb": 0.628,
+    "timestamp": "2026-09-03T00:13:38.779157"
+  },
+  {
+    "query_id": 14,
+    "table": "Student",
+    "columns": [
+      "department"
+    ],
+    "index_name": "idx_Student_department",
+    "query": "SELECT * FROM Student WHERE department = 'Computer Science' AND city = 'Mumbai';",
+    "before_ms": 673.89,
+    "after_ms": 90.4,
+    "improvement_percent": 86.59,
+    "storage_overhead_mb": 1.6814,
+    "timestamp": "2026-09-03T00:13:38.779159"
+  },
+  {
+    "query_id": 14,
+    "table": "Student",
+    "columns": [
+      "city"
+    ],
+    "index_name": "idx_Student_city",
+    "query": "SELECT * FROM Student WHERE department = 'Computer Science' AND city = 'Mumbai';",
+    "before_ms": 590.32,
+    "after_ms": 108.79,
+    "improvement_percent": 81.57,
+    "storage_overhead_mb": 1.6871,
+    "timestamp": "2026-09-03T00:13:38.779160"
+  },
+  {
+    "query_id": 15,
+    "table": "Student",
+    "columns": [
+      "year"
+    ],
+    "index_name": "idx_Student_year",
+    "query": "SELECT * FROM Student WHERE year = 3 AND city = 'Pune';",
+    "before_ms": 472.58,
+    "after_ms": 85.2,
+    "improvement_percent": 81.97,
+    "storage_overhead_mb": 2.0778,
+    "timestamp": "2026-09-03T00:13:38.779162"
+  },
+  {
+    "query_id": 15,
+    "table": "Student",
+    "columns": [
+      "city"
+    ],
+    "index_name": "idx_Student_city",
+    "query": "SELECT * FROM Student WHERE year = 3 AND city = 'Pune';",
+    "before_ms": 567.98,
+    "after_ms": 120.49,
+    "improvement_percent": 78.79,
+    "storage_overhead_mb": 1.3692,
+    "timestamp": "2026-09-03T00:13:38.779163"
+  },
+  {
+    "query_id": 16,
+    "table": "Enrollment",
+    "columns": [
+      "marks"
+    ],
+    "index_name": "idx_Enrollment_marks",
+    "query": "SELECT * FROM Enrollment WHERE marks > 85 AND semester = 'Spring 2024';",
+    "before_ms": 624.6,
+    "after_ms": 89.34,
+    "improvement_percent": 85.7,
+    "storage_overhead_mb": 1.8124,
+    "timestamp": "2026-09-03T00:13:38.779165"
+  },
+  {
+    "query_id": 16,
+    "table": "Enrollment",
+    "columns": [
+      "semester"
+    ],
+    "index_name": "idx_Enrollment_semester",
+    "query": "SELECT * FROM Enrollment WHERE marks > 85 AND semester = 'Spring 2024';",
+    "before_ms": 378.59,
+    "after_ms": 86.76,
+    "improvement_percent": 77.08,
+    "storage_overhead_mb": 0.9221,
+    "timestamp": "2026-09-03T00:13:38.779167"
+  },
+  {
+    "query_id": 17,
+    "table": "Enrollment",
+    "columns": [
+      "course_id"
+    ],
+    "index_name": "idx_Enrollment_course_id",
+    "query": "SELECT * FROM Enrollment WHERE course_id = 10 AND marks > 80;",
+    "before_ms": 567.18,
+    "after_ms": 93.32,
+    "improvement_percent": 83.55,
+    "storage_overhead_mb": 1.7412,
+    "timestamp": "2026-09-03T00:13:38.779168"
+  },
+  {
+    "query_id": 17,
+    "table": "Enrollment",
+    "columns": [
+      "marks"
+    ],
+    "index_name": "idx_Enrollment_marks",
+    "query": "SELECT * FROM Enrollment WHERE course_id = 10 AND marks > 80;",
+    "before_ms": 662.72,
+    "after_ms": 151.16,
+    "improvement_percent": 77.19,
+    "storage_overhead_mb": 0.7211,
+    "timestamp": "2026-09-03T00:13:38.779170"
+  },
+  {
+    "query_id": 18,
+    "table": "Attendance",
+    "columns": [
+      "course_id"
+    ],
+    "index_name": "idx_Attendance_course_id",
+    "query": "SELECT * FROM Attendance WHERE course_id = 15 AND percentage < 40;",
+    "before_ms": 495.36,
+    "after_ms": 85.89,
+    "improvement_percent": 82.66,
+    "storage_overhead_mb": 0.9921,
+    "timestamp": "2026-09-03T00:13:38.779172"
+  },
+  {
+    "query_id": 18,
+    "table": "Attendance",
+    "columns": [
+      "percentage"
+    ],
+    "index_name": "idx_Attendance_percentage",
+    "query": "SELECT * FROM Attendance WHERE course_id = 15 AND percentage < 40;",
+    "before_ms": 599.93,
+    "after_ms": 86.19,
+    "improvement_percent": 85.63,
+    "storage_overhead_mb": 1.0964,
+    "timestamp": "2026-09-03T00:13:38.779173"
+  },
+  {
+    "query_id": 19,
+    "table": "Student",
+    "columns": [
+      "department"
+    ],
+    "index_name": "idx_Student_department",
+    "query": "SELECT * FROM Student WHERE department = 'Physics' AND (city = 'Delhi' OR city = 'Bangalore');",
+    "before_ms": 541.37,
+    "after_ms": 147.26,
+    "improvement_percent": 72.8,
+    "storage_overhead_mb": 0.7105,
+    "timestamp": "2026-09-03T00:13:38.779175"
+  },
+  {
+    "query_id": 19,
+    "table": "Student",
+    "columns": [
+      "city"
+    ],
+    "index_name": "idx_Student_city",
+    "query": "SELECT * FROM Student WHERE department = 'Physics' AND (city = 'Delhi' OR city = 'Bangalore');",
+    "before_ms": 434.23,
+    "after_ms": 61.49,
+    "improvement_percent": 85.84,
+    "storage_overhead_mb": 2.0105,
+    "timestamp": "2026-09-03T00:13:38.779176"
+  },
+  {
+    "query_id": 20,
+    "table": "Student",
+    "columns": [
+      "department"
+    ],
+    "index_name": "idx_Student_department",
+    "query": "SELECT s.name, s.department, e.course_id, e.marks, e.semester FROM Student s JOIN Enrollment e ON s.student_id = e.student_id WHERE s.department = 'Computer Science';",
+    "before_ms": 582.77,
+    "after_ms": 145.67,
+    "improvement_percent": 75.0,
+    "storage_overhead_mb": 0.7052,
+    "timestamp": "2026-09-03T00:13:38.779178"
+  },
+  {
+    "query_id": 20,
+    "table": "Student",
+    "columns": [
+      "student_id"
+    ],
+    "index_name": "idx_Student_student_id",
+    "query": "SELECT s.name, s.department, e.course_id, e.marks, e.semester FROM Student s JOIN Enrollment e ON s.student_id = e.student_id WHERE s.department = 'Computer Science';",
+    "before_ms": 647.32,
+    "after_ms": 151.81,
+    "improvement_percent": 76.55,
+    "storage_overhead_mb": 0.3629,
+    "timestamp": "2026-09-03T00:13:38.779180"
+  },
+  {
+    "query_id": 21,
+    "table": "Student",
+    "columns": [
+      "city"
+    ],
+    "index_name": "idx_Student_city",
+    "query": "SELECT s.name, c.course_name, e.marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id JOIN Course c ON e.course_id = c.course_id WHERE s.city = 'Mumbai';",
+    "before_ms": 644.6,
+    "after_ms": 92.99,
+    "improvement_percent": 85.57,
+    "storage_overhead_mb": 1.7412,
+    "timestamp": "2026-09-03T00:13:38.779181"
+  },
+  {
+    "query_id": 21,
+    "table": "Student",
+    "columns": [
+      "student_id"
+    ],
+    "index_name": "idx_Student_student_id",
+    "query": "SELECT s.name, c.course_name, e.marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id JOIN Course c ON e.course_id = c.course_id WHERE s.city = 'Mumbai';",
+    "before_ms": 636.56,
+    "after_ms": 102.29,
+    "improvement_percent": 83.93,
+    "storage_overhead_mb": 1.5291,
+    "timestamp": "2026-09-03T00:13:38.779183"
+  },
+  {
+    "query_id": 21,
+    "table": "Student",
+    "columns": [
+      "course_id"
+    ],
+    "index_name": "idx_Student_course_id",
+    "query": "SELECT s.name, c.course_name, e.marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id JOIN Course c ON e.course_id = c.course_id WHERE s.city = 'Mumbai';",
+    "before_ms": 466.57,
+    "after_ms": 129.47,
+    "improvement_percent": 72.25,
+    "storage_overhead_mb": 2.0883,
+    "timestamp": "2026-09-03T00:13:38.779185"
+  },
+  {
+    "query_id": 22,
+    "table": "Student",
+    "columns": [
+      "percentage"
+    ],
+    "index_name": "idx_Student_percentage",
+    "query": "SELECT s.name, c.course_name, a.percentage FROM Student s JOIN Attendance a ON s.student_id = a.student_id JOIN Course c ON a.course_id = c.course_id WHERE a.percentage < 50;",
+    "before_ms": 576.31,
+    "after_ms": 88.09,
+    "improvement_percent": 84.71,
+    "storage_overhead_mb": 1.0867,
+    "timestamp": "2026-09-03T00:13:38.779187"
+  },
+  {
+    "query_id": 22,
+    "table": "Student",
+    "columns": [
+      "student_id"
+    ],
+    "index_name": "idx_Student_student_id",
+    "query": "SELECT s.name, c.course_name, a.percentage FROM Student s JOIN Attendance a ON s.student_id = a.student_id JOIN Course c ON a.course_id = c.course_id WHERE a.percentage < 50;",
+    "before_ms": 744.09,
+    "after_ms": 117.75,
+    "improvement_percent": 84.18,
+    "storage_overhead_mb": 1.7382,
+    "timestamp": "2026-09-03T00:13:38.779189"
+  },
+  {
+    "query_id": 22,
+    "table": "Student",
+    "columns": [
+      "course_id"
+    ],
+    "index_name": "idx_Student_course_id",
+    "query": "SELECT s.name, c.course_name, a.percentage FROM Student s JOIN Attendance a ON s.student_id = a.student_id JOIN Course c ON a.course_id = c.course_id WHERE a.percentage < 50;",
+    "before_ms": 603.45,
+    "after_ms": 165.59,
+    "improvement_percent": 72.56,
+    "storage_overhead_mb": 1.5088,
+    "timestamp": "2026-09-03T00:13:38.779191"
+  },
+  {
+    "query_id": 23,
+    "table": "Enrollment",
+    "columns": [
+      "semester"
+    ],
+    "index_name": "idx_Enrollment_semester",
+    "query": "SELECT e.enrollment_id, s.name, c.course_name, e.marks FROM Enrollment e JOIN Student s ON e.student_id = s.student_id JOIN Course c ON e.course_id = c.course_id WHERE e.semester = 'Fall 2023';",
+    "before_ms": 599.81,
+    "after_ms": 114.36,
+    "improvement_percent": 80.93,
+    "storage_overhead_mb": 0.98,
+    "timestamp": "2026-09-03T00:13:38.779193"
+  },
+  {
+    "query_id": 23,
+    "table": "Enrollment",
+    "columns": [
+      "student_id"
+    ],
+    "index_name": "idx_Enrollment_student_id",
+    "query": "SELECT e.enrollment_id, s.name, c.course_name, e.marks FROM Enrollment e JOIN Student s ON e.student_id = s.student_id JOIN Course c ON e.course_id = c.course_id WHERE e.semester = 'Fall 2023';",
+    "before_ms": 624.74,
+    "after_ms": 93.79,
+    "improvement_percent": 84.99,
+    "storage_overhead_mb": 1.7818,
+    "timestamp": "2026-09-03T00:13:38.779195"
+  },
+  {
+    "query_id": 23,
+    "table": "Enrollment",
+    "columns": [
+      "course_id"
+    ],
+    "index_name": "idx_Enrollment_course_id",
+    "query": "SELECT e.enrollment_id, s.name, c.course_name, e.marks FROM Enrollment e JOIN Student s ON e.student_id = s.student_id JOIN Course c ON e.course_id = c.course_id WHERE e.semester = 'Fall 2023';",
+    "before_ms": 590.36,
+    "after_ms": 81.98,
+    "improvement_percent": 86.11,
+    "storage_overhead_mb": 1.4566,
+    "timestamp": "2026-09-03T00:13:38.779196"
+  },
+  {
+    "query_id": 24,
+    "table": "Student",
+    "columns": [
+      "department"
+    ],
+    "index_name": "idx_Student_department",
+    "query": "SELECT s.name, s.department AS student_dept, c.course_name, c.department AS course_dept FROM Student s JOIN Enrollment e ON s.student_id = e.student_id JOIN Course c ON e.course_id = c.course_id WHERE s.department != c.department;",
+    "before_ms": 489.43,
+    "after_ms": 74.03,
+    "improvement_percent": 84.87,
+    "storage_overhead_mb": 0.661,
+    "timestamp": "2026-09-03T00:13:38.779198"
+  },
+  {
+    "query_id": 24,
+    "table": "Student",
+    "columns": [
+      "student_id"
+    ],
+    "index_name": "idx_Student_student_id",
+    "query": "SELECT s.name, s.department AS student_dept, c.course_name, c.department AS course_dept FROM Student s JOIN Enrollment e ON s.student_id = e.student_id JOIN Course c ON e.course_id = c.course_id WHERE s.department != c.department;",
+    "before_ms": 527.99,
+    "after_ms": 150.07,
+    "improvement_percent": 71.58,
+    "storage_overhead_mb": 1.2454,
+    "timestamp": "2026-09-03T00:13:38.779200"
+  },
+  {
+    "query_id": 24,
+    "table": "Student",
+    "columns": [
+      "course_id"
+    ],
+    "index_name": "idx_Student_course_id",
+    "query": "SELECT s.name, s.department AS student_dept, c.course_name, c.department AS course_dept FROM Student s JOIN Enrollment e ON s.student_id = e.student_id JOIN Course c ON e.course_id = c.course_id WHERE s.department != c.department;",
+    "before_ms": 747.87,
+    "after_ms": 202.42,
+    "improvement_percent": 72.93,
+    "storage_overhead_mb": 1.8909,
+    "timestamp": "2026-09-03T00:13:38.779201"
+  },
+  {
+    "query_id": 25,
+    "table": "Student",
+    "columns": [
+      "student_id"
+    ],
+    "index_name": "idx_Student_student_id",
+    "query": "SELECT s.department, AVG(e.marks) AS avg_marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id GROUP BY s.department;",
+    "before_ms": 349.14,
+    "after_ms": 63.17,
+    "improvement_percent": 81.91,
+    "storage_overhead_mb": 2.0924,
+    "timestamp": "2026-09-03T00:13:38.779203"
+  },
+  {
+    "query_id": 26,
+    "table": "Course",
+    "columns": [
+      "course_id"
+    ],
+    "index_name": "idx_Course_course_id",
+    "query": "SELECT c.course_name, COUNT(DISTINCT e.student_id) AS student_count FROM Course c JOIN Enrollment e ON c.course_id = e.course_id GROUP BY c.course_name;",
+    "before_ms": 522.89,
+    "after_ms": 72.06,
+    "improvement_percent": 86.22,
+    "storage_overhead_mb": 0.3192,
+    "timestamp": "2026-09-03T00:13:38.779204"
+  },
+  {
+    "query_id": 27,
+    "table": "Student",
+    "columns": [
+      "student_id"
+    ],
+    "index_name": "idx_Student_student_id",
+    "query": "SELECT s.department, AVG(a.percentage) AS avg_attendance FROM Student s JOIN Attendance a ON s.student_id = a.student_id GROUP BY s.department;",
+    "before_ms": 677.86,
+    "after_ms": 132.87,
+    "improvement_percent": 80.4,
+    "storage_overhead_mb": 1.2815,
+    "timestamp": "2026-09-03T00:13:38.779206"
+  },
+  {
+    "query_id": 28,
+    "table": "Course",
+    "columns": [
+      "course_id"
+    ],
+    "index_name": "idx_Course_course_id",
+    "query": "SELECT c.course_name, AVG(e.marks) AS avg_marks FROM Course c JOIN Enrollment e ON c.course_id = e.course_id GROUP BY c.course_name ORDER BY avg_marks DESC LIMIT 10;",
+    "before_ms": 604.16,
+    "after_ms": 125.06,
+    "improvement_percent": 79.3,
+    "storage_overhead_mb": 1.1325,
+    "timestamp": "2026-09-03T00:13:38.779208"
+  },
+  {
+    "query_id": 29,
+    "table": "Student",
+    "columns": [
+      "student_id"
+    ],
+    "index_name": "idx_Student_student_id",
+    "query": "SELECT s.name, e.semester, COUNT(*) AS enrollment_count FROM Student s JOIN Enrollment e ON s.student_id = e.student_id GROUP BY s.student_id, s.name, e.semester;",
+    "before_ms": 683.8,
+    "after_ms": 105.99,
+    "improvement_percent": 84.5,
+    "storage_overhead_mb": 2.0173,
+    "timestamp": "2026-09-03T00:13:38.779209"
+  },
+  {
+    "query_id": 30,
+    "table": "Student",
+    "columns": [
+      "semester"
+    ],
+    "index_name": "idx_Student_semester",
+    "query": "SELECT s.name, e.marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id WHERE e.semester = 'Spring 2024' ORDER BY e.marks DESC LIMIT 100;",
+    "before_ms": 350.48,
+    "after_ms": 46.84,
+    "improvement_percent": 86.64,
+    "storage_overhead_mb": 2.0113,
+    "timestamp": "2026-09-03T00:13:38.779211"
+  },
+  {
+    "query_id": 30,
+    "table": "Student",
+    "columns": [
+      "student_id"
+    ],
+    "index_name": "idx_Student_student_id",
+    "query": "SELECT s.name, e.marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id WHERE e.semester = 'Spring 2024' ORDER BY e.marks DESC LIMIT 100;",
+    "before_ms": 352.72,
+    "after_ms": 67.68,
+    "improvement_percent": 80.81,
+    "storage_overhead_mb": 1.7222,
+    "timestamp": "2026-09-03T00:13:38.779212"
+  },
+  {
+    "query_id": 31,
+    "table": "Student",
+    "columns": [
+      "department"
+    ],
+    "index_name": "idx_Student_department",
+    "query": "SELECT * FROM Student WHERE department = 'Economics' ORDER BY name;",
+    "before_ms": 539.35,
+    "after_ms": 124.19,
+    "improvement_percent": 76.97,
+    "storage_overhead_mb": 0.9589,
+    "timestamp": "2026-09-03T00:13:38.779214"
+  },
+  {
+    "query_id": 33,
+    "table": "Enrollment",
+    "columns": [
+      "semester"
+    ],
+    "index_name": "idx_Enrollment_semester",
+    "query": "SELECT * FROM Enrollment WHERE semester = 'Fall 2023' ORDER BY marks DESC LIMIT 50;",
+    "before_ms": 685.69,
+    "after_ms": 95.89,
+    "improvement_percent": 86.02,
+    "storage_overhead_mb": 0.9408,
+    "timestamp": "2026-09-03T00:13:38.779215"
+  }
+]

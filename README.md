@@ -274,3 +274,38 @@ at least one teammate reviews → merge
 - [x] `workload/workload.csv` committed (byte-identical for all teammates)
 - [x] Four-file protocol documented above with exact field names
 - [x] README explains full setup for a teammate with zero context
+
+---
+
+## Running the End-to-End Pipeline
+
+### 1. Generate Query Workload (Person 1)
+```bash
+python workload/generate_workload.py
+```
+
+### 2. Analyze Workload Features (Person 2)
+```bash
+python analyzer/analyze.py
+```
+
+### 3. Generate Index Recommendations & Train ML Model (Person 3)
+```bash
+python models/train_model.py
+python recommendation/candidate_generator.py
+python recommendation/ml_recommender.py
+```
+
+### 4. Benchmark Recommended Indexes & Launch Dashboard (Person 4)
+```bash
+# Run benchmarking (live with MySQL or simulated fallback)
+python benchmark.py
+
+# Launch the interactive Streamlit analytics dashboard
+streamlit run app.py
+```
+
+### 5. Run Automated Tests
+```bash
+python -m unittest discover tests
+```

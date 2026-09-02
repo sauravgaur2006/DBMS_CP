@@ -1,0 +1,9 @@
+{
+  "host": "localhost",
+  "port": 3306,
+  "user": "root",
+  "password": "",
+  "database": "academic_db",
+  "warmup_runs": 1,
+  "benchmark_runs": 3
+}
