@@ -22,12 +22,19 @@ def extract_features(query, column):
 
 
 def generate_ml_recommendations(workload, model_path):
+    if not os.path.exists(model_path):
+        print(f"Model file not found at {model_path}. Training a new model...")
+        from models.train_model import train_and_save_model
+        train_and_save_model(model_path)
+
     print(f"Loading ML Model from {model_path}...")
     model = joblib.load(model_path)
     recommendations = []
 
     for query in workload:
-        table = query["table"]
+        table = query.get("table", "UNKNOWN")
+        if not table or table == "UNKNOWN":
+            continue
 
         # Collect all unique columns mentioned in this query
         all_columns = set(

@@ -15,23 +15,26 @@ def generate_and_score_candidates(workload):
     recommendations = []
     
     for query in workload:
-        table = query["table"]
-        freq = query["frequency"]
+        table = query.get("table", "UNKNOWN")
+        if not table or table == "UNKNOWN":
+            continue
+        freq = query.get("frequency", 1)
+        query_id = query.get("query_id", 0)
         column_scores = {}
         
-        for col in query["where_columns"]:
+        for col in query.get("where_columns", []):
             column_scores[col] = column_scores.get(col, 0) + (freq * WEIGHTS["where"])
             
-        for col in query["join_columns"]:
+        for col in query.get("join_columns", []):
             column_scores[col] = column_scores.get(col, 0) + (freq * WEIGHTS["join"])
             
-        for col in query["order_columns"]:
+        for col in query.get("order_columns", []):
             column_scores[col] = column_scores.get(col, 0) + (freq * WEIGHTS["order"])
             
         for col, score in column_scores.items():
             if score > 20: 
                 recommendations.append({
-                    "query_id": query["query_id"],
+                    "query_id": query_id,
                     "table": table,
                     "columns": [col],
                     "score": score,

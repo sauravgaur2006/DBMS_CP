@@ -1,11 +1,308 @@
 [
   {
+    "query_id": 1,
+    "table": "Student",
+    "columns": [
+      "student_id"
+    ],
+    "confidence_score": 100.0,
+    "reason": "ML Model predicted beneficial with 100.0% confidence."
+  },
+  {
+    "query_id": 2,
+    "table": "Enrollment",
+    "columns": [
+      "student_id"
+    ],
+    "confidence_score": 100.0,
+    "reason": "ML Model predicted beneficial with 100.0% confidence."
+  },
+  {
     "query_id": 3,
+    "table": "Attendance",
+    "columns": [
+      "student_id"
+    ],
+    "confidence_score": 97.25,
+    "reason": "ML Model predicted beneficial with 97.25% confidence."
+  },
+  {
+    "query_id": 4,
+    "table": "Course",
+    "columns": [
+      "course_id"
+    ],
+    "confidence_score": 100.0,
+    "reason": "ML Model predicted beneficial with 100.0% confidence."
+  },
+  {
+    "query_id": 5,
+    "table": "Attendance",
+    "columns": [
+      "student_id"
+    ],
+    "confidence_score": 100.0,
+    "reason": "ML Model predicted beneficial with 100.0% confidence."
+  },
+  {
+    "query_id": 5,
+    "table": "Attendance",
+    "columns": [
+      "course_id"
+    ],
+    "confidence_score": 100.0,
+    "reason": "ML Model predicted beneficial with 100.0% confidence."
+  },
+  {
+    "query_id": 9,
+    "table": "Course",
+    "columns": [
+      "department"
+    ],
+    "confidence_score": 97.0,
+    "reason": "ML Model predicted beneficial with 97.0% confidence."
+  },
+  {
+    "query_id": 11,
+    "table": "Enrollment",
+    "columns": [
+      "marks"
+    ],
+    "confidence_score": 98.0,
+    "reason": "ML Model predicted beneficial with 98.0% confidence."
+  },
+  {
+    "query_id": 12,
+    "table": "Attendance",
+    "columns": [
+      "percentage"
+    ],
+    "confidence_score": 97.0,
+    "reason": "ML Model predicted beneficial with 97.0% confidence."
+  },
+  {
+    "query_id": 13,
+    "table": "Student",
+    "columns": [
+      "name"
+    ],
+    "confidence_score": 99.05,
+    "reason": "ML Model predicted beneficial with 99.05% confidence."
+  },
+  {
+    "query_id": 15,
+    "table": "Student",
+    "columns": [
+      "city"
+    ],
+    "confidence_score": 100.0,
+    "reason": "ML Model predicted beneficial with 100.0% confidence."
+  },
+  {
+    "query_id": 15,
+    "table": "Student",
+    "columns": [
+      "year"
+    ],
+    "confidence_score": 100.0,
+    "reason": "ML Model predicted beneficial with 100.0% confidence."
+  },
+  {
+    "query_id": 18,
+    "table": "Attendance",
+    "columns": [
+      "percentage"
+    ],
+    "confidence_score": 100.0,
+    "reason": "ML Model predicted beneficial with 100.0% confidence."
+  },
+  {
+    "query_id": 18,
+    "table": "Attendance",
+    "columns": [
+      "course_id"
+    ],
+    "confidence_score": 100.0,
+    "reason": "ML Model predicted beneficial with 100.0% confidence."
+  },
+  {
+    "query_id": 19,
+    "table": "Student",
+    "columns": [
+      "city"
+    ],
+    "confidence_score": 97.67,
+    "reason": "ML Model predicted beneficial with 97.67% confidence."
+  },
+  {
+    "query_id": 19,
+    "table": "Student",
+    "columns": [
+      "department"
+    ],
+    "confidence_score": 97.67,
+    "reason": "ML Model predicted beneficial with 97.67% confidence."
+  },
+  {
+    "query_id": 20,
+    "table": "Student",
+    "columns": [
+      "department"
+    ],
+    "confidence_score": 90.0,
+    "reason": "ML Model predicted beneficial with 90.0% confidence."
+  },
+  {
+    "query_id": 21,
+    "table": "Student",
+    "columns": [
+      "course_id"
+    ],
+    "confidence_score": 94.0,
+    "reason": "ML Model predicted beneficial with 94.0% confidence."
+  },
+  {
+    "query_id": 21,
     "table": "Student",
     "columns": [
       "student_id"
     ],
     "confidence_score": 94.0,
     "reason": "ML Model predicted beneficial with 94.0% confidence."
+  },
+  {
+    "query_id": 22,
+    "table": "Student",
+    "columns": [
+      "student_id"
+    ],
+    "confidence_score": 98.0,
+    "reason": "ML Model predicted beneficial with 98.0% confidence."
+  },
+  {
+    "query_id": 22,
+    "table": "Student",
+    "columns": [
+      "course_id"
+    ],
+    "confidence_score": 98.0,
+    "reason": "ML Model predicted beneficial with 98.0% confidence."
+  },
+  {
+    "query_id": 23,
+    "table": "Enrollment",
+    "columns": [
+      "student_id"
+    ],
+    "confidence_score": 100.0,
+    "reason": "ML Model predicted beneficial with 100.0% confidence."
+  },
+  {
+    "query_id": 23,
+    "table": "Enrollment",
+    "columns": [
+      "course_id"
+    ],
+    "confidence_score": 100.0,
+    "reason": "ML Model predicted beneficial with 100.0% confidence."
+  },
+  {
+    "query_id": 23,
+    "table": "Enrollment",
+    "columns": [
+      "semester"
+    ],
+    "confidence_score": 67.0,
+    "reason": "ML Model predicted beneficial with 67.0% confidence."
+  },
+  {
+    "query_id": 24,
+    "table": "Student",
+    "columns": [
+      "student_id"
+    ],
+    "confidence_score": 99.0,
+    "reason": "ML Model predicted beneficial with 99.0% confidence."
+  },
+  {
+    "query_id": 24,
+    "table": "Student",
+    "columns": [
+      "department"
+    ],
+    "confidence_score": 94.83,
+    "reason": "ML Model predicted beneficial with 94.83% confidence."
+  },
+  {
+    "query_id": 24,
+    "table": "Student",
+    "columns": [
+      "course_id"
+    ],
+    "confidence_score": 99.0,
+    "reason": "ML Model predicted beneficial with 99.0% confidence."
+  },
+  {
+    "query_id": 26,
+    "table": "Course",
+    "columns": [
+      "course_id"
+    ],
+    "confidence_score": 77.0,
+    "reason": "ML Model predicted beneficial with 77.0% confidence."
+  },
+  {
+    "query_id": 27,
+    "table": "Student",
+    "columns": [
+      "student_id"
+    ],
+    "confidence_score": 94.0,
+    "reason": "ML Model predicted beneficial with 94.0% confidence."
+  },
+  {
+    "query_id": 29,
+    "table": "Student",
+    "columns": [
+      "student_id"
+    ],
+    "confidence_score": 77.0,
+    "reason": "ML Model predicted beneficial with 77.0% confidence."
+  },
+  {
+    "query_id": 30,
+    "table": "Student",
+    "columns": [
+      "student_id"
+    ],
+    "confidence_score": 92.0,
+    "reason": "ML Model predicted beneficial with 92.0% confidence."
+  },
+  {
+    "query_id": 41,
+    "table": "Student",
+    "columns": [
+      "student_id"
+    ],
+    "confidence_score": 71.0,
+    "reason": "ML Model predicted beneficial with 71.0% confidence."
+  },
+  {
+    "query_id": 43,
+    "table": "Student",
+    "columns": [
+      "student_id"
+    ],
+    "confidence_score": 100.0,
+    "reason": "ML Model predicted beneficial with 100.0% confidence."
+  },
+  {
+    "query_id": 43,
+    "table": "Student",
+    "columns": [
+      "course_id"
+    ],
+    "confidence_score": 71.0,
+    "reason": "ML Model predicted beneficial with 71.0% confidence."
   }
 ]
