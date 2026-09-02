@@ -1,0 +1,11 @@
+[
+  {
+    "query_id": 3,
+    "table": "Student",
+    "columns": [
+      "student_id"
+    ],
+    "confidence_score": 94.0,
+    "reason": "ML Model predicted beneficial with 94.0% confidence."
+  }
+]
