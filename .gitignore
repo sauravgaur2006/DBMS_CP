@@ -3,12 +3,14 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# Virtual environment
+# Virtual environments
 .venv/
 venv/
+env/
 
-# Environment variables (credentials — NEVER commit)
+# Environment variables & credentials (NEVER commit)
 .env
+.streamlit/credentials.toml
 
 # IDE
 .idea/
@@ -16,9 +18,10 @@ venv/
 *.swp
 *.swo
 
-# OS
+# OS metadata
 Thumbs.db
 .DS_Store
+._*
 
 # Model files (may be large)
 models/*.pkl

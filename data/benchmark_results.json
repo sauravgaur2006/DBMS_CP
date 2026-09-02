@@ -1,0 +1,74 @@
+[
+  {
+    "query_id": 1,
+    "table": "Student",
+    "columns": [
+      "department"
+    ],
+    "index_name": "idx_Student_department",
+    "query": "SELECT * FROM Student WHERE department = 'Computer Science'",
+    "before_ms": 358.56,
+    "after_ms": 96.73,
+    "improvement_percent": 73.02,
+    "storage_overhead_mb": 0.8165,
+    "timestamp": "2026-09-02T21:33:30.130580"
+  },
+  {
+    "query_id": 2,
+    "table": "Student",
+    "columns": [
+      "department",
+      "city"
+    ],
+    "index_name": "idx_Student_department_city",
+    "query": "SELECT * FROM Student WHERE department = 'Mechanical Engineering' AND city = 'Pune'",
+    "before_ms": 344.52,
+    "after_ms": 86.7,
+    "improvement_percent": 74.83,
+    "storage_overhead_mb": 1.2319,
+    "timestamp": "2026-09-02T21:33:30.130597"
+  },
+  {
+    "query_id": 3,
+    "table": "Enrollment",
+    "columns": [
+      "student_id"
+    ],
+    "index_name": "idx_Enrollment_student_id",
+    "query": "SELECT s.name, e.marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id WHERE s.department = 'Computer Science'",
+    "before_ms": 418.96,
+    "after_ms": 97.79,
+    "improvement_percent": 76.66,
+    "storage_overhead_mb": 1.448,
+    "timestamp": "2026-09-02T21:33:30.130605"
+  },
+  {
+    "query_id": 4,
+    "table": "Attendance",
+    "columns": [
+      "student_id",
+      "percentage"
+    ],
+    "index_name": "idx_Attendance_student_id_percentage",
+    "query": "SELECT * FROM Attendance WHERE student_id = 500 AND percentage < 75.0",
+    "before_ms": 357.08,
+    "after_ms": 87.55,
+    "improvement_percent": 75.48,
+    "storage_overhead_mb": 1.3079,
+    "timestamp": "2026-09-02T21:33:30.130609"
+  },
+  {
+    "query_id": 5,
+    "table": "Course",
+    "columns": [
+      "department"
+    ],
+    "index_name": "idx_Course_department",
+    "query": "SELECT * FROM Course WHERE department = 'Civil Engineering'",
+    "before_ms": 329.75,
+    "after_ms": 55.43,
+    "improvement_percent": 83.19,
+    "storage_overhead_mb": 1.158,
+    "timestamp": "2026-09-02T21:33:30.130612"
+  }
+]
