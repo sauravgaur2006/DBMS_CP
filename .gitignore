@@ -1,0 +1,16 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Streamlit credentials (keep config.toml, ignore personal credentials)
+.streamlit/credentials.toml
+
+# macOS metadata
+.DS_Store
+._*

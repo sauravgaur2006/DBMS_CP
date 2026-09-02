@@ -1,0 +1,11 @@
+# Database Driver for connecting to MySQL
+mysql-connector-python>=8.0.0
+
+# Interactive Dashboard Framework
+streamlit>=1.30.0
+
+# Data Manipulation
+pandas>=2.0.0
+
+# Interactive Charts and Graphs
+plotly>=5.18.0
