@@ -12,9 +12,9 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from app import load_benchmark_data
 from benchmark import (
     generate_index_name,
+    load_benchmark_dataframe,
     load_json_file,
     run_benchmark_simulated,
     save_json_file,
@@ -118,7 +118,7 @@ class TestBenchmarkPipeline(unittest.TestCase):
 
         try:
             save_json_file(results, Path(temp_path))
-            df = load_benchmark_data(temp_path)
+            df = load_benchmark_dataframe(temp_path)
             self.assertIsNotNone(df)
             self.assertEqual(len(df), len(results))
             self.assertIn("columns_display", df.columns)

@@ -45,6 +45,8 @@ import json
 import os
 from pathlib import Path
 
+from benchmark import load_benchmark_dataframe
+
 # ==============================================================================
 # PAGE CONFIGURATION & STYLING
 # ==============================================================================
@@ -99,19 +101,7 @@ def load_benchmark_data(file_path_str: str):
     Reads benchmark_results.json and returns a Pandas DataFrame.
     Uses st.cache_data so the file is not unnecessarily re-read on every widget interaction.
     """
-    path = Path(file_path_str)
-    if not path.exists():
-        return None
-    with open(path, "r", encoding="utf-8") as f:
-        data = json.load(f)
-    if not data:
-        return pd.DataFrame()
-    
-    df = pd.DataFrame(data)
-    # Format columns string for clean display
-    if "columns" in df.columns:
-        df["columns_display"] = df["columns"].apply(lambda c: ", ".join(c) if isinstance(c, list) else str(c))
-    return df
+    return load_benchmark_dataframe(file_path_str)
 
 
 # ==============================================================================

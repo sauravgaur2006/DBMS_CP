@@ -37,6 +37,10 @@ import time
 # team agreed upon for data exchange between team members (Person 3 -> Person 4).
 import json
 
+# 'pandas':
+# Why: Used for structured data manipulation and exporting performance report metrics.
+import pandas as pd
+
 # 'os' and 'pathlib.Path':
 # Why: To ensure safe, cross-platform file path resolution whether running on
 # macOS, Linux, or Windows.
@@ -77,6 +81,26 @@ def load_json_file(file_path: Path):
         raise FileNotFoundError(f"Configuration/Data file not found at: {file_path}")
     with open(file_path, "r", encoding="utf-8") as f:
         return json.load(f)
+
+
+def load_benchmark_dataframe(file_path_str: str) -> pd.DataFrame:
+    """
+    Reads benchmark_results.json and returns a Pandas DataFrame with clean display columns.
+    """
+    path = Path(file_path_str)
+    if not path.exists():
+        return None
+    with open(path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    if not data:
+        return pd.DataFrame()
+
+    df = pd.DataFrame(data)
+    if "columns" in df.columns:
+        df["columns_display"] = df["columns"].apply(
+            lambda c: ", ".join(c) if isinstance(c, list) else str(c)
+        )
+    return df
 
 
 def save_json_file(data, file_path: Path):
