@@ -6,8 +6,10 @@
     "columns": [
       "student_id"
     ],
-    "confidence_score": 100.0,
-    "reason": "ML Model predicted beneficial with 100.0% confidence."
+    "confidence_score": 99.66,
+    "score": 99.7,
+    "estimated_size_mb": 0.254,
+    "reason": "ML Model predicted beneficial with 99.66% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 2,
@@ -16,8 +18,10 @@
     "columns": [
       "student_id"
     ],
-    "confidence_score": 100.0,
-    "reason": "ML Model predicted beneficial with 100.0% confidence."
+    "confidence_score": 98.87,
+    "score": 98.9,
+    "estimated_size_mb": 1.268,
+    "reason": "ML Model predicted beneficial with 98.87% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 3,
@@ -26,8 +30,10 @@
     "columns": [
       "student_id"
     ],
-    "confidence_score": 97.25,
-    "reason": "ML Model predicted beneficial with 97.25% confidence."
+    "confidence_score": 98.64,
+    "score": 98.6,
+    "estimated_size_mb": 2.537,
+    "reason": "ML Model predicted beneficial with 98.64% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 4,
@@ -36,8 +42,10 @@
     "columns": [
       "course_id"
     ],
-    "confidence_score": 100.0,
-    "reason": "ML Model predicted beneficial with 100.0% confidence."
+    "confidence_score": 98.34,
+    "score": 98.3,
+    "estimated_size_mb": 0.013,
+    "reason": "ML Model predicted beneficial with 98.34% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 5,
@@ -46,8 +54,10 @@
     "columns": [
       "course_id"
     ],
-    "confidence_score": 100.0,
-    "reason": "ML Model predicted beneficial with 100.0% confidence."
+    "confidence_score": 97.87,
+    "score": 97.9,
+    "estimated_size_mb": 2.537,
+    "reason": "ML Model predicted beneficial with 97.87% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 5,
@@ -56,8 +66,46 @@
     "columns": [
       "student_id"
     ],
-    "confidence_score": 100.0,
-    "reason": "ML Model predicted beneficial with 100.0% confidence."
+    "confidence_score": 98.92,
+    "score": 98.9,
+    "estimated_size_mb": 2.537,
+    "reason": "ML Model predicted beneficial with 98.92% confidence (>30% estimated cost reduction)."
+  },
+  {
+    "query_id": 6,
+    "query": "SELECT * FROM Student WHERE department = 'Computer Science';",
+    "table": "Student",
+    "columns": [
+      "department"
+    ],
+    "confidence_score": 98.61,
+    "score": 98.6,
+    "estimated_size_mb": 0.457,
+    "reason": "ML Model predicted beneficial with 98.61% confidence (>30% estimated cost reduction)."
+  },
+  {
+    "query_id": 7,
+    "query": "SELECT * FROM Student WHERE city = 'Pune';",
+    "table": "Student",
+    "columns": [
+      "city"
+    ],
+    "confidence_score": 97.61,
+    "score": 97.6,
+    "estimated_size_mb": 0.393,
+    "reason": "ML Model predicted beneficial with 97.61% confidence (>30% estimated cost reduction)."
+  },
+  {
+    "query_id": 8,
+    "query": "SELECT * FROM Student WHERE year = 3;",
+    "table": "Student",
+    "columns": [
+      "year"
+    ],
+    "confidence_score": 98.9,
+    "score": 98.9,
+    "estimated_size_mb": 0.254,
+    "reason": "ML Model predicted beneficial with 98.9% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 9,
@@ -66,8 +114,22 @@
     "columns": [
       "department"
     ],
-    "confidence_score": 97.0,
-    "reason": "ML Model predicted beneficial with 97.0% confidence."
+    "confidence_score": 99.55,
+    "score": 99.5,
+    "estimated_size_mb": 0.023,
+    "reason": "ML Model predicted beneficial with 99.55% confidence (>30% estimated cost reduction)."
+  },
+  {
+    "query_id": 10,
+    "query": "SELECT * FROM Enrollment WHERE semester = 'Fall 2023';",
+    "table": "Enrollment",
+    "columns": [
+      "semester"
+    ],
+    "confidence_score": 99.26,
+    "score": 99.3,
+    "estimated_size_mb": 1.776,
+    "reason": "ML Model predicted beneficial with 99.26% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 11,
@@ -76,8 +138,10 @@
     "columns": [
       "marks"
     ],
-    "confidence_score": 98.0,
-    "reason": "ML Model predicted beneficial with 98.0% confidence."
+    "confidence_score": 97.81,
+    "score": 97.8,
+    "estimated_size_mb": 1.268,
+    "reason": "ML Model predicted beneficial with 97.81% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 12,
@@ -86,8 +150,10 @@
     "columns": [
       "percentage"
     ],
-    "confidence_score": 97.0,
-    "reason": "ML Model predicted beneficial with 97.0% confidence."
+    "confidence_score": 98.84,
+    "score": 98.8,
+    "estimated_size_mb": 2.537,
+    "reason": "ML Model predicted beneficial with 98.84% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 13,
@@ -96,8 +162,34 @@
     "columns": [
       "name"
     ],
-    "confidence_score": 99.05,
-    "reason": "ML Model predicted beneficial with 99.05% confidence."
+    "confidence_score": 97.45,
+    "score": 97.5,
+    "estimated_size_mb": 0.52,
+    "reason": "ML Model predicted beneficial with 97.45% confidence (>30% estimated cost reduction)."
+  },
+  {
+    "query_id": 14,
+    "query": "SELECT * FROM Student WHERE department = 'Computer Science' AND city = 'Mumbai';",
+    "table": "Student",
+    "columns": [
+      "city"
+    ],
+    "confidence_score": 97.61,
+    "score": 97.6,
+    "estimated_size_mb": 0.393,
+    "reason": "ML Model predicted beneficial with 97.61% confidence (>30% estimated cost reduction)."
+  },
+  {
+    "query_id": 14,
+    "query": "SELECT * FROM Student WHERE department = 'Computer Science' AND city = 'Mumbai';",
+    "table": "Student",
+    "columns": [
+      "department"
+    ],
+    "confidence_score": 98.61,
+    "score": 98.6,
+    "estimated_size_mb": 0.457,
+    "reason": "ML Model predicted beneficial with 98.61% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 15,
@@ -106,8 +198,10 @@
     "columns": [
       "city"
     ],
-    "confidence_score": 100.0,
-    "reason": "ML Model predicted beneficial with 100.0% confidence."
+    "confidence_score": 98.51,
+    "score": 98.5,
+    "estimated_size_mb": 0.393,
+    "reason": "ML Model predicted beneficial with 98.51% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 15,
@@ -116,8 +210,58 @@
     "columns": [
       "year"
     ],
-    "confidence_score": 100.0,
-    "reason": "ML Model predicted beneficial with 100.0% confidence."
+    "confidence_score": 98.8,
+    "score": 98.8,
+    "estimated_size_mb": 0.254,
+    "reason": "ML Model predicted beneficial with 98.8% confidence (>30% estimated cost reduction)."
+  },
+  {
+    "query_id": 16,
+    "query": "SELECT * FROM Enrollment WHERE marks > 85 AND semester = 'Spring 2024';",
+    "table": "Enrollment",
+    "columns": [
+      "marks"
+    ],
+    "confidence_score": 95.06,
+    "score": 95.1,
+    "estimated_size_mb": 1.268,
+    "reason": "ML Model predicted beneficial with 95.06% confidence (>30% estimated cost reduction)."
+  },
+  {
+    "query_id": 16,
+    "query": "SELECT * FROM Enrollment WHERE marks > 85 AND semester = 'Spring 2024';",
+    "table": "Enrollment",
+    "columns": [
+      "semester"
+    ],
+    "confidence_score": 99.26,
+    "score": 99.3,
+    "estimated_size_mb": 1.776,
+    "reason": "ML Model predicted beneficial with 99.26% confidence (>30% estimated cost reduction)."
+  },
+  {
+    "query_id": 17,
+    "query": "SELECT * FROM Enrollment WHERE course_id = 10 AND marks > 80;",
+    "table": "Enrollment",
+    "columns": [
+      "course_id"
+    ],
+    "confidence_score": 97.29,
+    "score": 97.3,
+    "estimated_size_mb": 1.268,
+    "reason": "ML Model predicted beneficial with 97.29% confidence (>30% estimated cost reduction)."
+  },
+  {
+    "query_id": 17,
+    "query": "SELECT * FROM Enrollment WHERE course_id = 10 AND marks > 80;",
+    "table": "Enrollment",
+    "columns": [
+      "marks"
+    ],
+    "confidence_score": 96.06,
+    "score": 96.1,
+    "estimated_size_mb": 1.268,
+    "reason": "ML Model predicted beneficial with 96.06% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 18,
@@ -126,8 +270,10 @@
     "columns": [
       "course_id"
     ],
-    "confidence_score": 100.0,
-    "reason": "ML Model predicted beneficial with 100.0% confidence."
+    "confidence_score": 96.58,
+    "score": 96.6,
+    "estimated_size_mb": 2.537,
+    "reason": "ML Model predicted beneficial with 96.58% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 18,
@@ -136,8 +282,10 @@
     "columns": [
       "percentage"
     ],
-    "confidence_score": 100.0,
-    "reason": "ML Model predicted beneficial with 100.0% confidence."
+    "confidence_score": 97.42,
+    "score": 97.4,
+    "estimated_size_mb": 2.537,
+    "reason": "ML Model predicted beneficial with 97.42% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 19,
@@ -146,8 +294,10 @@
     "columns": [
       "city"
     ],
-    "confidence_score": 97.67,
-    "reason": "ML Model predicted beneficial with 97.67% confidence."
+    "confidence_score": 98.51,
+    "score": 98.5,
+    "estimated_size_mb": 0.393,
+    "reason": "ML Model predicted beneficial with 98.51% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 19,
@@ -156,8 +306,10 @@
     "columns": [
       "department"
     ],
-    "confidence_score": 97.67,
-    "reason": "ML Model predicted beneficial with 97.67% confidence."
+    "confidence_score": 98.51,
+    "score": 98.5,
+    "estimated_size_mb": 0.457,
+    "reason": "ML Model predicted beneficial with 98.51% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 20,
@@ -166,8 +318,34 @@
     "columns": [
       "department"
     ],
-    "confidence_score": 90.0,
-    "reason": "ML Model predicted beneficial with 90.0% confidence."
+    "confidence_score": 98.4,
+    "score": 98.4,
+    "estimated_size_mb": 0.457,
+    "reason": "ML Model predicted beneficial with 98.4% confidence (>30% estimated cost reduction)."
+  },
+  {
+    "query_id": 20,
+    "query": "SELECT s.name, s.department, e.course_id, e.marks, e.semester FROM Student s JOIN Enrollment e ON s.student_id = e.student_id WHERE s.department = 'Computer Science';",
+    "table": "Student",
+    "columns": [
+      "student_id"
+    ],
+    "confidence_score": 90.81,
+    "score": 90.8,
+    "estimated_size_mb": 0.254,
+    "reason": "ML Model predicted beneficial with 90.81% confidence (>30% estimated cost reduction)."
+  },
+  {
+    "query_id": 21,
+    "query": "SELECT s.name, c.course_name, e.marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id JOIN Course c ON e.course_id = c.course_id WHERE s.city = 'Mumbai';",
+    "table": "Student",
+    "columns": [
+      "city"
+    ],
+    "confidence_score": 98.51,
+    "score": 98.5,
+    "estimated_size_mb": 0.393,
+    "reason": "ML Model predicted beneficial with 98.51% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 21,
@@ -176,8 +354,10 @@
     "columns": [
       "course_id"
     ],
-    "confidence_score": 94.0,
-    "reason": "ML Model predicted beneficial with 94.0% confidence."
+    "confidence_score": 90.27,
+    "score": 90.3,
+    "estimated_size_mb": 0.304,
+    "reason": "ML Model predicted beneficial with 90.27% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 21,
@@ -186,8 +366,10 @@
     "columns": [
       "student_id"
     ],
-    "confidence_score": 94.0,
-    "reason": "ML Model predicted beneficial with 94.0% confidence."
+    "confidence_score": 91.41,
+    "score": 91.4,
+    "estimated_size_mb": 0.254,
+    "reason": "ML Model predicted beneficial with 91.41% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 22,
@@ -196,8 +378,22 @@
     "columns": [
       "course_id"
     ],
-    "confidence_score": 98.0,
-    "reason": "ML Model predicted beneficial with 98.0% confidence."
+    "confidence_score": 90.27,
+    "score": 90.3,
+    "estimated_size_mb": 0.304,
+    "reason": "ML Model predicted beneficial with 90.27% confidence (>30% estimated cost reduction)."
+  },
+  {
+    "query_id": 22,
+    "query": "SELECT s.name, c.course_name, a.percentage FROM Student s JOIN Attendance a ON s.student_id = a.student_id JOIN Course c ON a.course_id = c.course_id WHERE a.percentage < 50;",
+    "table": "Student",
+    "columns": [
+      "percentage"
+    ],
+    "confidence_score": 94.48,
+    "score": 94.5,
+    "estimated_size_mb": 0.304,
+    "reason": "ML Model predicted beneficial with 94.48% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 22,
@@ -206,8 +402,10 @@
     "columns": [
       "student_id"
     ],
-    "confidence_score": 98.0,
-    "reason": "ML Model predicted beneficial with 98.0% confidence."
+    "confidence_score": 91.41,
+    "score": 91.4,
+    "estimated_size_mb": 0.254,
+    "reason": "ML Model predicted beneficial with 91.41% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 23,
@@ -216,8 +414,10 @@
     "columns": [
       "course_id"
     ],
-    "confidence_score": 100.0,
-    "reason": "ML Model predicted beneficial with 100.0% confidence."
+    "confidence_score": 89.69,
+    "score": 89.7,
+    "estimated_size_mb": 1.268,
+    "reason": "ML Model predicted beneficial with 89.69% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 23,
@@ -226,8 +426,10 @@
     "columns": [
       "semester"
     ],
-    "confidence_score": 67.0,
-    "reason": "ML Model predicted beneficial with 67.0% confidence."
+    "confidence_score": 99.16,
+    "score": 99.2,
+    "estimated_size_mb": 1.776,
+    "reason": "ML Model predicted beneficial with 99.16% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 23,
@@ -236,8 +438,10 @@
     "columns": [
       "student_id"
     ],
-    "confidence_score": 100.0,
-    "reason": "ML Model predicted beneficial with 100.0% confidence."
+    "confidence_score": 89.93,
+    "score": 89.9,
+    "estimated_size_mb": 1.268,
+    "reason": "ML Model predicted beneficial with 89.93% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 24,
@@ -246,8 +450,10 @@
     "columns": [
       "course_id"
     ],
-    "confidence_score": 99.0,
-    "reason": "ML Model predicted beneficial with 99.0% confidence."
+    "confidence_score": 89.27,
+    "score": 89.3,
+    "estimated_size_mb": 0.304,
+    "reason": "ML Model predicted beneficial with 89.27% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 24,
@@ -256,8 +462,10 @@
     "columns": [
       "department"
     ],
-    "confidence_score": 94.83,
-    "reason": "ML Model predicted beneficial with 94.83% confidence."
+    "confidence_score": 98.61,
+    "score": 98.6,
+    "estimated_size_mb": 0.457,
+    "reason": "ML Model predicted beneficial with 98.61% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 24,
@@ -266,8 +474,22 @@
     "columns": [
       "student_id"
     ],
-    "confidence_score": 99.0,
-    "reason": "ML Model predicted beneficial with 99.0% confidence."
+    "confidence_score": 91.41,
+    "score": 91.4,
+    "estimated_size_mb": 0.254,
+    "reason": "ML Model predicted beneficial with 91.41% confidence (>30% estimated cost reduction)."
+  },
+  {
+    "query_id": 25,
+    "query": "SELECT s.department, AVG(e.marks) AS avg_marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id GROUP BY s.department;",
+    "table": "Student",
+    "columns": [
+      "student_id"
+    ],
+    "confidence_score": 91.71,
+    "score": 91.7,
+    "estimated_size_mb": 0.254,
+    "reason": "ML Model predicted beneficial with 91.71% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 26,
@@ -276,8 +498,10 @@
     "columns": [
       "course_id"
     ],
-    "confidence_score": 77.0,
-    "reason": "ML Model predicted beneficial with 77.0% confidence."
+    "confidence_score": 90.27,
+    "score": 90.3,
+    "estimated_size_mb": 0.013,
+    "reason": "ML Model predicted beneficial with 90.27% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 27,
@@ -286,8 +510,22 @@
     "columns": [
       "student_id"
     ],
-    "confidence_score": 94.0,
-    "reason": "ML Model predicted beneficial with 94.0% confidence."
+    "confidence_score": 91.71,
+    "score": 91.7,
+    "estimated_size_mb": 0.254,
+    "reason": "ML Model predicted beneficial with 91.71% confidence (>30% estimated cost reduction)."
+  },
+  {
+    "query_id": 28,
+    "query": "SELECT c.course_name, AVG(e.marks) AS avg_marks FROM Course c JOIN Enrollment e ON c.course_id = e.course_id GROUP BY c.course_name ORDER BY avg_marks DESC LIMIT 10;",
+    "table": "Course",
+    "columns": [
+      "course_id"
+    ],
+    "confidence_score": 90.27,
+    "score": 90.3,
+    "estimated_size_mb": 0.013,
+    "reason": "ML Model predicted beneficial with 90.27% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 29,
@@ -296,8 +534,22 @@
     "columns": [
       "student_id"
     ],
-    "confidence_score": 77.0,
-    "reason": "ML Model predicted beneficial with 77.0% confidence."
+    "confidence_score": 90.2,
+    "score": 90.2,
+    "estimated_size_mb": 0.254,
+    "reason": "ML Model predicted beneficial with 90.2% confidence (>30% estimated cost reduction)."
+  },
+  {
+    "query_id": 30,
+    "query": "SELECT s.name, e.marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id WHERE e.semester = 'Spring 2024' ORDER BY e.marks DESC LIMIT 100;",
+    "table": "Student",
+    "columns": [
+      "semester"
+    ],
+    "confidence_score": 96.58,
+    "score": 96.6,
+    "estimated_size_mb": 0.304,
+    "reason": "ML Model predicted beneficial with 96.58% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 30,
@@ -306,8 +558,46 @@
     "columns": [
       "student_id"
     ],
-    "confidence_score": 92.0,
-    "reason": "ML Model predicted beneficial with 92.0% confidence."
+    "confidence_score": 90.96,
+    "score": 91.0,
+    "estimated_size_mb": 0.254,
+    "reason": "ML Model predicted beneficial with 90.96% confidence (>30% estimated cost reduction)."
+  },
+  {
+    "query_id": 31,
+    "query": "SELECT * FROM Student WHERE department = 'Economics' ORDER BY name;",
+    "table": "Student",
+    "columns": [
+      "department"
+    ],
+    "confidence_score": 97.92,
+    "score": 97.9,
+    "estimated_size_mb": 0.457,
+    "reason": "ML Model predicted beneficial with 97.92% confidence (>30% estimated cost reduction)."
+  },
+  {
+    "query_id": 33,
+    "query": "SELECT * FROM Enrollment WHERE semester = 'Fall 2023' ORDER BY marks DESC LIMIT 50;",
+    "table": "Enrollment",
+    "columns": [
+      "semester"
+    ],
+    "confidence_score": 99.02,
+    "score": 99.0,
+    "estimated_size_mb": 1.776,
+    "reason": "ML Model predicted beneficial with 99.02% confidence (>30% estimated cost reduction)."
+  },
+  {
+    "query_id": 41,
+    "query": "SELECT s.* FROM Student s LEFT JOIN Enrollment e ON s.student_id = e.student_id WHERE e.enrollment_id IS NULL;",
+    "table": "Student",
+    "columns": [
+      "enrollment_id"
+    ],
+    "confidence_score": 97.07,
+    "score": 97.1,
+    "estimated_size_mb": 0.304,
+    "reason": "ML Model predicted beneficial with 97.07% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 41,
@@ -316,8 +606,34 @@
     "columns": [
       "student_id"
     ],
-    "confidence_score": 71.0,
-    "reason": "ML Model predicted beneficial with 71.0% confidence."
+    "confidence_score": 92.21,
+    "score": 92.2,
+    "estimated_size_mb": 0.254,
+    "reason": "ML Model predicted beneficial with 92.21% confidence (>30% estimated cost reduction)."
+  },
+  {
+    "query_id": 42,
+    "query": "SELECT c.* FROM Course c LEFT JOIN Enrollment e ON c.course_id = e.course_id WHERE e.enrollment_id IS NULL;",
+    "table": "Course",
+    "columns": [
+      "course_id"
+    ],
+    "confidence_score": 92.73,
+    "score": 92.7,
+    "estimated_size_mb": 0.013,
+    "reason": "ML Model predicted beneficial with 92.73% confidence (>30% estimated cost reduction)."
+  },
+  {
+    "query_id": 42,
+    "query": "SELECT c.* FROM Course c LEFT JOIN Enrollment e ON c.course_id = e.course_id WHERE e.enrollment_id IS NULL;",
+    "table": "Course",
+    "columns": [
+      "enrollment_id"
+    ],
+    "confidence_score": 99.53,
+    "score": 99.5,
+    "estimated_size_mb": 0.015,
+    "reason": "ML Model predicted beneficial with 99.53% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 43,
@@ -326,8 +642,10 @@
     "columns": [
       "course_id"
     ],
-    "confidence_score": 71.0,
-    "reason": "ML Model predicted beneficial with 71.0% confidence."
+    "confidence_score": 92.31,
+    "score": 92.3,
+    "estimated_size_mb": 0.304,
+    "reason": "ML Model predicted beneficial with 92.31% confidence (>30% estimated cost reduction)."
   },
   {
     "query_id": 43,
@@ -336,7 +654,9 @@
     "columns": [
       "student_id"
     ],
-    "confidence_score": 100.0,
-    "reason": "ML Model predicted beneficial with 100.0% confidence."
+    "confidence_score": 99.5,
+    "score": 99.5,
+    "estimated_size_mb": 0.254,
+    "reason": "ML Model predicted beneficial with 99.5% confidence (>30% estimated cost reduction)."
   }
 ]

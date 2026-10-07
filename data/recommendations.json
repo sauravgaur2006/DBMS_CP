@@ -1,492 +1,163 @@
 [
   {
-    "query_id": 1,
-    "query": "SELECT * FROM Student WHERE student_id = 42;",
     "table": "Student",
     "columns": [
       "student_id"
     ],
-    "score": 181.0,
-    "reason": "Rule-based score based on frequency (181) and usage."
-  },
-  {
-    "query_id": 2,
-    "query": "SELECT * FROM Enrollment WHERE student_id = 42;",
-    "table": "Enrollment",
-    "columns": [
-      "student_id"
+    "index_name": "idx_student_student_id",
+    "total_score": 682.1300000000001,
+    "query_ids": [
+      1,
+      20,
+      21,
+      22,
+      24,
+      25,
+      27,
+      29,
+      30
     ],
-    "score": 114.0,
-    "reason": "Rule-based score based on frequency (114) and usage."
+    "estimated_size_mb": 0.254,
+    "selectivity": 0.0001,
+    "is_composite": false,
+    "reasons": [
+      "Rule-based single-col index on student_id (freq=181, equality filter, sel=0.0001)."
+    ]
   },
   {
-    "query_id": 3,
-    "query": "SELECT * FROM Attendance WHERE student_id = 42;",
-    "table": "Attendance",
-    "columns": [
-      "student_id"
-    ],
-    "score": 103.0,
-    "reason": "Rule-based score based on frequency (103) and usage."
-  },
-  {
-    "query_id": 4,
-    "query": "SELECT * FROM Course WHERE course_id = 10;",
     "table": "Course",
     "columns": [
       "course_id"
     ],
-    "score": 194.0,
-    "reason": "Rule-based score based on frequency (194) and usage."
-  },
-  {
-    "query_id": 5,
-    "query": "SELECT * FROM Attendance WHERE student_id = 42 AND course_id = 10;",
-    "table": "Attendance",
-    "columns": [
-      "student_id"
+    "index_name": "idx_course_course_id",
+    "total_score": 347.6,
+    "query_ids": [
+      4,
+      26,
+      28
     ],
-    "score": 135.0,
-    "reason": "Rule-based score based on frequency (135) and usage."
+    "estimated_size_mb": 0.013,
+    "selectivity": 0.002,
+    "is_composite": false,
+    "reasons": [
+      "Rule-based single-col index on course_id (freq=194, equality filter, sel=0.0020)."
+    ]
   },
   {
-    "query_id": 5,
-    "query": "SELECT * FROM Attendance WHERE student_id = 42 AND course_id = 10;",
-    "table": "Attendance",
-    "columns": [
-      "course_id"
-    ],
-    "score": 135.0,
-    "reason": "Rule-based score based on frequency (135) and usage."
-  },
-  {
-    "query_id": 6,
-    "query": "SELECT * FROM Student WHERE department = 'Computer Science';",
     "table": "Student",
     "columns": [
       "department"
     ],
-    "score": 67.0,
-    "reason": "Rule-based score based on frequency (67) and usage."
+    "index_name": "idx_student_department",
+    "total_score": 336.96,
+    "query_ids": [
+      6,
+      14,
+      19,
+      20,
+      24,
+      31
+    ],
+    "estimated_size_mb": 0.457,
+    "selectivity": 0.1,
+    "is_composite": false,
+    "reasons": [
+      "Rule-based single-col index on department (freq=67, equality filter, sel=0.1000)."
+    ]
   },
   {
-    "query_id": 7,
-    "query": "SELECT * FROM Student WHERE city = 'Pune';",
     "table": "Student",
     "columns": [
       "city"
     ],
-    "score": 67.0,
-    "reason": "Rule-based score based on frequency (67) and usage."
-  },
-  {
-    "query_id": 8,
-    "query": "SELECT * FROM Student WHERE year = 3;",
-    "table": "Student",
-    "columns": [
-      "year"
+    "index_name": "idx_student_city",
+    "total_score": 315.84000000000003,
+    "query_ids": [
+      7,
+      14,
+      15,
+      19,
+      21
     ],
-    "score": 64.0,
-    "reason": "Rule-based score based on frequency (64) and usage."
+    "estimated_size_mb": 0.393,
+    "selectivity": 0.066667,
+    "is_composite": false,
+    "reasons": [
+      "Rule-based single-col index on city (freq=67, equality filter, sel=0.0667)."
+    ]
   },
   {
-    "query_id": 9,
-    "query": "SELECT * FROM Course WHERE department = 'Mathematics';",
-    "table": "Course",
+    "table": "Attendance",
     "columns": [
-      "department"
+      "student_id"
     ],
-    "score": 83.0,
-    "reason": "Rule-based score based on frequency (83) and usage."
+    "index_name": "idx_attendance_student_id",
+    "total_score": 285.57,
+    "query_ids": [
+      3,
+      5
+    ],
+    "estimated_size_mb": 2.537,
+    "selectivity": 0.0001,
+    "is_composite": false,
+    "reasons": [
+      "Rule-based single-col index on student_id (freq=103, equality filter, sel=0.0001)."
+    ]
   },
   {
-    "query_id": 10,
-    "query": "SELECT * FROM Enrollment WHERE semester = 'Fall 2023';",
     "table": "Enrollment",
     "columns": [
-      "semester"
-    ],
-    "score": 63.0,
-    "reason": "Rule-based score based on frequency (63) and usage."
-  },
-  {
-    "query_id": 11,
-    "query": "SELECT * FROM Enrollment WHERE marks > 90;",
-    "table": "Enrollment",
-    "columns": [
+      "semester",
       "marks"
     ],
-    "score": 81.0,
-    "reason": "Rule-based score based on frequency (81) and usage."
-  },
-  {
-    "query_id": 12,
-    "query": "SELECT * FROM Attendance WHERE percentage < 50;",
-    "table": "Attendance",
-    "columns": [
-      "percentage"
+    "index_name": "idx_enrollment_semester_marks",
+    "total_score": 249.91000000000003,
+    "query_ids": [
+      16,
+      33
     ],
-    "score": 83.0,
-    "reason": "Rule-based score based on frequency (83) and usage."
+    "estimated_size_mb": 2.029,
+    "selectivity": 0.003333,
+    "is_composite": true,
+    "reasons": [
+      "Composite B-Tree index (semester, marks) covering range+equality with B-Tree prefix ordering."
+    ]
   },
   {
-    "query_id": 13,
-    "query": "SELECT * FROM Student WHERE name LIKE 'A%';",
     "table": "Student",
-    "columns": [
-      "name"
-    ],
-    "score": 88.0,
-    "reason": "Rule-based score based on frequency (88) and usage."
-  },
-  {
-    "query_id": 14,
-    "query": "SELECT * FROM Student WHERE department = 'Computer Science' AND city = 'Mumbai';",
-    "table": "Student",
-    "columns": [
-      "department"
-    ],
-    "score": 67.0,
-    "reason": "Rule-based score based on frequency (67) and usage."
-  },
-  {
-    "query_id": 14,
-    "query": "SELECT * FROM Student WHERE department = 'Computer Science' AND city = 'Mumbai';",
-    "table": "Student",
-    "columns": [
-      "city"
-    ],
-    "score": 67.0,
-    "reason": "Rule-based score based on frequency (67) and usage."
-  },
-  {
-    "query_id": 15,
-    "query": "SELECT * FROM Student WHERE year = 3 AND city = 'Pune';",
-    "table": "Student",
-    "columns": [
-      "year"
-    ],
-    "score": 52.0,
-    "reason": "Rule-based score based on frequency (52) and usage."
-  },
-  {
-    "query_id": 15,
-    "query": "SELECT * FROM Student WHERE year = 3 AND city = 'Pune';",
-    "table": "Student",
-    "columns": [
-      "city"
-    ],
-    "score": 52.0,
-    "reason": "Rule-based score based on frequency (52) and usage."
-  },
-  {
-    "query_id": 16,
-    "query": "SELECT * FROM Enrollment WHERE marks > 85 AND semester = 'Spring 2024';",
-    "table": "Enrollment",
-    "columns": [
-      "marks"
-    ],
-    "score": 68.0,
-    "reason": "Rule-based score based on frequency (68) and usage."
-  },
-  {
-    "query_id": 16,
-    "query": "SELECT * FROM Enrollment WHERE marks > 85 AND semester = 'Spring 2024';",
-    "table": "Enrollment",
-    "columns": [
-      "semester"
-    ],
-    "score": 68.0,
-    "reason": "Rule-based score based on frequency (68) and usage."
-  },
-  {
-    "query_id": 17,
-    "query": "SELECT * FROM Enrollment WHERE course_id = 10 AND marks > 80;",
-    "table": "Enrollment",
     "columns": [
       "course_id"
     ],
-    "score": 63.0,
-    "reason": "Rule-based score based on frequency (63) and usage."
-  },
-  {
-    "query_id": 17,
-    "query": "SELECT * FROM Enrollment WHERE course_id = 10 AND marks > 80;",
-    "table": "Enrollment",
-    "columns": [
-      "marks"
+    "index_name": "idx_student_course_id",
+    "total_score": 227.54,
+    "query_ids": [
+      21,
+      22,
+      24
     ],
-    "score": 63.0,
-    "reason": "Rule-based score based on frequency (63) and usage."
+    "estimated_size_mb": 0.304,
+    "selectivity": 0.002,
+    "is_composite": false,
+    "reasons": [
+      "Rule-based single-col index on course_id (freq=46, JOIN lookup, sel=0.0020)."
+    ]
   },
   {
-    "query_id": 18,
-    "query": "SELECT * FROM Attendance WHERE course_id = 15 AND percentage < 40;",
     "table": "Attendance",
     "columns": [
       "course_id"
     ],
-    "score": 51.0,
-    "reason": "Rule-based score based on frequency (51) and usage."
-  },
-  {
-    "query_id": 18,
-    "query": "SELECT * FROM Attendance WHERE course_id = 15 AND percentage < 40;",
-    "table": "Attendance",
-    "columns": [
-      "percentage"
+    "index_name": "idx_attendance_course_id",
+    "total_score": 222.76,
+    "query_ids": [
+      5,
+      18
     ],
-    "score": 51.0,
-    "reason": "Rule-based score based on frequency (51) and usage."
-  },
-  {
-    "query_id": 19,
-    "query": "SELECT * FROM Student WHERE department = 'Physics' AND (city = 'Delhi' OR city = 'Bangalore');",
-    "table": "Student",
-    "columns": [
-      "department"
-    ],
-    "score": 50.0,
-    "reason": "Rule-based score based on frequency (50) and usage."
-  },
-  {
-    "query_id": 19,
-    "query": "SELECT * FROM Student WHERE department = 'Physics' AND (city = 'Delhi' OR city = 'Bangalore');",
-    "table": "Student",
-    "columns": [
-      "city"
-    ],
-    "score": 50.0,
-    "reason": "Rule-based score based on frequency (50) and usage."
-  },
-  {
-    "query_id": 20,
-    "query": "SELECT s.name, s.department, e.course_id, e.marks, e.semester FROM Student s JOIN Enrollment e ON s.student_id = e.student_id WHERE s.department = 'Computer Science';",
-    "table": "Student",
-    "columns": [
-      "department"
-    ],
-    "score": 42.0,
-    "reason": "Rule-based score based on frequency (42) and usage."
-  },
-  {
-    "query_id": 20,
-    "query": "SELECT s.name, s.department, e.course_id, e.marks, e.semester FROM Student s JOIN Enrollment e ON s.student_id = e.student_id WHERE s.department = 'Computer Science';",
-    "table": "Student",
-    "columns": [
-      "student_id"
-    ],
-    "score": 63.0,
-    "reason": "Rule-based score based on frequency (42) and usage."
-  },
-  {
-    "query_id": 21,
-    "query": "SELECT s.name, c.course_name, e.marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id JOIN Course c ON e.course_id = c.course_id WHERE s.city = 'Mumbai';",
-    "table": "Student",
-    "columns": [
-      "city"
-    ],
-    "score": 46.0,
-    "reason": "Rule-based score based on frequency (46) and usage."
-  },
-  {
-    "query_id": 21,
-    "query": "SELECT s.name, c.course_name, e.marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id JOIN Course c ON e.course_id = c.course_id WHERE s.city = 'Mumbai';",
-    "table": "Student",
-    "columns": [
-      "student_id"
-    ],
-    "score": 69.0,
-    "reason": "Rule-based score based on frequency (46) and usage."
-  },
-  {
-    "query_id": 21,
-    "query": "SELECT s.name, c.course_name, e.marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id JOIN Course c ON e.course_id = c.course_id WHERE s.city = 'Mumbai';",
-    "table": "Student",
-    "columns": [
-      "course_id"
-    ],
-    "score": 69.0,
-    "reason": "Rule-based score based on frequency (46) and usage."
-  },
-  {
-    "query_id": 22,
-    "query": "SELECT s.name, c.course_name, a.percentage FROM Student s JOIN Attendance a ON s.student_id = a.student_id JOIN Course c ON a.course_id = c.course_id WHERE a.percentage < 50;",
-    "table": "Student",
-    "columns": [
-      "percentage"
-    ],
-    "score": 47.0,
-    "reason": "Rule-based score based on frequency (47) and usage."
-  },
-  {
-    "query_id": 22,
-    "query": "SELECT s.name, c.course_name, a.percentage FROM Student s JOIN Attendance a ON s.student_id = a.student_id JOIN Course c ON a.course_id = c.course_id WHERE a.percentage < 50;",
-    "table": "Student",
-    "columns": [
-      "student_id"
-    ],
-    "score": 70.5,
-    "reason": "Rule-based score based on frequency (47) and usage."
-  },
-  {
-    "query_id": 22,
-    "query": "SELECT s.name, c.course_name, a.percentage FROM Student s JOIN Attendance a ON s.student_id = a.student_id JOIN Course c ON a.course_id = c.course_id WHERE a.percentage < 50;",
-    "table": "Student",
-    "columns": [
-      "course_id"
-    ],
-    "score": 70.5,
-    "reason": "Rule-based score based on frequency (47) and usage."
-  },
-  {
-    "query_id": 23,
-    "query": "SELECT e.enrollment_id, s.name, c.course_name, e.marks FROM Enrollment e JOIN Student s ON e.student_id = s.student_id JOIN Course c ON e.course_id = c.course_id WHERE e.semester = 'Fall 2023';",
-    "table": "Enrollment",
-    "columns": [
-      "semester"
-    ],
-    "score": 56.0,
-    "reason": "Rule-based score based on frequency (56) and usage."
-  },
-  {
-    "query_id": 23,
-    "query": "SELECT e.enrollment_id, s.name, c.course_name, e.marks FROM Enrollment e JOIN Student s ON e.student_id = s.student_id JOIN Course c ON e.course_id = c.course_id WHERE e.semester = 'Fall 2023';",
-    "table": "Enrollment",
-    "columns": [
-      "student_id"
-    ],
-    "score": 84.0,
-    "reason": "Rule-based score based on frequency (56) and usage."
-  },
-  {
-    "query_id": 23,
-    "query": "SELECT e.enrollment_id, s.name, c.course_name, e.marks FROM Enrollment e JOIN Student s ON e.student_id = s.student_id JOIN Course c ON e.course_id = c.course_id WHERE e.semester = 'Fall 2023';",
-    "table": "Enrollment",
-    "columns": [
-      "course_id"
-    ],
-    "score": 84.0,
-    "reason": "Rule-based score based on frequency (56) and usage."
-  },
-  {
-    "query_id": 24,
-    "query": "SELECT s.name, s.department AS student_dept, c.course_name, c.department AS course_dept FROM Student s JOIN Enrollment e ON s.student_id = e.student_id JOIN Course c ON e.course_id = c.course_id WHERE s.department != c.department;",
-    "table": "Student",
-    "columns": [
-      "department"
-    ],
-    "score": 59.0,
-    "reason": "Rule-based score based on frequency (59) and usage."
-  },
-  {
-    "query_id": 24,
-    "query": "SELECT s.name, s.department AS student_dept, c.course_name, c.department AS course_dept FROM Student s JOIN Enrollment e ON s.student_id = e.student_id JOIN Course c ON e.course_id = c.course_id WHERE s.department != c.department;",
-    "table": "Student",
-    "columns": [
-      "student_id"
-    ],
-    "score": 88.5,
-    "reason": "Rule-based score based on frequency (59) and usage."
-  },
-  {
-    "query_id": 24,
-    "query": "SELECT s.name, s.department AS student_dept, c.course_name, c.department AS course_dept FROM Student s JOIN Enrollment e ON s.student_id = e.student_id JOIN Course c ON e.course_id = c.course_id WHERE s.department != c.department;",
-    "table": "Student",
-    "columns": [
-      "course_id"
-    ],
-    "score": 88.5,
-    "reason": "Rule-based score based on frequency (59) and usage."
-  },
-  {
-    "query_id": 25,
-    "query": "SELECT s.department, AVG(e.marks) AS avg_marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id GROUP BY s.department;",
-    "table": "Student",
-    "columns": [
-      "student_id"
-    ],
-    "score": 30.0,
-    "reason": "Rule-based score based on frequency (20) and usage."
-  },
-  {
-    "query_id": 26,
-    "query": "SELECT c.course_name, COUNT(DISTINCT e.student_id) AS student_count FROM Course c JOIN Enrollment e ON c.course_id = e.course_id GROUP BY c.course_name;",
-    "table": "Course",
-    "columns": [
-      "course_id"
-    ],
-    "score": 55.5,
-    "reason": "Rule-based score based on frequency (37) and usage."
-  },
-  {
-    "query_id": 27,
-    "query": "SELECT s.department, AVG(a.percentage) AS avg_attendance FROM Student s JOIN Attendance a ON s.student_id = a.student_id GROUP BY s.department;",
-    "table": "Student",
-    "columns": [
-      "student_id"
-    ],
-    "score": 39.0,
-    "reason": "Rule-based score based on frequency (26) and usage."
-  },
-  {
-    "query_id": 28,
-    "query": "SELECT c.course_name, AVG(e.marks) AS avg_marks FROM Course c JOIN Enrollment e ON c.course_id = e.course_id GROUP BY c.course_name ORDER BY avg_marks DESC LIMIT 10;",
-    "table": "Course",
-    "columns": [
-      "course_id"
-    ],
-    "score": 60.0,
-    "reason": "Rule-based score based on frequency (40) and usage."
-  },
-  {
-    "query_id": 29,
-    "query": "SELECT s.name, e.semester, COUNT(*) AS enrollment_count FROM Student s JOIN Enrollment e ON s.student_id = e.student_id GROUP BY s.student_id, s.name, e.semester;",
-    "table": "Student",
-    "columns": [
-      "student_id"
-    ],
-    "score": 55.5,
-    "reason": "Rule-based score based on frequency (37) and usage."
-  },
-  {
-    "query_id": 30,
-    "query": "SELECT s.name, e.marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id WHERE e.semester = 'Spring 2024' ORDER BY e.marks DESC LIMIT 100;",
-    "table": "Student",
-    "columns": [
-      "semester"
-    ],
-    "score": 33.0,
-    "reason": "Rule-based score based on frequency (33) and usage."
-  },
-  {
-    "query_id": 30,
-    "query": "SELECT s.name, e.marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id WHERE e.semester = 'Spring 2024' ORDER BY e.marks DESC LIMIT 100;",
-    "table": "Student",
-    "columns": [
-      "student_id"
-    ],
-    "score": 49.5,
-    "reason": "Rule-based score based on frequency (33) and usage."
-  },
-  {
-    "query_id": 31,
-    "query": "SELECT * FROM Student WHERE department = 'Economics' ORDER BY name;",
-    "table": "Student",
-    "columns": [
-      "department"
-    ],
-    "score": 27.0,
-    "reason": "Rule-based score based on frequency (27) and usage."
-  },
-  {
-    "query_id": 33,
-    "query": "SELECT * FROM Enrollment WHERE semester = 'Fall 2023' ORDER BY marks DESC LIMIT 50;",
-    "table": "Enrollment",
-    "columns": [
-      "semester"
-    ],
-    "score": 38.0,
-    "reason": "Rule-based score based on frequency (38) and usage."
+    "estimated_size_mb": 2.537,
+    "selectivity": 0.002,
+    "is_composite": false,
+    "reasons": [
+      "Rule-based single-col index on course_id (freq=135, equality filter, sel=0.0020)."
+    ]
   }
 ]

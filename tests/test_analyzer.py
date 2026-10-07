@@ -246,8 +246,9 @@ class TestWorkloadAnalyzer(unittest.TestCase):
                     os.remove(p)
 
     def test_invalid_output_path(self):
+        invalid_path = "Z:\\nonexistent_volume_root\\path.json" if os.name == "nt" else "/dev/null/impossible/path.json"
         with self.assertRaises(OSError) as ctx:
-            write_json_safely({"test": 1}, "/dev/null/impossible/path.json")
+            write_json_safely({"test": 1}, invalid_path)
         self.assertIn("Unable to write", str(ctx.exception))
 
     # ---------------------------------------------------------
