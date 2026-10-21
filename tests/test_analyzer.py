@@ -246,8 +246,9 @@ class TestWorkloadAnalyzer(unittest.TestCase):
                     os.remove(p)
 
     def test_invalid_output_path(self):
+        impossible_path = os.path.join(os.path.abspath(__file__), "impossible", "path.json")
         with self.assertRaises(OSError) as ctx:
-            write_json_safely({"test": 1}, "/dev/null/impossible/path.json")
+            write_json_safely({"test": 1}, impossible_path)
         self.assertIn("Unable to write", str(ctx.exception))
 
     # ---------------------------------------------------------

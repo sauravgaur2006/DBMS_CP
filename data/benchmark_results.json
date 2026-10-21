@@ -7,11 +7,11 @@
     ],
     "index_name": "idx_Student_student_id",
     "query": "SELECT * FROM Student WHERE student_id = 42;",
-    "before_ms": 478.08,
-    "after_ms": 135.73,
-    "improvement_percent": 71.61,
-    "storage_overhead_mb": 1.967,
-    "timestamp": "2026-09-03T00:13:38.779124"
+    "before_ms": 410.41,
+    "after_ms": 91.23,
+    "improvement_percent": 77.77,
+    "storage_overhead_mb": 0.5418,
+    "timestamp": "2026-10-22T01:26:21.861447"
   },
   {
     "query_id": 2,
@@ -21,11 +21,11 @@
     ],
     "index_name": "idx_Enrollment_student_id",
     "query": "SELECT * FROM Enrollment WHERE student_id = 42;",
-    "before_ms": 419.41,
-    "after_ms": 58.63,
-    "improvement_percent": 86.02,
-    "storage_overhead_mb": 0.6032,
-    "timestamp": "2026-09-03T00:13:38.779134"
+    "before_ms": 422.67,
+    "after_ms": 70.01,
+    "improvement_percent": 83.44,
+    "storage_overhead_mb": 1.4802,
+    "timestamp": "2026-10-22T01:26:21.969571"
   },
   {
     "query_id": 3,
@@ -35,11 +35,11 @@
     ],
     "index_name": "idx_Attendance_student_id",
     "query": "SELECT * FROM Attendance WHERE student_id = 42;",
-    "before_ms": 396.7,
-    "after_ms": 81.47,
-    "improvement_percent": 79.46,
-    "storage_overhead_mb": 0.6404,
-    "timestamp": "2026-09-03T00:13:38.779137"
+    "before_ms": 695.95,
+    "after_ms": 145.94,
+    "improvement_percent": 79.03,
+    "storage_overhead_mb": 1.8292,
+    "timestamp": "2026-10-22T01:26:22.110836"
   },
   {
     "query_id": 4,
@@ -49,11 +49,11 @@
     ],
     "index_name": "idx_Course_course_id",
     "query": "SELECT * FROM Course WHERE course_id = 10;",
-    "before_ms": 558.34,
-    "after_ms": 84.8,
-    "improvement_percent": 84.81,
-    "storage_overhead_mb": 1.8638,
-    "timestamp": "2026-09-03T00:13:38.779139"
+    "before_ms": 480.87,
+    "after_ms": 132.0,
+    "improvement_percent": 72.55,
+    "storage_overhead_mb": 1.5674,
+    "timestamp": "2026-10-22T01:26:22.271268"
   },
   {
     "query_id": 5,
@@ -63,11 +63,11 @@
     ],
     "index_name": "idx_Attendance_student_id",
     "query": "SELECT * FROM Attendance WHERE student_id = 42 AND course_id = 10;",
-    "before_ms": 697.63,
-    "after_ms": 150.17,
-    "improvement_percent": 78.47,
-    "storage_overhead_mb": 1.7564,
-    "timestamp": "2026-09-03T00:13:38.779141"
+    "before_ms": 330.85,
+    "after_ms": 90.42,
+    "improvement_percent": 72.67,
+    "storage_overhead_mb": 1.4307,
+    "timestamp": "2026-10-22T01:26:22.433435"
   },
   {
     "query_id": 5,
@@ -77,11 +77,11 @@
     ],
     "index_name": "idx_Attendance_course_id",
     "query": "SELECT * FROM Attendance WHERE student_id = 42 AND course_id = 10;",
-    "before_ms": 504.38,
-    "after_ms": 102.74,
-    "improvement_percent": 79.63,
-    "storage_overhead_mb": 1.4717,
-    "timestamp": "2026-09-03T00:13:38.779143"
+    "before_ms": 451.56,
+    "after_ms": 87.28,
+    "improvement_percent": 80.67,
+    "storage_overhead_mb": 1.2245,
+    "timestamp": "2026-10-22T01:26:22.582696"
   },
   {
     "query_id": 6,
@@ -91,11 +91,11 @@
     ],
     "index_name": "idx_Student_department",
     "query": "SELECT * FROM Student WHERE department = 'Computer Science';",
-    "before_ms": 340.77,
-    "after_ms": 62.28,
-    "improvement_percent": 81.72,
-    "storage_overhead_mb": 0.8701,
-    "timestamp": "2026-09-03T00:13:38.779145"
+    "before_ms": 172.6,
+    "after_ms": 367.37,
+    "improvement_percent": -112.85,
+    "storage_overhead_mb": 0.0,
+    "timestamp": "2026-10-22T01:26:25.250543"
   },
   {
     "query_id": 7,
@@ -105,11 +105,11 @@
     ],
     "index_name": "idx_Student_city",
     "query": "SELECT * FROM Student WHERE city = 'Pune';",
-    "before_ms": 343.69,
-    "after_ms": 75.05,
-    "improvement_percent": 78.16,
-    "storage_overhead_mb": 1.5653,
-    "timestamp": "2026-09-03T00:13:38.779147"
+    "before_ms": 114.19,
+    "after_ms": 82.08,
+    "improvement_percent": 28.13,
+    "storage_overhead_mb": 0.0,
+    "timestamp": "2026-10-22T01:26:26.733219"
   },
   {
     "query_id": 8,
@@ -119,11 +119,11 @@
     ],
     "index_name": "idx_Student_year",
     "query": "SELECT * FROM Student WHERE year = 3;",
-    "before_ms": 730.38,
-    "after_ms": 102.0,
-    "improvement_percent": 86.03,
-    "storage_overhead_mb": 0.7187,
-    "timestamp": "2026-09-03T00:13:38.779148"
+    "before_ms": 155.94,
+    "after_ms": 133.85,
+    "improvement_percent": 14.16,
+    "storage_overhead_mb": 0.0,
+    "timestamp": "2026-10-22T01:26:28.407689"
   },
   {
     "query_id": 9,
@@ -133,11 +133,11 @@
     ],
     "index_name": "idx_Course_department",
     "query": "SELECT * FROM Course WHERE department = 'Mathematics';",
-    "before_ms": 473.83,
-    "after_ms": 71.44,
-    "improvement_percent": 84.92,
-    "storage_overhead_mb": 0.4906,
-    "timestamp": "2026-09-03T00:13:38.779150"
+    "before_ms": 46.64,
+    "after_ms": 40.62,
+    "improvement_percent": 12.93,
+    "storage_overhead_mb": 0.0,
+    "timestamp": "2026-10-22T01:26:29.290603"
   },
   {
     "query_id": 10,
@@ -147,11 +147,11 @@
     ],
     "index_name": "idx_Enrollment_semester",
     "query": "SELECT * FROM Enrollment WHERE semester = 'Fall 2023';",
-    "before_ms": 656.71,
-    "after_ms": 114.09,
-    "improvement_percent": 82.63,
-    "storage_overhead_mb": 1.8902,
-    "timestamp": "2026-09-03T00:13:38.779152"
+    "before_ms": 678.37,
+    "after_ms": 568.53,
+    "improvement_percent": 16.19,
+    "storage_overhead_mb": 3.0312,
+    "timestamp": "2026-10-22T01:26:35.009626"
   },
   {
     "query_id": 11,
@@ -161,11 +161,11 @@
     ],
     "index_name": "idx_Enrollment_marks",
     "query": "SELECT * FROM Enrollment WHERE marks > 90;",
-    "before_ms": 374.34,
-    "after_ms": 97.19,
-    "improvement_percent": 74.04,
-    "storage_overhead_mb": 1.4668,
-    "timestamp": "2026-09-03T00:13:38.779154"
+    "before_ms": 259.29,
+    "after_ms": 327.47,
+    "improvement_percent": -26.3,
+    "storage_overhead_mb": 3.0312,
+    "timestamp": "2026-10-22T01:26:38.788988"
   },
   {
     "query_id": 12,
@@ -175,11 +175,11 @@
     ],
     "index_name": "idx_Attendance_percentage",
     "query": "SELECT * FROM Attendance WHERE percentage < 50;",
-    "before_ms": 652.41,
-    "after_ms": 126.29,
-    "improvement_percent": 80.64,
-    "storage_overhead_mb": 1.7724,
-    "timestamp": "2026-09-03T00:13:38.779155"
+    "before_ms": 917.78,
+    "after_ms": 662.18,
+    "improvement_percent": 27.85,
+    "storage_overhead_mb": 5.0312,
+    "timestamp": "2026-10-22T01:26:46.440985"
   },
   {
     "query_id": 13,
@@ -189,11 +189,11 @@
     ],
     "index_name": "idx_Student_name",
     "query": "SELECT * FROM Student WHERE name LIKE 'A%';",
-    "before_ms": 612.01,
-    "after_ms": 94.96,
-    "improvement_percent": 84.48,
-    "storage_overhead_mb": 0.628,
-    "timestamp": "2026-09-03T00:13:38.779157"
+    "before_ms": 107.55,
+    "after_ms": 91.73,
+    "improvement_percent": 14.71,
+    "storage_overhead_mb": 0.0,
+    "timestamp": "2026-10-22T01:26:48.021537"
   },
   {
     "query_id": 14,
@@ -203,11 +203,11 @@
     ],
     "index_name": "idx_Student_department",
     "query": "SELECT * FROM Student WHERE department = 'Computer Science' AND city = 'Mumbai';",
-    "before_ms": 673.89,
-    "after_ms": 90.4,
-    "improvement_percent": 86.59,
-    "storage_overhead_mb": 1.6814,
-    "timestamp": "2026-09-03T00:13:38.779159"
+    "before_ms": 80.85,
+    "after_ms": 94.8,
+    "improvement_percent": -17.26,
+    "storage_overhead_mb": 0.0,
+    "timestamp": "2026-10-22T01:26:49.302185"
   },
   {
     "query_id": 14,
@@ -217,11 +217,11 @@
     ],
     "index_name": "idx_Student_city",
     "query": "SELECT * FROM Student WHERE department = 'Computer Science' AND city = 'Mumbai';",
-    "before_ms": 590.32,
-    "after_ms": 108.79,
-    "improvement_percent": 81.57,
-    "storage_overhead_mb": 1.6871,
-    "timestamp": "2026-09-03T00:13:38.779160"
+    "before_ms": 78.73,
+    "after_ms": 78.74,
+    "improvement_percent": -0.01,
+    "storage_overhead_mb": 0.0,
+    "timestamp": "2026-10-22T01:26:50.689998"
   },
   {
     "query_id": 15,
@@ -231,11 +231,11 @@
     ],
     "index_name": "idx_Student_year",
     "query": "SELECT * FROM Student WHERE year = 3 AND city = 'Pune';",
-    "before_ms": 472.58,
-    "after_ms": 85.2,
-    "improvement_percent": 81.97,
-    "storage_overhead_mb": 2.0778,
-    "timestamp": "2026-09-03T00:13:38.779162"
+    "before_ms": 144.42,
+    "after_ms": 76.52,
+    "improvement_percent": 47.02,
+    "storage_overhead_mb": 0.0,
+    "timestamp": "2026-10-22T01:26:52.502097"
   },
   {
     "query_id": 15,
@@ -245,11 +245,11 @@
     ],
     "index_name": "idx_Student_city",
     "query": "SELECT * FROM Student WHERE year = 3 AND city = 'Pune';",
-    "before_ms": 567.98,
-    "after_ms": 120.49,
-    "improvement_percent": 78.79,
-    "storage_overhead_mb": 1.3692,
-    "timestamp": "2026-09-03T00:13:38.779163"
+    "before_ms": 186.58,
+    "after_ms": 79.42,
+    "improvement_percent": 57.44,
+    "storage_overhead_mb": 0.0,
+    "timestamp": "2026-10-22T01:26:54.772211"
   },
   {
     "query_id": 16,
@@ -259,11 +259,11 @@
     ],
     "index_name": "idx_Enrollment_marks",
     "query": "SELECT * FROM Enrollment WHERE marks > 85 AND semester = 'Spring 2024';",
-    "before_ms": 624.6,
-    "after_ms": 89.34,
-    "improvement_percent": 85.7,
-    "storage_overhead_mb": 1.8124,
-    "timestamp": "2026-09-03T00:13:38.779165"
+    "before_ms": 165.97,
+    "after_ms": 133.61,
+    "improvement_percent": 19.5,
+    "storage_overhead_mb": 3.0312,
+    "timestamp": "2026-10-22T01:26:56.811502"
   },
   {
     "query_id": 16,
@@ -273,11 +273,11 @@
     ],
     "index_name": "idx_Enrollment_semester",
     "query": "SELECT * FROM Enrollment WHERE marks > 85 AND semester = 'Spring 2024';",
-    "before_ms": 378.59,
-    "after_ms": 86.76,
-    "improvement_percent": 77.08,
-    "storage_overhead_mb": 0.9221,
-    "timestamp": "2026-09-03T00:13:38.779167"
+    "before_ms": 143.42,
+    "after_ms": 356.75,
+    "improvement_percent": -148.74,
+    "storage_overhead_mb": 3.0312,
+    "timestamp": "2026-10-22T01:27:00.333558"
   },
   {
     "query_id": 17,
@@ -287,11 +287,11 @@
     ],
     "index_name": "idx_Enrollment_course_id",
     "query": "SELECT * FROM Enrollment WHERE course_id = 10 AND marks > 80;",
-    "before_ms": 567.18,
-    "after_ms": 93.32,
-    "improvement_percent": 83.55,
-    "storage_overhead_mb": 1.7412,
-    "timestamp": "2026-09-03T00:13:38.779168"
+    "before_ms": 481.01,
+    "after_ms": 89.6,
+    "improvement_percent": 81.37,
+    "storage_overhead_mb": 1.9077,
+    "timestamp": "2026-10-22T01:27:00.938160"
   },
   {
     "query_id": 17,
@@ -301,11 +301,11 @@
     ],
     "index_name": "idx_Enrollment_marks",
     "query": "SELECT * FROM Enrollment WHERE course_id = 10 AND marks > 80;",
-    "before_ms": 662.72,
-    "after_ms": 151.16,
-    "improvement_percent": 77.19,
-    "storage_overhead_mb": 0.7211,
-    "timestamp": "2026-09-03T00:13:38.779170"
+    "before_ms": 50.06,
+    "after_ms": 41.7,
+    "improvement_percent": 16.71,
+    "storage_overhead_mb": 3.0312,
+    "timestamp": "2026-10-22T01:27:01.972214"
   },
   {
     "query_id": 18,
@@ -315,11 +315,11 @@
     ],
     "index_name": "idx_Attendance_course_id",
     "query": "SELECT * FROM Attendance WHERE course_id = 15 AND percentage < 40;",
-    "before_ms": 495.36,
-    "after_ms": 85.89,
-    "improvement_percent": 82.66,
-    "storage_overhead_mb": 0.9921,
-    "timestamp": "2026-09-03T00:13:38.779172"
+    "before_ms": 371.8,
+    "after_ms": 53.04,
+    "improvement_percent": 85.73,
+    "storage_overhead_mb": 0.5326,
+    "timestamp": "2026-10-22T01:27:02.057444"
   },
   {
     "query_id": 18,
@@ -329,11 +329,11 @@
     ],
     "index_name": "idx_Attendance_percentage",
     "query": "SELECT * FROM Attendance WHERE course_id = 15 AND percentage < 40;",
-    "before_ms": 599.93,
-    "after_ms": 86.19,
-    "improvement_percent": 85.63,
-    "storage_overhead_mb": 1.0964,
-    "timestamp": "2026-09-03T00:13:38.779173"
+    "before_ms": 79.19,
+    "after_ms": 80.04,
+    "improvement_percent": -1.08,
+    "storage_overhead_mb": 5.0312,
+    "timestamp": "2026-10-22T01:27:03.592071"
   },
   {
     "query_id": 19,
@@ -343,11 +343,11 @@
     ],
     "index_name": "idx_Student_department",
     "query": "SELECT * FROM Student WHERE department = 'Physics' AND (city = 'Delhi' OR city = 'Bangalore');",
-    "before_ms": 541.37,
-    "after_ms": 147.26,
-    "improvement_percent": 72.8,
-    "storage_overhead_mb": 0.7105,
-    "timestamp": "2026-09-03T00:13:38.779175"
+    "before_ms": 78.56,
+    "after_ms": 79.18,
+    "improvement_percent": -0.78,
+    "storage_overhead_mb": 0.0,
+    "timestamp": "2026-10-22T01:27:04.871959"
   },
   {
     "query_id": 19,
@@ -357,11 +357,11 @@
     ],
     "index_name": "idx_Student_city",
     "query": "SELECT * FROM Student WHERE department = 'Physics' AND (city = 'Delhi' OR city = 'Bangalore');",
-    "before_ms": 434.23,
-    "after_ms": 61.49,
-    "improvement_percent": 85.84,
-    "storage_overhead_mb": 2.0105,
-    "timestamp": "2026-09-03T00:13:38.779176"
+    "before_ms": 91.4,
+    "after_ms": 69.17,
+    "improvement_percent": 24.33,
+    "storage_overhead_mb": 0.0,
+    "timestamp": "2026-10-22T01:27:06.021977"
   },
   {
     "query_id": 20,
@@ -371,11 +371,11 @@
     ],
     "index_name": "idx_Student_department",
     "query": "SELECT s.name, s.department, e.course_id, e.marks, e.semester FROM Student s JOIN Enrollment e ON s.student_id = e.student_id WHERE s.department = 'Computer Science';",
-    "before_ms": 582.77,
-    "after_ms": 145.67,
-    "improvement_percent": 75.0,
-    "storage_overhead_mb": 0.7052,
-    "timestamp": "2026-09-03T00:13:38.779178"
+    "before_ms": 744.17,
+    "after_ms": 214.49,
+    "improvement_percent": 71.18,
+    "storage_overhead_mb": 0.0,
+    "timestamp": "2026-10-22T01:27:10.542216"
   },
   {
     "query_id": 20,
@@ -385,11 +385,11 @@
     ],
     "index_name": "idx_Student_student_id",
     "query": "SELECT s.name, s.department, e.course_id, e.marks, e.semester FROM Student s JOIN Enrollment e ON s.student_id = e.student_id WHERE s.department = 'Computer Science';",
-    "before_ms": 647.32,
-    "after_ms": 151.81,
-    "improvement_percent": 76.55,
-    "storage_overhead_mb": 0.3629,
-    "timestamp": "2026-09-03T00:13:38.779180"
+    "before_ms": 244.73,
+    "after_ms": 195.24,
+    "improvement_percent": 20.22,
+    "storage_overhead_mb": 0.0,
+    "timestamp": "2026-10-22T01:27:12.393314"
   },
   {
     "query_id": 21,
@@ -399,11 +399,11 @@
     ],
     "index_name": "idx_Student_city",
     "query": "SELECT s.name, c.course_name, e.marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id JOIN Course c ON e.course_id = c.course_id WHERE s.city = 'Mumbai';",
-    "before_ms": 644.6,
-    "after_ms": 92.99,
-    "improvement_percent": 85.57,
-    "storage_overhead_mb": 1.7412,
-    "timestamp": "2026-09-03T00:13:38.779181"
+    "before_ms": 209.93,
+    "after_ms": 198.42,
+    "improvement_percent": 5.48,
+    "storage_overhead_mb": 0.0,
+    "timestamp": "2026-10-22T01:27:15.025063"
   },
   {
     "query_id": 21,
@@ -413,11 +413,11 @@
     ],
     "index_name": "idx_Student_student_id",
     "query": "SELECT s.name, c.course_name, e.marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id JOIN Course c ON e.course_id = c.course_id WHERE s.city = 'Mumbai';",
-    "before_ms": 636.56,
-    "after_ms": 102.29,
-    "improvement_percent": 83.93,
-    "storage_overhead_mb": 1.5291,
-    "timestamp": "2026-09-03T00:13:38.779183"
+    "before_ms": 331.14,
+    "after_ms": 260.68,
+    "improvement_percent": 21.28,
+    "storage_overhead_mb": 0.0,
+    "timestamp": "2026-10-22T01:27:17.982728"
   },
   {
     "query_id": 21,
@@ -427,11 +427,11 @@
     ],
     "index_name": "idx_Student_course_id",
     "query": "SELECT s.name, c.course_name, e.marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id JOIN Course c ON e.course_id = c.course_id WHERE s.city = 'Mumbai';",
-    "before_ms": 466.57,
-    "after_ms": 129.47,
-    "improvement_percent": 72.25,
-    "storage_overhead_mb": 2.0883,
-    "timestamp": "2026-09-03T00:13:38.779185"
+    "before_ms": 676.63,
+    "after_ms": 113.62,
+    "improvement_percent": 83.21,
+    "storage_overhead_mb": 1.9427,
+    "timestamp": "2026-10-22T01:27:18.742754"
   },
   {
     "query_id": 22,
@@ -441,11 +441,11 @@
     ],
     "index_name": "idx_Student_percentage",
     "query": "SELECT s.name, c.course_name, a.percentage FROM Student s JOIN Attendance a ON s.student_id = a.student_id JOIN Course c ON a.course_id = c.course_id WHERE a.percentage < 50;",
-    "before_ms": 576.31,
-    "after_ms": 88.09,
-    "improvement_percent": 84.71,
-    "storage_overhead_mb": 1.0867,
-    "timestamp": "2026-09-03T00:13:38.779187"
+    "before_ms": 341.66,
+    "after_ms": 49.94,
+    "improvement_percent": 85.38,
+    "storage_overhead_mb": 1.9765,
+    "timestamp": "2026-10-22T01:27:23.463300"
   },
   {
     "query_id": 22,
@@ -455,11 +455,11 @@
     ],
     "index_name": "idx_Student_student_id",
     "query": "SELECT s.name, c.course_name, a.percentage FROM Student s JOIN Attendance a ON s.student_id = a.student_id JOIN Course c ON a.course_id = c.course_id WHERE a.percentage < 50;",
-    "before_ms": 744.09,
-    "after_ms": 117.75,
-    "improvement_percent": 84.18,
-    "storage_overhead_mb": 1.7382,
-    "timestamp": "2026-09-03T00:13:38.779189"
+    "before_ms": 1008.33,
+    "after_ms": 1387.41,
+    "improvement_percent": -37.6,
+    "storage_overhead_mb": 0.0,
+    "timestamp": "2026-10-22T01:27:33.822977"
   },
   {
     "query_id": 22,
@@ -469,11 +469,11 @@
     ],
     "index_name": "idx_Student_course_id",
     "query": "SELECT s.name, c.course_name, a.percentage FROM Student s JOIN Attendance a ON s.student_id = a.student_id JOIN Course c ON a.course_id = c.course_id WHERE a.percentage < 50;",
-    "before_ms": 603.45,
-    "after_ms": 165.59,
-    "improvement_percent": 72.56,
-    "storage_overhead_mb": 1.5088,
-    "timestamp": "2026-09-03T00:13:38.779191"
+    "before_ms": 401.02,
+    "after_ms": 63.22,
+    "improvement_percent": 84.24,
+    "storage_overhead_mb": 1.718,
+    "timestamp": "2026-10-22T01:27:40.414570"
   },
   {
     "query_id": 23,
@@ -483,11 +483,11 @@
     ],
     "index_name": "idx_Enrollment_semester",
     "query": "SELECT e.enrollment_id, s.name, c.course_name, e.marks FROM Enrollment e JOIN Student s ON e.student_id = s.student_id JOIN Course c ON e.course_id = c.course_id WHERE e.semester = 'Fall 2023';",
-    "before_ms": 599.81,
-    "after_ms": 114.36,
-    "improvement_percent": 80.93,
-    "storage_overhead_mb": 0.98,
-    "timestamp": "2026-09-03T00:13:38.779193"
+    "before_ms": 330.11,
+    "after_ms": 436.35,
+    "improvement_percent": -32.18,
+    "storage_overhead_mb": 3.0312,
+    "timestamp": "2026-10-22T01:27:45.491721"
   },
   {
     "query_id": 23,
@@ -497,11 +497,11 @@
     ],
     "index_name": "idx_Enrollment_student_id",
     "query": "SELECT e.enrollment_id, s.name, c.course_name, e.marks FROM Enrollment e JOIN Student s ON e.student_id = s.student_id JOIN Course c ON e.course_id = c.course_id WHERE e.semester = 'Fall 2023';",
-    "before_ms": 624.74,
-    "after_ms": 93.79,
-    "improvement_percent": 84.99,
-    "storage_overhead_mb": 1.7818,
-    "timestamp": "2026-09-03T00:13:38.779195"
+    "before_ms": 352.28,
+    "after_ms": 314.41,
+    "improvement_percent": 10.75,
+    "storage_overhead_mb": 3.0312,
+    "timestamp": "2026-10-22T01:27:48.562189"
   },
   {
     "query_id": 23,
@@ -511,11 +511,11 @@
     ],
     "index_name": "idx_Enrollment_course_id",
     "query": "SELECT e.enrollment_id, s.name, c.course_name, e.marks FROM Enrollment e JOIN Student s ON e.student_id = s.student_id JOIN Course c ON e.course_id = c.course_id WHERE e.semester = 'Fall 2023';",
-    "before_ms": 590.36,
-    "after_ms": 81.98,
-    "improvement_percent": 86.11,
-    "storage_overhead_mb": 1.4566,
-    "timestamp": "2026-09-03T00:13:38.779196"
+    "before_ms": 225.27,
+    "after_ms": 581.97,
+    "improvement_percent": -158.35,
+    "storage_overhead_mb": 3.0312,
+    "timestamp": "2026-10-22T01:27:52.056523"
   },
   {
     "query_id": 24,
@@ -525,11 +525,11 @@
     ],
     "index_name": "idx_Student_department",
     "query": "SELECT s.name, s.department AS student_dept, c.course_name, c.department AS course_dept FROM Student s JOIN Enrollment e ON s.student_id = e.student_id JOIN Course c ON e.course_id = c.course_id WHERE s.department != c.department;",
-    "before_ms": 489.43,
-    "after_ms": 74.03,
-    "improvement_percent": 84.87,
-    "storage_overhead_mb": 0.661,
-    "timestamp": "2026-09-03T00:13:38.779198"
+    "before_ms": 1873.07,
+    "after_ms": 1765.45,
+    "improvement_percent": 5.75,
+    "storage_overhead_mb": 0.0,
+    "timestamp": "2026-10-22T01:28:08.387725"
   },
   {
     "query_id": 24,
@@ -539,11 +539,11 @@
     ],
     "index_name": "idx_Student_student_id",
     "query": "SELECT s.name, s.department AS student_dept, c.course_name, c.department AS course_dept FROM Student s JOIN Enrollment e ON s.student_id = e.student_id JOIN Course c ON e.course_id = c.course_id WHERE s.department != c.department;",
-    "before_ms": 527.99,
-    "after_ms": 150.07,
-    "improvement_percent": 71.58,
-    "storage_overhead_mb": 1.2454,
-    "timestamp": "2026-09-03T00:13:38.779200"
+    "before_ms": 1854.0,
+    "after_ms": 2593.7,
+    "improvement_percent": -39.9,
+    "storage_overhead_mb": 0.0,
+    "timestamp": "2026-10-22T01:28:24.905296"
   },
   {
     "query_id": 24,
@@ -553,11 +553,11 @@
     ],
     "index_name": "idx_Student_course_id",
     "query": "SELECT s.name, s.department AS student_dept, c.course_name, c.department AS course_dept FROM Student s JOIN Enrollment e ON s.student_id = e.student_id JOIN Course c ON e.course_id = c.course_id WHERE s.department != c.department;",
-    "before_ms": 747.87,
-    "after_ms": 202.42,
-    "improvement_percent": 72.93,
-    "storage_overhead_mb": 1.8909,
-    "timestamp": "2026-09-03T00:13:38.779201"
+    "before_ms": 651.25,
+    "after_ms": 132.37,
+    "improvement_percent": 79.67,
+    "storage_overhead_mb": 2.0591,
+    "timestamp": "2026-10-22T01:28:34.145363"
   },
   {
     "query_id": 25,
@@ -567,11 +567,11 @@
     ],
     "index_name": "idx_Student_student_id",
     "query": "SELECT s.department, AVG(e.marks) AS avg_marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id GROUP BY s.department;",
-    "before_ms": 349.14,
-    "after_ms": 63.17,
-    "improvement_percent": 81.91,
-    "storage_overhead_mb": 2.0924,
-    "timestamp": "2026-09-03T00:13:38.779203"
+    "before_ms": 399.84,
+    "after_ms": 434.15,
+    "improvement_percent": -8.58,
+    "storage_overhead_mb": 0.0,
+    "timestamp": "2026-10-22T01:28:37.672502"
   },
   {
     "query_id": 26,
@@ -581,11 +581,11 @@
     ],
     "index_name": "idx_Course_course_id",
     "query": "SELECT c.course_name, COUNT(DISTINCT e.student_id) AS student_count FROM Course c JOIN Enrollment e ON c.course_id = e.course_id GROUP BY c.course_name;",
-    "before_ms": 522.89,
-    "after_ms": 72.06,
-    "improvement_percent": 86.22,
-    "storage_overhead_mb": 0.3192,
-    "timestamp": "2026-09-03T00:13:38.779204"
+    "before_ms": 706.25,
+    "after_ms": 650.73,
+    "improvement_percent": 7.86,
+    "storage_overhead_mb": 0.0,
+    "timestamp": "2026-10-22T01:28:43.264369"
   },
   {
     "query_id": 27,
@@ -595,11 +595,11 @@
     ],
     "index_name": "idx_Student_student_id",
     "query": "SELECT s.department, AVG(a.percentage) AS avg_attendance FROM Student s JOIN Attendance a ON s.student_id = a.student_id GROUP BY s.department;",
-    "before_ms": 677.86,
-    "after_ms": 132.87,
-    "improvement_percent": 80.4,
-    "storage_overhead_mb": 1.2815,
-    "timestamp": "2026-09-03T00:13:38.779206"
+    "before_ms": 736.35,
+    "after_ms": 682.89,
+    "improvement_percent": 7.26,
+    "storage_overhead_mb": 0.0,
+    "timestamp": "2026-10-22T01:28:49.498659"
   },
   {
     "query_id": 28,
@@ -609,11 +609,11 @@
     ],
     "index_name": "idx_Course_course_id",
     "query": "SELECT c.course_name, AVG(e.marks) AS avg_marks FROM Course c JOIN Enrollment e ON c.course_id = e.course_id GROUP BY c.course_name ORDER BY avg_marks DESC LIMIT 10;",
-    "before_ms": 604.16,
-    "after_ms": 125.06,
-    "improvement_percent": 79.3,
-    "storage_overhead_mb": 1.1325,
-    "timestamp": "2026-09-03T00:13:38.779208"
+    "before_ms": 333.31,
+    "after_ms": 346.87,
+    "improvement_percent": -4.07,
+    "storage_overhead_mb": 0.0,
+    "timestamp": "2026-10-22T01:28:52.315561"
   },
   {
     "query_id": 29,
@@ -623,11 +623,11 @@
     ],
     "index_name": "idx_Student_student_id",
     "query": "SELECT s.name, e.semester, COUNT(*) AS enrollment_count FROM Student s JOIN Enrollment e ON s.student_id = e.student_id GROUP BY s.student_id, s.name, e.semester;",
-    "before_ms": 683.8,
-    "after_ms": 105.99,
-    "improvement_percent": 84.5,
-    "storage_overhead_mb": 2.0173,
-    "timestamp": "2026-09-03T00:13:38.779209"
+    "before_ms": 1630.26,
+    "after_ms": 1641.4,
+    "improvement_percent": -0.68,
+    "storage_overhead_mb": 0.0,
+    "timestamp": "2026-10-22T01:29:05.711575"
   },
   {
     "query_id": 30,
@@ -637,11 +637,11 @@
     ],
     "index_name": "idx_Student_semester",
     "query": "SELECT s.name, e.marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id WHERE e.semester = 'Spring 2024' ORDER BY e.marks DESC LIMIT 100;",
-    "before_ms": 350.48,
-    "after_ms": 46.84,
-    "improvement_percent": 86.64,
-    "storage_overhead_mb": 2.0113,
-    "timestamp": "2026-09-03T00:13:38.779211"
+    "before_ms": 453.04,
+    "after_ms": 66.17,
+    "improvement_percent": 85.39,
+    "storage_overhead_mb": 0.5035,
+    "timestamp": "2026-10-22T01:29:06.384089"
   },
   {
     "query_id": 30,
@@ -651,11 +651,11 @@
     ],
     "index_name": "idx_Student_student_id",
     "query": "SELECT s.name, e.marks FROM Student s JOIN Enrollment e ON s.student_id = e.student_id WHERE e.semester = 'Spring 2024' ORDER BY e.marks DESC LIMIT 100;",
-    "before_ms": 352.72,
-    "after_ms": 67.68,
-    "improvement_percent": 80.81,
-    "storage_overhead_mb": 1.7222,
-    "timestamp": "2026-09-03T00:13:38.779212"
+    "before_ms": 325.22,
+    "after_ms": 116.96,
+    "improvement_percent": 64.04,
+    "storage_overhead_mb": 0.0,
+    "timestamp": "2026-10-22T01:29:08.261313"
   },
   {
     "query_id": 31,
@@ -665,11 +665,11 @@
     ],
     "index_name": "idx_Student_department",
     "query": "SELECT * FROM Student WHERE department = 'Economics' ORDER BY name;",
-    "before_ms": 539.35,
-    "after_ms": 124.19,
-    "improvement_percent": 76.97,
-    "storage_overhead_mb": 0.9589,
-    "timestamp": "2026-09-03T00:13:38.779214"
+    "before_ms": 106.25,
+    "after_ms": 151.12,
+    "improvement_percent": -42.23,
+    "storage_overhead_mb": 0.0,
+    "timestamp": "2026-10-22T01:29:09.906271"
   },
   {
     "query_id": 33,
@@ -679,10 +679,10 @@
     ],
     "index_name": "idx_Enrollment_semester",
     "query": "SELECT * FROM Enrollment WHERE semester = 'Fall 2023' ORDER BY marks DESC LIMIT 50;",
-    "before_ms": 685.69,
-    "after_ms": 95.89,
-    "improvement_percent": 86.02,
-    "storage_overhead_mb": 0.9408,
-    "timestamp": "2026-09-03T00:13:38.779215"
+    "before_ms": 119.79,
+    "after_ms": 112.78,
+    "improvement_percent": 5.85,
+    "storage_overhead_mb": 3.0312,
+    "timestamp": "2026-10-22T01:29:11.619479"
   }
 ]

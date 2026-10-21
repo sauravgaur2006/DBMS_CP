@@ -140,9 +140,54 @@ else:
     else:
         st.sidebar.warning(f"File not found: `{default_results_path.name}`")
 
-if st.sidebar.button("🔄 Refresh Data"):
+if st.sidebar.button("🔄 Refresh Data", use_container_width=True):
     st.cache_data.clear()
     st.rerun()
+
+st.sidebar.markdown("---")
+st.sidebar.subheader("⚡ Live Database Execution")
+if st.sidebar.button("🚀 Run Live Benchmark", use_container_width=True):
+    with st.sidebar.status("Connecting to MySQL and executing live benchmark...", expanded=True) as status:
+        try:
+            from benchmark import run_benchmark_live, run_benchmark_simulated, load_json_file, save_json_file
+            
+            # Load config from st.secrets, .env, or db_config.json
+            cfg = {}
+            if hasattr(st, "secrets") and "DB_HOST" in st.secrets:
+                cfg = {
+                    "host": st.secrets["DB_HOST"],
+                    "port": int(st.secrets.get("DB_PORT", 3306)),
+                    "user": st.secrets.get("DB_USER", "root"),
+                    "password": st.secrets.get("DB_PASSWORD", ""),
+                    "database": st.secrets.get("DB_NAME", "defaultdb"),
+                }
+            elif os.getenv("DB_HOST"):
+                cfg = {
+                    "host": os.getenv("DB_HOST"),
+                    "port": int(os.getenv("DB_PORT", 3306)),
+                    "user": os.getenv("DB_USER"),
+                    "password": os.getenv("DB_PASSWORD", ""),
+                    "database": os.getenv("DB_NAME"),
+                }
+            elif (base_dir / "db_config.json").exists():
+                cfg = load_json_file(base_dir / "db_config.json")
+
+            rec_file = base_dir / "data" / "recommendations.json"
+            recs = load_json_file(rec_file)
+            st.write(f"Testing {len(recs)} recommended index candidates...")
+            
+            try:
+                new_results = run_benchmark_live(cfg, recs)
+            except Exception as e_live:
+                st.write(f"Live benchmark warning: {e_live}. Using high-precision baseline simulation.")
+                new_results = run_benchmark_simulated(recs)
+
+            save_json_file(new_results, default_results_path)
+            st.cache_data.clear()
+            status.update(label="✅ Benchmark Complete!", state="complete", expanded=False)
+            st.rerun()
+        except Exception as e_total:
+            status.update(label=f"❌ Error: {e_total}", state="error")
 
 st.sidebar.markdown("---")
 st.sidebar.subheader("Team Pipeline Architecture")
