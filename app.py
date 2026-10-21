@@ -143,10 +143,17 @@ st.markdown("""
         color: #1565C0;
         padding: 4px 10px;
         border-radius: 12px;
-        font-size: 12px;
-        font-weight: 600;
         margin-right: 6px;
     }
+
+    /* Hide default Streamlit footer & branding */
+    #MainMenu {visibility: hidden; display: none !important;}
+    footer {visibility: hidden; display: none !important;}
+    .stDeployButton {display: none !important;}
+    [data-testid="stToolbar"] {visibility: hidden; display: none !important;}
+    [data-testid="stDecoration"] {visibility: hidden; display: none !important;}
+    div[class*="viewerBadge"] {display: none !important;}
+    [data-testid="manage-app-button"] {display: none !important;}
 </style>
 """, unsafe_allow_html=True)
 
