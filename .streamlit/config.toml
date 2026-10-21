@@ -5,3 +5,8 @@ gatherUsageStats = false
 headless = true
 enableCORS = false
 enableXsrfProtection = false
+
+[client]
+toolbarMode = "minimal"
+showErrorDetails = false
+

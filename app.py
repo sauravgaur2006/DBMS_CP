@@ -154,8 +154,52 @@ st.markdown("""
     [data-testid="stDecoration"] {visibility: hidden; display: none !important;}
     div[class*="viewerBadge"] {display: none !important;}
     [data-testid="manage-app-button"] {display: none !important;}
+
+    /* Specifically hide Streamlit Cloud floating crown and user profile badges */
+    a[href*="streamlit.io/cloud"],
+    a[href*="share.streamlit.io"],
+    a[class*="viewerBadge"],
+    div[class*="viewerBadge"],
+    ._viewerBadge_1j65n_23,
+    ._container_gzau3_1 {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
 </style>
 """, unsafe_allow_html=True)
+
+import streamlit.components.v1 as components
+components.html("""
+<script>
+function hideCloudBadges() {
+    const selectors = [
+        'a[href*="streamlit.io/cloud"]',
+        'a[href*="share.streamlit.io"]',
+        'a[class*="viewerBadge"]',
+        'div[class*="viewerBadge"]',
+        '._viewerBadge_1j65n_23',
+        '._container_gzau3_1',
+        '[data-testid="manage-app-button"]'
+    ];
+    [window, window.parent, window.top].forEach(win => {
+        try {
+            if (win && win.document) {
+                selectors.forEach(sel => {
+                    win.document.querySelectorAll(sel).forEach(el => {
+                        el.style.setProperty('display', 'none', 'important');
+                        el.style.setProperty('visibility', 'hidden', 'important');
+                    });
+                });
+            }
+        } catch(e) {}
+    });
+}
+hideCloudBadges();
+setInterval(hideCloudBadges, 300);
+</script>
+""", height=0, width=0)
 
 
 # ==============================================================================
