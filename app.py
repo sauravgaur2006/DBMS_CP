@@ -146,6 +146,145 @@ st.markdown("""
         margin-right: 6px;
     }
 
+    /* =========================================================================
+       RESPONSIVE DESIGN SYSTEM (MOBILE / IPHONE / IPAD / DESKTOP)
+       ========================================================================= */
+    
+    /* Clean container margins on small viewports */
+    @media (max-width: 768px) {
+        .main .block-container {
+            padding-top: 1.5rem !important;
+            padding-left: 0.85rem !important;
+            padding-right: 0.85rem !important;
+            padding-bottom: 2rem !important;
+        }
+        h1 {
+            font-size: 1.55rem !important;
+            line-height: 1.25 !important;
+            margin-bottom: 0.5rem !important;
+        }
+        h2, h3 {
+            font-size: 1.2rem !important;
+            margin-top: 0.8rem !important;
+            margin-bottom: 0.4rem !important;
+        }
+    }
+
+    /* Modern iOS Segmented Control Navigation Tabs */
+    div[role="radiogroup"] {
+        display: flex !important;
+        flex-direction: row !important;
+        background: #f1f5f9 !important;
+        padding: 4px !important;
+        border-radius: 12px !important;
+        gap: 6px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        border: 1px solid #e2e8f0 !important;
+        margin: 10px 0 16px 0 !important;
+    }
+    div[role="radiogroup"] > label {
+        flex: 1 1 50% !important;
+        background: transparent !important;
+        padding: 9px 12px !important;
+        border-radius: 9px !important;
+        text-align: center !important;
+        font-weight: 600 !important;
+        font-size: 13px !important;
+        cursor: pointer !important;
+        transition: all 0.2s ease !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin: 0 !important;
+        color: #475569 !important;
+    }
+    /* Hide native radio circle */
+    div[role="radiogroup"] > label > div:first-child {
+        display: none !important;
+    }
+    /* Active tab style */
+    div[role="radiogroup"] > label:has(input:checked) {
+        background: #ffffff !important;
+        color: #1565C0 !important;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.08) !important;
+    }
+
+    /* Responsive KPI Metric Grid (2 columns on mobile, 5 on desktop) */
+    [data-testid="stHorizontalBlock"]:has([data-testid="stMetric"]) {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+        margin-bottom: 12px !important;
+    }
+    @media (min-width: 900px) {
+        [data-testid="stHorizontalBlock"]:has([data-testid="stMetric"]) {
+            grid-template-columns: repeat(5, 1fr) !important;
+            gap: 14px !important;
+        }
+    }
+    [data-testid="stHorizontalBlock"]:has([data-testid="stMetric"]) > [data-testid="column"] {
+        width: 100% !important;
+        min-width: 0 !important;
+        flex: unset !important;
+    }
+    /* On mobile, if odd number of cards (5th card), span full width */
+    @media (max-width: 899px) {
+        [data-testid="stHorizontalBlock"]:has([data-testid="stMetric"]) > [data-testid="column"]:last-child:nth-child(odd) {
+            grid-column: span 2 !important;
+        }
+    }
+    [data-testid="stMetric"] {
+        background: #ffffff !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 12px !important;
+        padding: 12px 14px !important;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.04) !important;
+    }
+    [data-testid="stMetricLabel"] {
+        font-size: 12px !important;
+        font-weight: 600 !important;
+        color: #64748b !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.3px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+    [data-testid="stMetricValue"] {
+        font-size: 20px !important;
+        font-weight: 700 !important;
+        color: #0f172a !important;
+    }
+
+    /* Filter inputs responsive stacking */
+    @media (max-width: 768px) {
+        [data-testid="stHorizontalBlock"]:not(:has([data-testid="stMetric"])) {
+            flex-direction: column !important;
+            gap: 8px !important;
+        }
+        [data-testid="stHorizontalBlock"]:not(:has([data-testid="stMetric"])) > [data-testid="column"] {
+            width: 100% !important;
+            min-width: 100% !important;
+        }
+    }
+
+    /* Touch-friendly sidebar buttons on mobile */
+    [data-testid="stSidebar"] button {
+        min-height: 44px !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        border-radius: 8px !important;
+    }
+
+    /* Dataframe touch scrolling */
+    [data-testid="stDataFrame"] {
+        width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        border-radius: 8px !important;
+    }
+
     /* Hide default Streamlit footer & branding */
     #MainMenu {visibility: hidden; display: none !important;}
     footer {visibility: hidden; display: none !important;}
@@ -547,14 +686,19 @@ if nav_mode == "📊 Benchmark Performance Analytics":
 
     fig_bar.update_layout(
         barmode="group",
-        yaxis_title="Execution Time (milliseconds)",
-        xaxis_title="Query Candidate",
-        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
-        margin=dict(l=20, r=20, t=50, b=50),
-        height=420
+        yaxis_title="Execution Time (ms)",
+        xaxis_title="",
+        xaxis=dict(
+            tickangle=-45,
+            automargin=True,
+            tickfont=dict(size=10)
+        ),
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1, font=dict(size=11)),
+        margin=dict(l=10, r=10, t=45, b=60),
+        height=400
     )
 
-    st.plotly_chart(fig_bar, use_container_width=True)
+    st.plotly_chart(fig_bar, use_container_width=True, config={"displayModeBar": False, "responsive": True})
 
 
     # ==============================================================================
@@ -578,12 +722,14 @@ if nav_mode == "📊 Benchmark Performance Analytics":
         )
         fig_imp.update_traces(textposition="outside")
         fig_imp.update_layout(
-            yaxis_title="Improvement Percentage (%)",
+            yaxis_title="Improvement (%)",
+            xaxis_title="",
+            xaxis=dict(tickangle=-45, automargin=True, tickfont=dict(size=9)),
             yaxis_range=[0, 105],
-            height=380,
-            margin=dict(l=20, r=20, t=30, b=40)
+            height=360,
+            margin=dict(l=10, r=10, t=30, b=60)
         )
-        st.plotly_chart(fig_imp, use_container_width=True)
+        st.plotly_chart(fig_imp, use_container_width=True, config={"displayModeBar": False, "responsive": True})
 
     with col_c2:
         st.markdown("### 💾 Storage Cost per Index (MB)")
@@ -600,10 +746,12 @@ if nav_mode == "📊 Benchmark Performance Analytics":
         fig_storage.update_traces(textposition="outside")
         fig_storage.update_layout(
             yaxis_title="Storage Overhead (MB)",
-            height=380,
-            margin=dict(l=20, r=20, t=30, b=40)
+            xaxis_title="",
+            xaxis=dict(tickangle=-45, automargin=True, tickfont=dict(size=9)),
+            height=360,
+            margin=dict(l=10, r=10, t=30, b=60)
         )
-        st.plotly_chart(fig_storage, use_container_width=True)
+        st.plotly_chart(fig_storage, use_container_width=True, config={"displayModeBar": False, "responsive": True})
 
 
     # ==============================================================================
