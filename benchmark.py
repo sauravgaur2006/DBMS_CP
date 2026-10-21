@@ -202,8 +202,10 @@ def get_existing_indexes(cursor, table: str) -> dict:
 def inject_ignore_index(query: str, table: str, index_name: str) -> str:
     """
     Injects IGNORE INDEX (`index_name`) into query directly after the table name or table alias.
+    Ensures SQL keywords (WHERE, JOIN, ORDER, etc.) are not treated as aliases.
     """
-    pattern = rf'\b(FROM|JOIN)\s+`?{re.escape(table)}`?(?:\s+(?:AS\s+)?([a-zA-Z0-9_]+))?'
+    reserved = r'(?:WHERE|JOIN|LEFT|RIGHT|INNER|OUTER|ON|ORDER|GROUP|LIMIT|HAVING|UNION|;|\$)'
+    pattern = rf'\b(FROM|JOIN)\s+`?{re.escape(table)}`?(?:\s+AS\s+([a-zA-Z0-9_]+)|\s+(?!{reserved}\b)([a-zA-Z0-9_]+))?'
     match = re.search(pattern, query, re.IGNORECASE)
     if match:
         end_pos = match.end()
@@ -211,7 +213,7 @@ def inject_ignore_index(query: str, table: str, index_name: str) -> str:
     return query
 
 
-def run_benchmark_live(config: dict, recommendations: list) -> list:
+def run_benchmark_live(config: dict, recommendations: list, progress_callback=None) -> list:
     """
     Executes the real benchmarking pipeline against a live MySQL database.
     """
@@ -255,6 +257,20 @@ def run_benchmark_live(config: dict, recommendations: list) -> list:
                 query_sql = f"SELECT * FROM `{table}` WHERE {col_conds};"
             index_name = generate_index_name(table, columns)
             col_list_str = ", ".join(f"`{c}`" for c in columns)
+
+            if progress_callback:
+                try:
+                    progress_callback(idx, total, {
+                        "status": "running",
+                        "query_id": query_id,
+                        "table": table,
+                        "columns": columns,
+                        "before_ms": 0.0,
+                        "after_ms": 0.0,
+                        "improvement_percent": 0.0
+                    })
+                except Exception:
+                    pass
 
             print(f"--- [Query {idx}/{total}] Table: `{table}` | Target Columns: {columns} ---")
             print(f"SQL: {query_sql}")
@@ -325,7 +341,7 @@ def run_benchmark_live(config: dict, recommendations: list) -> list:
                     improvement_pct = 0.0
                 print(f"     [Metric] Improvement: {improvement_pct:.2f}%\n")
 
-                results.append({
+                res_item = {
                     "query_id": query_id,
                     "table": table,
                     "columns": columns,
@@ -336,11 +352,28 @@ def run_benchmark_live(config: dict, recommendations: list) -> list:
                     "improvement_percent": round(improvement_pct, 2),
                     "storage_overhead_mb": overhead_mb,
                     "timestamp": datetime.now().isoformat()
-                })
+                }
+                results.append(res_item)
+                if progress_callback:
+                    try:
+                        progress_callback(idx, total, {
+                            "status": "completed",
+                            **res_item
+                        })
+                    except Exception:
+                        pass
             except Exception as e_q:
                 print(f"  [!] Live benchmark query {idx} exception: {e_q}. Using baseline estimation.")
                 sim = run_benchmark_simulated([item])[0]
                 results.append(sim)
+                if progress_callback:
+                    try:
+                        progress_callback(idx, total, {
+                            "status": "completed",
+                            **sim
+                        })
+                    except Exception:
+                        pass
 
     finally:
         cursor.close()
