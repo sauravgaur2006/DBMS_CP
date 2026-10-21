@@ -69,15 +69,40 @@ COURSE_SUBJECTS = [
 ]
 
 
+def resolve_host(h: str) -> str:
+    if h in ("localhost", "127.0.0.1"):
+        return h
+    try:
+        import socket
+        return socket.gethostbyname(h)
+    except Exception:
+        try:
+            import urllib.request, json
+            url = f"https://dns.google/resolve?name={h}"
+            res = json.loads(urllib.request.urlopen(url, timeout=5).read())
+            for ans in res.get("Answer", []):
+                if ans.get("type") == 1:
+                    return ans["data"]
+        except Exception:
+            pass
+    return h
+
+
 def get_connection():
     """Create a MySQL connection using .env credentials."""
     load_dotenv()
-    return mysql.connector.connect(
-        host=os.getenv("DB_HOST", "localhost"),
-        user=os.getenv("DB_USER"),
-        password=os.getenv("DB_PASSWORD"),
-        database=os.getenv("DB_NAME"),
-    )
+    host = os.getenv("DB_HOST", "localhost")
+    resolved_host = resolve_host(host)
+    kwargs = {
+        "host": resolved_host,
+        "port": int(os.getenv("DB_PORT", 3306)),
+        "user": os.getenv("DB_USER"),
+        "password": os.getenv("DB_PASSWORD"),
+        "database": os.getenv("DB_NAME"),
+    }
+    if host not in ("localhost", "127.0.0.1"):
+        kwargs["ssl_disabled"] = False
+    return mysql.connector.connect(**kwargs)
 
 
 def truncate_tables(cursor):

@@ -3,5 +3,10 @@ gatherUsageStats = false
 
 [server]
 headless = true
-port = 8502
-address = "localhost"
+enableCORS = false
+enableXsrfProtection = false
+
+[client]
+toolbarMode = "minimal"
+showErrorDetails = false
+

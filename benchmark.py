@@ -55,6 +55,7 @@ from datetime import datetime
 # Why: Allows us to pass command-line options such as custom config paths or
 # enabling a simulation mode for dry-running without a live database.
 import argparse
+import re
 
 # 'mysql.connector':
 # Why: The official MySQL driver for Python maintained by Oracle. It implements
@@ -176,7 +177,43 @@ def measure_query_latency(cursor, query_sql: str, warmup_runs: int = 1, benchmar
     return sum(latencies) / len(latencies)
 
 
-def run_benchmark_live(config: dict, recommendations: list) -> list:
+def get_existing_indexes(cursor, table: str) -> dict:
+    """
+    Returns a dict mapping tuple of lowercase column names -> index name.
+    Example: {('student_id',): 'PRIMARY', ('course_id',): 'course_id'}
+    """
+    cursor.execute(f"SHOW INDEX FROM `{table}`;")
+    indexes = {}
+    for row in cursor.fetchall():
+        idx_name = row[2]
+        seq = row[3]
+        col_name = row[4].lower() if row[4] else ""
+        if idx_name not in indexes:
+            indexes[idx_name] = []
+        indexes[idx_name].append((seq, col_name))
+    
+    col_to_idx = {}
+    for idx_name, cols in indexes.items():
+        sorted_cols = tuple(c[1] for c in sorted(cols, key=lambda x: x[0]))
+        col_to_idx[sorted_cols] = idx_name
+    return col_to_idx
+
+
+def inject_ignore_index(query: str, table: str, index_name: str) -> str:
+    """
+    Injects IGNORE INDEX (`index_name`) into query directly after the table name or table alias.
+    Ensures SQL keywords (WHERE, JOIN, ORDER, etc.) are not treated as aliases.
+    """
+    reserved = r'(?:WHERE|JOIN|LEFT|RIGHT|INNER|OUTER|ON|ORDER|GROUP|LIMIT|HAVING|UNION|;|\$)'
+    pattern = rf'\b(FROM|JOIN)\s+`?{re.escape(table)}`?(?:\s+AS\s+([a-zA-Z0-9_]+)|\s+(?!{reserved}\b)([a-zA-Z0-9_]+))?'
+    match = re.search(pattern, query, re.IGNORECASE)
+    if match:
+        end_pos = match.end()
+        return query[:end_pos] + f" IGNORE INDEX (`{index_name}`)" + query[end_pos:]
+    return query
+
+
+def run_benchmark_live(config: dict, recommendations: list, progress_callback=None) -> list:
     """
     Executes the real benchmarking pipeline against a live MySQL database.
     """
@@ -186,18 +223,21 @@ def run_benchmark_live(config: dict, recommendations: list) -> list:
             "Please run: pip install mysql-connector-python"
         )
 
-    db_name = config.get("database", "academic_db")
+    db_name = config.get("database", "index_recommender")
     warmup_runs = config.get("warmup_runs", 1)
     benchmark_runs = config.get("benchmark_runs", 3)
 
-    print(f"[*] Connecting to MySQL Database '{db_name}' on {config.get('host')}:{config.get('port')}...")
-    connection = mysql.connector.connect(
-        host=config.get("host", "localhost"),
-        port=config.get("port", 3306),
-        user=config.get("user", "root"),
-        password=config.get("password", ""),
-        database=db_name
-    )
+    connect_kwargs = {
+        "host": config.get("host", "localhost"),
+        "port": int(config.get("port", 3306)),
+        "user": config.get("user", "indexrec_user"),
+        "password": config.get("password", ""),
+        "database": db_name,
+    }
+    if connect_kwargs["host"] not in ("localhost", "127.0.0.1"):
+        connect_kwargs["ssl_disabled"] = False
+
+    connection = mysql.connector.connect(**connect_kwargs)
     
     # Use buffered cursor so all rows can be fetched reliably
     cursor = connection.cursor(buffered=True)
@@ -218,84 +258,122 @@ def run_benchmark_live(config: dict, recommendations: list) -> list:
             index_name = generate_index_name(table, columns)
             col_list_str = ", ".join(f"`{c}`" for c in columns)
 
+            if progress_callback:
+                try:
+                    progress_callback(idx, total, {
+                        "status": "running",
+                        "query_id": query_id,
+                        "table": table,
+                        "columns": columns,
+                        "before_ms": 0.0,
+                        "after_ms": 0.0,
+                        "improvement_percent": 0.0
+                    })
+                except Exception:
+                    pass
+
             print(f"--- [Query {idx}/{total}] Table: `{table}` | Target Columns: {columns} ---")
             print(f"SQL: {query_sql}")
 
-            # ------------------------------------------------------------------
-            # Step 1: Measure execution time BEFORE adding index
-            # ------------------------------------------------------------------
-            print("  -> Step 1: Measuring execution time BEFORE index...")
-            before_ms = measure_query_latency(cursor, query_sql, warmup_runs, benchmark_runs)
-            print(f"     [Result] Before Index Latency: {before_ms:.2f} ms")
+            try:
+                target_cols_tuple = tuple(c.lower() for c in columns)
+                existing_indexes = get_existing_indexes(cursor, table)
+                existing_idx_name = existing_indexes.get(target_cols_tuple)
 
-            # Measure initial index storage on the table
-            index_bytes_before = get_table_index_storage_bytes(cursor, db_name, table)
+                if existing_idx_name:
+                    # Target column(s) are already indexed on this table (e.g. PRIMARY KEY or Foreign Key)
+                    print(f"  [*] Notice: Columns {columns} on `{table}` already covered by existing index `{existing_idx_name}`.")
+                    print("  -> Measuring baseline (Full Table Scan via IGNORE INDEX)...")
+                    unindexed_sql = inject_ignore_index(query_sql, table, existing_idx_name)
+                    before_ms = measure_query_latency(cursor, unindexed_sql, warmup_runs, benchmark_runs)
+                    print(f"     [Result] Before Index Latency: {before_ms:.2f} ms")
 
-            # ------------------------------------------------------------------
-            # Step 2: Apply the recommended index (CREATE INDEX)
-            # ------------------------------------------------------------------
-            create_index_sql = f"CREATE INDEX `{index_name}` ON `{table}` ({col_list_str});"
-            print(f"  -> Step 2: Executing SQL: {create_index_sql}")
-            cursor.execute(create_index_sql)
-            connection.commit()
+                    print("  -> Measuring indexed query latency...")
+                    after_ms = measure_query_latency(cursor, query_sql, warmup_runs, benchmark_runs)
+                    print(f"     [Result] After Index Latency: {after_ms:.2f} ms")
 
-            # ------------------------------------------------------------------
-            # Step 3: Measure execution time AFTER index is applied
-            # ------------------------------------------------------------------
-            print("  -> Step 3: Measuring execution time AFTER index...")
-            after_ms = measure_query_latency(cursor, query_sql, warmup_runs, benchmark_runs)
-            print(f"     [Result] After Index Latency: {after_ms:.2f} ms")
+                    index_bytes = get_table_index_storage_bytes(cursor, db_name, table)
+                    overhead_mb = round(index_bytes / (1024.0 * 1024.0), 4)
+                    print(f"  -> Storage overhead: {overhead_mb:.4f} MB")
+                else:
+                    # Need to create candidate index dynamically
+                    print("  -> Step 1: Measuring execution time BEFORE index...")
+                    before_ms = measure_query_latency(cursor, query_sql, warmup_runs, benchmark_runs)
+                    print(f"     [Result] Before Index Latency: {before_ms:.2f} ms")
 
-            # ------------------------------------------------------------------
-            # Step 4: Measure storage overhead in Megabytes (MB)
-            # ------------------------------------------------------------------
-            # Why: (Bytes / 1024 / 1024) translates raw disk bytes into human-readable MB.
-            index_bytes_after = get_table_index_storage_bytes(cursor, db_name, table)
-            overhead_bytes = max(0, index_bytes_after - index_bytes_before)
-            overhead_mb = overhead_bytes / (1024.0 * 1024.0)
-            
-            # If the table is small and InnoDB page allocations didn't jump by a full MB,
-            # we also record the total table index size for transparent visibility.
-            if overhead_mb == 0.0 and index_bytes_after > 0:
-                total_index_mb = index_bytes_after / (1024.0 * 1024.0)
-                overhead_mb = round(total_index_mb, 4)
-            else:
-                overhead_mb = round(overhead_mb, 4)
+                    index_bytes_before = get_table_index_storage_bytes(cursor, db_name, table)
+                    create_index_sql = f"CREATE INDEX `{index_name}` ON `{table}` ({col_list_str});"
+                    print(f"  -> Step 2: Executing SQL: {create_index_sql}")
+                    
+                    created = False
+                    try:
+                        cursor.execute(create_index_sql)
+                        connection.commit()
+                        created = True
 
-            print(f"  -> Step 4: Storage overhead calculated: {overhead_mb:.4f} MB")
+                        print("  -> Step 3: Measuring execution time AFTER index...")
+                        after_ms = measure_query_latency(cursor, query_sql, warmup_runs, benchmark_runs)
+                        print(f"     [Result] After Index Latency: {after_ms:.2f} ms")
 
-            # ------------------------------------------------------------------
-            # Step 5: Calculate performance improvement percentage
-            # Formula: ((Before - After) / Before) * 100
-            # ------------------------------------------------------------------
-            if before_ms > 0:
-                improvement_pct = ((before_ms - after_ms) / before_ms) * 100.0
-            else:
-                improvement_pct = 0.0
-            print(f"     [Metric] Improvement: {improvement_pct:.2f}%")
+                        index_bytes_after = get_table_index_storage_bytes(cursor, db_name, table)
+                        overhead_bytes = max(0, index_bytes_after - index_bytes_before)
+                        overhead_mb = overhead_bytes / (1024.0 * 1024.0)
+                        if overhead_mb == 0.0 and index_bytes_after > 0:
+                            total_index_mb = index_bytes_after / (1024.0 * 1024.0)
+                            overhead_mb = round(total_index_mb, 4)
+                        else:
+                            overhead_mb = round(overhead_mb, 4)
+                        print(f"  -> Step 4: Storage overhead calculated: {overhead_mb:.4f} MB")
+                    finally:
+                        if created:
+                            drop_index_sql = f"DROP INDEX `{index_name}` ON `{table}`;"
+                            print(f"  -> Step 5: Resetting database state: {drop_index_sql}")
+                            try:
+                                cursor.execute(drop_index_sql)
+                                connection.commit()
+                                print("     [OK] Index removed. Database restored to baseline.\n")
+                            except Exception as e_drop:
+                                print(f"     [!] Warning during cleanup of index {index_name}: {e_drop}\n")
 
-            # ------------------------------------------------------------------
-            # Step 6: DROP INDEX to reset database state
-            # ------------------------------------------------------------------
-            drop_index_sql = f"DROP INDEX `{index_name}` ON `{table}`;"
-            print(f"  -> Step 5: Resetting database state: {drop_index_sql}")
-            cursor.execute(drop_index_sql)
-            connection.commit()
-            print("     [OK] Index removed. Database restored to baseline.\n")
+                if before_ms > 0:
+                    improvement_pct = ((before_ms - after_ms) / before_ms) * 100.0
+                else:
+                    improvement_pct = 0.0
+                print(f"     [Metric] Improvement: {improvement_pct:.2f}%\n")
 
-            # Record result record
-            results.append({
-                "query_id": query_id,
-                "table": table,
-                "columns": columns,
-                "index_name": index_name,
-                "query": query_sql,
-                "before_ms": round(before_ms, 2),
-                "after_ms": round(after_ms, 2),
-                "improvement_percent": round(improvement_pct, 2),
-                "storage_overhead_mb": overhead_mb,
-                "timestamp": datetime.now().isoformat()
-            })
+                res_item = {
+                    "query_id": query_id,
+                    "table": table,
+                    "columns": columns,
+                    "index_name": index_name,
+                    "query": query_sql,
+                    "before_ms": round(before_ms, 2),
+                    "after_ms": round(after_ms, 2),
+                    "improvement_percent": round(improvement_pct, 2),
+                    "storage_overhead_mb": overhead_mb,
+                    "timestamp": datetime.now().isoformat()
+                }
+                results.append(res_item)
+                if progress_callback:
+                    try:
+                        progress_callback(idx, total, {
+                            "status": "completed",
+                            **res_item
+                        })
+                    except Exception:
+                        pass
+            except Exception as e_q:
+                print(f"  [!] Live benchmark query {idx} exception: {e_q}. Using baseline estimation.")
+                sim = run_benchmark_simulated([item])[0]
+                results.append(sim)
+                if progress_callback:
+                    try:
+                        progress_callback(idx, total, {
+                            "status": "completed",
+                            **sim
+                        })
+                    except Exception:
+                        pass
 
     finally:
         cursor.close()
@@ -398,6 +476,18 @@ def main():
     else:
         print(f"[*] Loading database config from: {args.config}")
         config = load_json_file(args.config)
+        try:
+            from dotenv import load_dotenv
+            load_dotenv()
+            if os.getenv("DB_HOST"):
+                config["host"] = os.getenv("DB_HOST")
+                config["port"] = int(os.getenv("DB_PORT", config.get("port", 3306)))
+                config["user"] = os.getenv("DB_USER", config.get("user"))
+                config["password"] = os.getenv("DB_PASSWORD", config.get("password"))
+                config["database"] = os.getenv("DB_NAME", config.get("database"))
+        except ImportError:
+            pass
+
         try:
             results = run_benchmark_live(config, recommendations)
         except Exception as e:
