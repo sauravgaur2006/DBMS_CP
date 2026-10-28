@@ -252,7 +252,6 @@ def get_table_counts():
 
 st.set_page_config(
     page_title="Automatic Index Recommendation — Benchmarking Dashboard",
-    page_icon="⚡",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -361,11 +360,11 @@ def load_benchmark_data(file_path_str: str):
 base_dir = Path(__file__).resolve().parent
 default_results_path = base_dir / "data" / "benchmark_results.json"
 
-st.sidebar.title("⚡ Control Panel")
+st.sidebar.title("Control Panel")
 st.sidebar.markdown("**Role**: Person 4 (Benchmark & Dashboard)")
 
 st.sidebar.markdown("---")
-st.sidebar.subheader("📁 Data Source")
+st.sidebar.subheader("Data Source")
 
 data_source_mode = st.sidebar.radio(
     "Select Input Method:",
@@ -390,28 +389,28 @@ else:
     else:
         st.sidebar.warning(f"File not found: `{default_results_path.name}`")
 
-if st.sidebar.button("🔄 Refresh Data", use_container_width=True):
+if st.sidebar.button("Refresh Data", use_container_width=True):
     st.cache_data.clear()
     st.rerun()
 
 st.sidebar.markdown("---")
-st.sidebar.subheader("⚡ Live Database Execution")
+st.sidebar.subheader("Live Database Execution")
 
 bench_mode = st.sidebar.radio(
     "Benchmark Mode:",
     [
-        "🎯 Quick Demo (5 Key Queries — ~5s)",
-        "⚡ Full Workload (All 49 Queries — ~45s)"
+        "Quick Demo (5 Key Queries, ~5s)",
+        "Full Workload (All 49 Queries, ~45s)"
     ],
     index=0,
     help="Quick Demo tests 5 representative queries across Student, Course, Enrollment, and Attendance in ~5s with real-time feedback."
 )
 
-if st.sidebar.button("🚀 Run Live Benchmark", use_container_width=True):
+if st.sidebar.button("Run Live Benchmark", use_container_width=True):
     prog_box = st.sidebar.container()
     prog_bar = prog_box.progress(0.0)
     prog_status = prog_box.empty()
-    prog_status.info("🔌 Connecting to MySQL database...")
+    prog_status.info("Connecting to MySQL database...")
 
     try:
         from benchmark import run_benchmark_live, run_benchmark_simulated, load_json_file, save_json_file
@@ -451,13 +450,13 @@ if st.sidebar.button("🚀 Run Live Benchmark", use_container_width=True):
             cols = data.get("columns", [])
             cols_str = ", ".join(cols) if isinstance(cols, list) else str(cols)
             if st_type == "running":
-                prog_status.markdown(f"⏳ **[{idx}/{total}]** Testing `{tbl}` (`{cols_str}`)...")
+                prog_status.markdown(f"**[{idx}/{total}]** Testing `{tbl}` (`{cols_str}`)...")
             else:
                 b_ms = data.get("before_ms", 0.0)
                 a_ms = data.get("after_ms", 0.0)
                 imp = data.get("improvement_percent", 0.0)
                 prog_status.markdown(
-                    f"✅ **[{idx}/{total}]** `{tbl}`: `{b_ms:.1f}ms` ➔ **`{a_ms:.1f}ms`** "
+                    f"**[{idx}/{total}]** `{tbl}`: `{b_ms:.1f}ms` ➔ **`{a_ms:.1f}ms`** "
                     f"({imp:+.1f}%)"
                 )
 
@@ -502,14 +501,14 @@ if st.sidebar.button("🚀 Run Live Benchmark", use_container_width=True):
 
         save_json_file(final_results, default_results_path)
         prog_bar.progress(1.0)
-        prog_status.success(f"🎉 Complete! Tested {len(new_results)} live queries.")
+        prog_status.success(f"Benchmark completed: evaluated {len(new_results)} live queries.")
         st.session_state["live_benchmark_ran"] = len(new_results)
         time.sleep(1.2)
         st.cache_data.clear()
         st.rerun()
 
     except Exception as e_total:
-        prog_status.error(f"❌ Error during benchmark: {e_total}")
+        prog_status.error(f"Error during benchmark: {e_total}")
 
 st.sidebar.markdown("---")
 st.sidebar.subheader("Team Pipeline Architecture")
@@ -525,8 +524,17 @@ st.sidebar.markdown("""
 # MAIN PAGE LAYOUT
 # ==============================================================================
 
-st.title("🚀 Automatic Index Recommendation System")
 st.markdown("""
+<div style='display: flex; align-items: center; gap: 14px; margin-bottom: 6px;'>
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1565C0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+    </svg>
+    <h1 style='margin: 0; padding: 0; font-size: 2.1rem; font-weight: 700; color: #0F172A; display: inline;'>
+        Automatic Index Recommendation System
+    </h1>
+</div>
 <div style='margin-bottom: 20px;'>
     <span class='pipeline-badge'>Person 4 Module</span>
     <span class='pipeline-badge'>MySQL Empirical Benchmark</span>
@@ -536,19 +544,19 @@ st.markdown("""
 
 if st.session_state.get("live_benchmark_ran"):
     st.success(
-        f"🟢 **Live Database Benchmark Active**: Successfully executed "
-        f"**{st.session_state['live_benchmark_ran']} live queries** against cloud MySQL! "
+        f"**Live Database Benchmark Active**: Successfully executed "
+        f"**{st.session_state['live_benchmark_ran']} live queries** against cloud MySQL. "
         f"Metrics and latency graphs below reflect empirical database execution times."
     )
 
 nav_mode = st.radio(
     "Navigation Tab:",
-    ["📊 Benchmark Performance Analytics", "🔍 Live MySQL Database Explorer"],
+    ["Benchmark Performance Analytics", "Live MySQL Database Explorer"],
     horizontal=True,
     label_visibility="collapsed"
 )
 
-if nav_mode == "📊 Benchmark Performance Analytics":
+if nav_mode == "Benchmark Performance Analytics":
     st.markdown("""
     Welcome to the empirical evaluation dashboard. This interface compares query execution latency 
     **before** and **after** creating candidate indexes recommended by the machine learning engine, 
@@ -556,7 +564,7 @@ if nav_mode == "📊 Benchmark Performance Analytics":
     """)
 
     if df_raw is None or df_raw.empty:
-        st.warning("⚠️ No benchmark results loaded yet.")
+        st.warning("No benchmark results loaded yet.")
         st.info("""
         To generate live benchmark data:
         1. Verify your MySQL database connection in `db_config.json`.
@@ -598,7 +606,7 @@ if nav_mode == "📊 Benchmark Performance Analytics":
     # 1. SUMMARY KPI CARDS
     # ==============================================================================
 
-    st.markdown("### 📊 Overall Performance & Cost Summary")
+    st.markdown("### Performance & Storage Summary")
 
     total_queries = len(df)
     avg_before = df["before_ms"].mean()
@@ -648,7 +656,7 @@ if nav_mode == "📊 Benchmark Performance Analytics":
     # 2. BEFORE VS AFTER LATENCY CHART
     # ==============================================================================
 
-    st.markdown("### ⏱️ Query Execution Time: Before vs. After Index")
+    st.markdown("### Query Execution Time: Before vs. After Index")
     st.caption("Lower execution time indicates faster query performance. Grouped bars show the direct effect of index creation.")
 
     # Prepare data for grouped bar chart
@@ -697,7 +705,7 @@ if nav_mode == "📊 Benchmark Performance Analytics":
     col_c1, col_c2 = st.columns([1, 1])
 
     with col_c1:
-        st.markdown("### 📈 Performance Improvement (%)")
+        st.markdown("### Performance Improvement (%)")
         st.caption("Percentage reduction in execution time achieved by adding the index.")
 
         fig_imp = px.bar(
@@ -719,7 +727,7 @@ if nav_mode == "📊 Benchmark Performance Analytics":
         st.plotly_chart(fig_imp, use_container_width=True)
 
     with col_c2:
-        st.markdown("### 💾 Storage Cost per Index (MB)")
+        st.markdown("### Storage Cost per Index (MB)")
         st.caption("Physical disk footprint allocated in MySQL data files for secondary index pages.")
 
         fig_storage = px.bar(
@@ -743,7 +751,7 @@ if nav_mode == "📊 Benchmark Performance Analytics":
     # 4. DETAILED BREAKDOWN TABLE
     # ==============================================================================
 
-    st.markdown("### 📋 Detailed Benchmark Records")
+    st.markdown("### Detailed Benchmark Records")
     st.caption("Inspect individual query parameters, index names, execution latencies, and storage costs.")
 
     display_columns = [
@@ -775,7 +783,7 @@ if nav_mode == "📊 Benchmark Performance Analytics":
     )
 
     # Expandable Query SQL Viewer
-    with st.expander("🔍 View Raw SQL Queries Benchmarked"):
+    with st.expander("View Raw SQL Queries Benchmarked"):
         for _, row in df.iterrows():
             st.markdown(f"**Query {row['query_id']}** (`{row['table']}` → `{row['index_name']}`):")
             st.code(row.get("query", "N/A"), language="sql")
@@ -785,7 +793,7 @@ if nav_mode == "📊 Benchmark Performance Analytics":
     # 5. EDUCATIONAL INSIGHTS & THEORY ("THE WHY")
     # ==============================================================================
 
-    with st.expander("📚 Educational Deep Dive: How Indexing & Benchmarking Work"):
+    with st.expander("Technical Background: Indexing Architecture & Measurement Methodology"):
         st.markdown("""
         #### 1. Why did the execution time decrease?
         Without an index, MySQL must inspect every single row in the table one by one (**Full Table Scan**, $O(N)$ time complexity).
@@ -809,14 +817,14 @@ else:
     db_port = cfg.get("port", 3306)
     db_type = "Local MySQL 8.0" if db_host in ("localhost", "127.0.0.1") else "Cloud MySQL 8.0"
 
-    st.markdown(f"### 🔍 Live MySQL Database Explorer (`{db_name}`)")
+    st.markdown(f"### Live MySQL Database Explorer: `{db_name}`")
     st.markdown(f"""
     Direct inspection of the live **{db_type}** cluster (`{db_host}:{db_port}`). Explore physical record counts,
     browse actual table rows, inspect MySQL B+Tree indexes, and execute custom SQL queries.
     """)
 
     if not cfg:
-        st.warning("⚠️ No database configuration detected. Please check `.env` or Streamlit Secrets.")
+        st.warning("No database configuration detected. Please check `.env` or Streamlit Secrets.")
     else:
         # Upfront connection test
         db_conn, conn_err = get_db_connection(cfg)
@@ -826,44 +834,36 @@ else:
                 db_conn.close()
             except Exception:
                 pass
-            st.success(f"🟢 **Live Database Connected**: `{db_name}` on `{db_host}:{db_port}` (User: `{cfg.get('user', 'indexrec_user')}`)")
+            st.success(f"**Live Database Connected**: `{db_name}` on `{db_host}:{db_port}` (User: `{cfg.get('user', 'indexrec_user')}`)")
             db_ready = True
         else:
-            st.warning(f"⚠️ **Could not connect to database (`{db_host}:{db_port}`)**: {conn_err}")
+            st.warning(f"Could not connect to database (`{db_host}:{db_port}`): {conn_err}")
             st.info("""
-            💡 **Streamlit Cloud Troubleshooting**:
+            **Connection Troubleshooting**:
             - **Is your Aiven service active?** Free trial clusters may auto-suspend after inactivity. Check your [Aiven Console](https://console.aiven.io/) to confirm the service is **Running**.
-            - **Streamlit Secrets format:** In **Streamlit App Settings ➔ Secrets**, you can paste the Aiven Service URI directly:
+            - **Streamlit Secrets format:** In **Streamlit App Settings ➔ Secrets**, paste your Service URI:
               ```toml
               DB_URI = "mysql://avnadmin:your_password@your-host:24887/defaultdb?ssl-mode=REQUIRED"
-              ```
-              or the individual keys:
-              ```toml
-              DB_HOST = "your-host.aivencloud.com"
-              DB_PORT = 24887
-              DB_USER = "avnadmin"
-              DB_PASSWORD = "your_password"
-              DB_NAME = "defaultdb"
               ```
             """)
 
         # 1. Real-time Summary Cards
         counts = get_table_counts()
         total_recs = sum(counts.values())
-        st.markdown(f"#### 📦 Database Table Overview ({total_recs:,} Total Records)")
+        st.markdown(f"#### Database Table Overview ({total_recs:,} Total Records)")
         col1, col2, col3, col4 = st.columns(4)
-        col1.metric("👨‍🎓 Student", f"{counts.get('Student', 10000):,} rows", "Clustered B+Tree")
-        col2.metric("📚 Course", f"{counts.get('Course', 500):,} rows", "Clustered B+Tree")
-        col3.metric("📝 Enrollment", f"{counts.get('Enrollment', 50000):,} rows", "Indexed by student/course")
-        col4.metric("📅 Attendance", f"{counts.get('Attendance', 100000):,} rows", "High-cardinality log")
+        col1.metric("Student", f"{counts.get('Student', 10000):,} rows", "Clustered B+Tree")
+        col2.metric("Course", f"{counts.get('Course', 500):,} rows", "Clustered B+Tree")
+        col3.metric("Enrollment", f"{counts.get('Enrollment', 50000):,} rows", "Indexed by student/course")
+        col4.metric("Attendance", f"{counts.get('Attendance', 100000):,} rows", "High-cardinality log")
 
         st.markdown("---")
 
         if not db_ready:
-            st.info("ℹ️ The interactive row browser and live SQL console will activate once your database is reachable. The **Benchmark Performance Analytics** dashboard remains fully accessible.")
+            st.info("The interactive row browser and live SQL console will activate once your database is reachable. The **Benchmark Performance Analytics** dashboard remains fully accessible.")
         else:
             # 2. Table Data Browser
-            st.markdown("#### 📋 Interactive Table Record Browser")
+            st.markdown("#### Table Record Browser")
             col_t1, col_t2 = st.columns([2, 1])
             with col_t1:
                 inspect_table = st.selectbox("Select Table to View:", ["Student", "Course", "Enrollment", "Attendance"])
@@ -873,13 +873,13 @@ else:
             with st.spinner(f"Querying `{inspect_table}` from database..."):
                 df_preview, fetch_ms = run_readonly_sql(f"SELECT * FROM `{inspect_table}` LIMIT {row_limit};")
                 if df_preview is not None:
-                    st.caption(f"⚡ Fetched {len(df_preview)} records from `{inspect_table}` in **{fetch_ms:.1f} ms**.")
+                    st.caption(f"Fetched {len(df_preview)} records from `{inspect_table}` in **{fetch_ms:.1f} ms**.")
                     st.dataframe(df_preview, use_container_width=True)
                 else:
                     st.error(f"Error querying table: {fetch_ms}")
 
             # 3. Active Physical Indexes & Schema Inspector
-            with st.expander(f"⚙️ View Physical Indexes & Schema for `{inspect_table}`"):
+            with st.expander(f"Physical Indexes & Schema for `{inspect_table}`"):
                 col_i1, col_i2 = st.columns([1, 1])
                 with col_i1:
                     st.markdown(f"**Physical Indexes on `{inspect_table}`:**")
@@ -896,21 +896,21 @@ else:
             st.markdown("---")
 
             # 4. Custom SQL Query Console
-            st.markdown("#### ⚡ Live SQL Query Console")
+            st.markdown("#### SQL Query Console")
             st.markdown("Run custom `SELECT`, `SHOW`, `EXPLAIN`, or `DESCRIBE` queries directly against the database:")
             default_query = f"SELECT * FROM `{inspect_table}` LIMIT 10;"
             user_query = st.text_area("SQL Statement:", value=default_query, height=85)
 
-            if st.button("▶ Execute SQL Query", key="btn_exec_sql"):
+            if st.button("Execute SQL Query", key="btn_exec_sql"):
                 clean_q = user_query.strip().rstrip(";")
                 cmd_verb = clean_q.split()[0].upper() if clean_q else ""
                 if cmd_verb not in ("SELECT", "SHOW", "EXPLAIN", "DESCRIBE"):
-                    st.warning("⚠️ For database safety, this web console only allows `SELECT`, `SHOW`, `EXPLAIN`, and `DESCRIBE` queries.")
+                    st.warning("Notice: For database safety, this web console only allows SELECT, SHOW, EXPLAIN, and DESCRIBE queries.")
                 else:
                     with st.spinner("Executing query on MySQL..."):
                         df_custom, q_ms = run_readonly_sql(clean_q)
                         if df_custom is not None:
-                            st.success(f"✅ Returned {len(df_custom)} rows in **{q_ms:.1f} ms**.")
+                            st.success(f"Returned {len(df_custom)} rows in **{q_ms:.1f} ms**.")
                             st.dataframe(df_custom, use_container_width=True)
                         else:
                             st.error(f"Query Error: {q_ms}")
