@@ -277,11 +277,14 @@ st.markdown("""
     }
     .pipeline-badge {
         display: inline-block;
-        background: #E3F2FD;
-        color: #1565C0;
-        padding: 4px 10px;
-        border-radius: 12px;
+        background: rgba(56, 189, 248, 0.12);
+        color: #38BDF8;
+        border: 1px solid rgba(56, 189, 248, 0.28);
+        padding: 4px 12px;
+        border-radius: 14px;
         margin-right: 6px;
+        font-weight: 500;
+        font-size: 13px;
     }
 
     /* Hide default Streamlit footer & branding */
@@ -525,13 +528,13 @@ st.sidebar.markdown("""
 # ==============================================================================
 
 st.markdown("""
-<div style='display: flex; align-items: center; gap: 14px; margin-bottom: 6px;'>
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1565C0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<div style='display: flex; align-items: center; gap: 14px; margin-bottom: 8px;'>
+    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
         <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
         <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
         <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
     </svg>
-    <h1 style='margin: 0; padding: 0; font-size: 2.1rem; font-weight: 700; color: #0F172A; display: inline;'>
+    <h1 style='margin: 0; padding: 0; font-size: 2.1rem; font-weight: 700; color: var(--text-color, inherit); display: inline;'>
         Automatic Index Recommendation System
     </h1>
 </div>
