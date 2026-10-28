@@ -55,46 +55,169 @@ from benchmark import load_benchmark_dataframe
 
 base_dir = Path(__file__).resolve().parent
 
+from urllib.parse import urlparse
+
+def parse_service_uri(uri_str):
+    if not uri_str:
+        return {}
+    try:
+        parsed = urlparse(uri_str)
+        return {
+            "host": parsed.hostname or "localhost",
+            "port": int(parsed.port or 3306),
+            "user": parsed.username or "avnadmin",
+            "password": parsed.password or "",
+            "database": parsed.path.lstrip('/') or "defaultdb",
+        }
+    except Exception:
+        return {}
+
+def resolve_host(h: str) -> str:
+    if not h or h in ("localhost", "127.0.0.1"):
+        return h
+    try:
+        import socket
+        return socket.gethostbyname(h)
+    except Exception:
+        try:
+            import urllib.request
+            url = f"https://dns.google/resolve?name={h}"
+            res = json.loads(urllib.request.urlopen(url, timeout=3).read().decode("utf-8"))
+            for ans in res.get("Answer", []):
+                if ans.get("type") == 1:
+                    return ans["data"]
+        except Exception:
+            pass
+    return h
+
 def get_db_config():
-    if hasattr(st, "secrets") and "DB_HOST" in st.secrets:
-        return {
-            "host": st.secrets["DB_HOST"],
-            "port": int(st.secrets.get("DB_PORT", 3306)),
-            "user": st.secrets.get("DB_USER", "root"),
-            "password": st.secrets.get("DB_PASSWORD", ""),
-            "database": st.secrets.get("DB_NAME", "defaultdb"),
-        }
-    if os.getenv("DB_HOST"):
-        return {
-            "host": os.getenv("DB_HOST"),
-            "port": int(os.getenv("DB_PORT", 3306)),
-            "user": os.getenv("DB_USER"),
-            "password": os.getenv("DB_PASSWORD", ""),
-            "database": os.getenv("DB_NAME"),
-        }
+    try:
+        from dotenv import load_dotenv
+        load_dotenv()
+    except Exception:
+        pass
+
+    cfg = {}
     cfg_file = base_dir / "db_config.json"
     if cfg_file.exists():
-        with open(cfg_file) as f:
-            return json.load(f)
-    return {}
+        try:
+            with open(cfg_file) as f:
+                cfg = json.load(f)
+        except Exception:
+            cfg = {}
+
+    # 1. Streamlit Secrets (Cloud deployment)
+    try:
+        if hasattr(st, "secrets"):
+            for k in ("DB_URI", "MYSQL_URL", "DATABASE_URL"):
+                if k in st.secrets and st.secrets[k]:
+                    parsed = parse_service_uri(str(st.secrets[k]))
+                    if parsed:
+                        parsed["warmup_runs"] = cfg.get("warmup_runs", 1)
+                        parsed["benchmark_runs"] = cfg.get("benchmark_runs", 3)
+                        return parsed
+
+            sec_host = st.secrets.get("DB_HOST", st.secrets.get("host"))
+            if sec_host:
+                default_user = "avnadmin" if "aivencloud" in str(sec_host).lower() else "indexrec_user"
+                default_db = "defaultdb" if "aivencloud" in str(sec_host).lower() else cfg.get("database", "index_recommender")
+                return {
+                    "host": str(sec_host).strip(),
+                    "port": int(st.secrets.get("DB_PORT", st.secrets.get("port", 3306))),
+                    "user": str(st.secrets.get("DB_USER", st.secrets.get("user", default_user))).strip(),
+                    "password": str(st.secrets.get("DB_PASSWORD", st.secrets.get("password", ""))).strip(),
+                    "database": str(st.secrets.get("DB_NAME", st.secrets.get("database", default_db))).strip(),
+                    "warmup_runs": cfg.get("warmup_runs", 1),
+                    "benchmark_runs": cfg.get("benchmark_runs", 3),
+                }
+    except Exception:
+        pass
+
+    # 2. Environment Variables (.env / system env)
+    for k in ("DB_URI", "MYSQL_URL", "DATABASE_URL"):
+        if os.getenv(k):
+            parsed = parse_service_uri(os.getenv(k))
+            if parsed:
+                parsed["warmup_runs"] = cfg.get("warmup_runs", 1)
+                parsed["benchmark_runs"] = cfg.get("benchmark_runs", 3)
+                return parsed
+
+    if os.getenv("DB_HOST"):
+        env_host = os.getenv("DB_HOST")
+        default_user = "avnadmin" if "aivencloud" in env_host.lower() else cfg.get("user", "indexrec_user")
+        default_db = "defaultdb" if "aivencloud" in env_host.lower() else cfg.get("database", "index_recommender")
+        return {
+            "host": env_host.strip(),
+            "port": int(os.getenv("DB_PORT", cfg.get("port", 3306))),
+            "user": os.getenv("DB_USER", default_user).strip(),
+            "password": str(os.getenv("DB_PASSWORD", cfg.get("password", ""))).strip(),
+            "database": os.getenv("DB_NAME", default_db).strip(),
+            "warmup_runs": cfg.get("warmup_runs", 1),
+            "benchmark_runs": cfg.get("benchmark_runs", 3),
+        }
+
+    if cfg:
+        return cfg
+
+    return {
+        "host": "localhost",
+        "port": 3306,
+        "user": "indexrec_user",
+        "password": "",
+        "database": "index_recommender",
+        "warmup_runs": 1,
+        "benchmark_runs": 3,
+    }
+
+def get_db_connection(cfg):
+    import mysql.connector
+    raw_host = cfg.get("host", "localhost")
+    resolved_host = resolve_host(raw_host)
+    kwargs = {
+        "host": resolved_host,
+        "port": int(cfg.get("port", 3306)),
+        "user": cfg.get("user", "indexrec_user"),
+        "password": str(cfg.get("password", "")),
+        "database": cfg.get("database", "index_recommender"),
+        "connection_timeout": 5,
+    }
+    if raw_host not in ("localhost", "127.0.0.1"):
+        kwargs["ssl_disabled"] = False
+    try:
+        conn = mysql.connector.connect(**kwargs)
+        return conn, None
+    except Exception as e_primary:
+        # Fallback to local config if remote host is unreachable or fails
+        if raw_host not in ("localhost", "127.0.0.1"):
+            cfg_file = base_dir / "db_config.json"
+            if cfg_file.exists():
+                try:
+                    with open(cfg_file) as f:
+                        local_cfg = json.load(f)
+                    local_kwargs = {
+                        "host": local_cfg.get("host", "localhost"),
+                        "port": int(local_cfg.get("port", 3306)),
+                        "user": local_cfg.get("user", "indexrec_user"),
+                        "password": str(local_cfg.get("password", "")),
+                        "database": local_cfg.get("database", "index_recommender"),
+                        "connection_timeout": 5,
+                    }
+                    conn = mysql.connector.connect(**local_kwargs)
+                    return conn, None
+                except Exception:
+                    pass
+        return None, str(e_primary)
 
 def run_readonly_sql(query_str, limit=500):
     cfg = get_db_config()
     if not cfg:
         return None, "Database configuration not found."
-    import mysql.connector
-    kwargs = {
-        "host": cfg.get("host", "localhost"),
-        "port": int(cfg.get("port", 3306)),
-        "user": cfg.get("user", "avnadmin"),
-        "password": cfg.get("password", ""),
-        "database": cfg.get("database", "defaultdb"),
-    }
-    if kwargs["host"] not in ("localhost", "127.0.0.1"):
-        kwargs["ssl_disabled"] = False
-    
+
     t0 = time.perf_counter()
-    conn = mysql.connector.connect(**kwargs)
+    conn, err = get_db_connection(cfg)
+    if err or conn is None:
+        return None, f"Connection failed: {err}"
+
     try:
         cur = conn.cursor(dictionary=True)
         cur.execute(query_str)
@@ -105,7 +228,23 @@ def run_readonly_sql(query_str, limit=500):
     except Exception as e:
         return None, str(e)
     finally:
-        conn.close()
+        try:
+            if conn and conn.is_connected():
+                conn.close()
+        except Exception:
+            pass
+
+@st.cache_data(ttl=60)
+def get_table_counts():
+    counts = {}
+    for tbl in ["Student", "Course", "Enrollment", "Attendance"]:
+        df_c, _ = run_readonly_sql(f"SELECT COUNT(*) as cnt FROM `{tbl}`;")
+        if df_c is not None and not df_c.empty:
+            counts[tbl] = int(df_c.iloc[0]["cnt"])
+        else:
+            default_counts = {"Student": 10000, "Course": 500, "Enrollment": 50000, "Attendance": 100000}
+            counts[tbl] = default_counts.get(tbl, 0)
+    return counts
 
 # ==============================================================================
 # PAGE CONFIGURATION & STYLING
@@ -277,27 +416,8 @@ if st.sidebar.button("🚀 Run Live Benchmark", use_container_width=True):
     try:
         from benchmark import run_benchmark_live, run_benchmark_simulated, load_json_file, save_json_file
         
-        # Load config from st.secrets, .env, or db_config.json
-        cfg = {}
-        if hasattr(st, "secrets") and "DB_HOST" in st.secrets:
-            cfg = {
-                "host": st.secrets["DB_HOST"],
-                "port": int(st.secrets.get("DB_PORT", 3306)),
-                "user": st.secrets.get("DB_USER", "root"),
-                "password": st.secrets.get("DB_PASSWORD", ""),
-                "database": st.secrets.get("DB_NAME", "defaultdb"),
-            }
-        elif os.getenv("DB_HOST"):
-            cfg = {
-                "host": os.getenv("DB_HOST"),
-                "port": int(os.getenv("DB_PORT", 3306)),
-                "user": os.getenv("DB_USER"),
-                "password": os.getenv("DB_PASSWORD", ""),
-                "database": os.getenv("DB_NAME"),
-            }
-        elif (base_dir / "db_config.json").exists():
-            cfg = load_json_file(base_dir / "db_config.json")
-
+        # Load config using unified get_db_config
+        cfg = get_db_config()
         cfg["warmup_runs"] = 1
         cfg["benchmark_runs"] = 1
 
@@ -344,8 +464,21 @@ if st.sidebar.button("🚀 Run Live Benchmark", use_container_width=True):
         try:
             new_results = run_benchmark_live(cfg, target_recs, progress_callback=on_bench_progress)
         except Exception as e_live:
-            prog_status.warning(f"Live DB note: {e_live}. Using simulation fallback.")
-            new_results = run_benchmark_simulated(target_recs)
+            fallback_success = False
+            if cfg.get("host") not in ("localhost", "127.0.0.1"):
+                cfg_file = base_dir / "db_config.json"
+                if cfg_file.exists():
+                    try:
+                        local_cfg = load_json_file(cfg_file)
+                        local_cfg["warmup_runs"] = 1
+                        local_cfg["benchmark_runs"] = 1
+                        new_results = run_benchmark_live(local_cfg, target_recs, progress_callback=on_bench_progress)
+                        fallback_success = True
+                    except Exception:
+                        pass
+            if not fallback_success:
+                prog_status.warning(f"Live DB note: {e_live}. Using simulation fallback.")
+                new_results = run_benchmark_simulated(target_recs)
 
         # Merge newly tested results into benchmark_results.json
         if default_results_path.exists():
@@ -670,78 +803,117 @@ if nav_mode == "📊 Benchmark Performance Analytics":
         """)
 
 else:
-    st.markdown("### 🔍 Live Cloud MySQL Database Explorer (`defaultdb`)")
-    st.markdown("""
-    Direct inspection of the live **Aiven Cloud MySQL 8.0** cluster. Explore physical record counts,
+    cfg = get_db_config()
+    db_host = cfg.get("host", "localhost")
+    db_name = cfg.get("database", "index_recommender")
+    db_port = cfg.get("port", 3306)
+    db_type = "Local MySQL 8.0" if db_host in ("localhost", "127.0.0.1") else "Cloud MySQL 8.0"
+
+    st.markdown(f"### 🔍 Live MySQL Database Explorer (`{db_name}`)")
+    st.markdown(f"""
+    Direct inspection of the live **{db_type}** cluster (`{db_host}:{db_port}`). Explore physical record counts,
     browse actual table rows, inspect MySQL B+Tree indexes, and execute custom SQL queries.
     """)
 
-    cfg = get_db_config()
     if not cfg:
         st.warning("⚠️ No database configuration detected. Please check `.env` or Streamlit Secrets.")
     else:
+        # Upfront connection test
+        db_conn, conn_err = get_db_connection(cfg)
+        db_ready = False
+        if db_conn is not None:
+            try:
+                db_conn.close()
+            except Exception:
+                pass
+            st.success(f"🟢 **Live Database Connected**: `{db_name}` on `{db_host}:{db_port}` (User: `{cfg.get('user', 'indexrec_user')}`)")
+            db_ready = True
+        else:
+            st.warning(f"⚠️ **Could not connect to database (`{db_host}:{db_port}`)**: {conn_err}")
+            st.info("""
+            💡 **Streamlit Cloud Troubleshooting**:
+            - **Is your Aiven service active?** Free trial clusters may auto-suspend after inactivity. Check your [Aiven Console](https://console.aiven.io/) to confirm the service is **Running**.
+            - **Streamlit Secrets format:** In **Streamlit App Settings ➔ Secrets**, you can paste the Aiven Service URI directly:
+              ```toml
+              DB_URI = "mysql://avnadmin:your_password@your-host:24887/defaultdb?ssl-mode=REQUIRED"
+              ```
+              or the individual keys:
+              ```toml
+              DB_HOST = "your-host.aivencloud.com"
+              DB_PORT = 24887
+              DB_USER = "avnadmin"
+              DB_PASSWORD = "your_password"
+              DB_NAME = "defaultdb"
+              ```
+            """)
+
         # 1. Real-time Summary Cards
-        st.markdown("#### 📦 Database Table Overview (160,500 Total Records)")
+        counts = get_table_counts()
+        total_recs = sum(counts.values())
+        st.markdown(f"#### 📦 Database Table Overview ({total_recs:,} Total Records)")
         col1, col2, col3, col4 = st.columns(4)
-        col1.metric("👨‍🎓 Student", "10,000 rows", "Clustered B+Tree")
-        col2.metric("📚 Course", "500 rows", "Clustered B+Tree")
-        col3.metric("📝 Enrollment", "50,000 rows", "Indexed by student/course")
-        col4.metric("📅 Attendance", "100,000 rows", "High-cardinality log")
+        col1.metric("👨‍🎓 Student", f"{counts.get('Student', 10000):,} rows", "Clustered B+Tree")
+        col2.metric("📚 Course", f"{counts.get('Course', 500):,} rows", "Clustered B+Tree")
+        col3.metric("📝 Enrollment", f"{counts.get('Enrollment', 50000):,} rows", "Indexed by student/course")
+        col4.metric("📅 Attendance", f"{counts.get('Attendance', 100000):,} rows", "High-cardinality log")
 
         st.markdown("---")
 
-        # 2. Table Data Browser
-        st.markdown("#### 📋 Interactive Table Record Browser")
-        col_t1, col_t2 = st.columns([2, 1])
-        with col_t1:
-            inspect_table = st.selectbox("Select Table to View:", ["Student", "Course", "Enrollment", "Attendance"])
-        with col_t2:
-            row_limit = st.select_slider("Rows to Preview:", options=[10, 25, 50, 100, 250, 500], value=50)
+        if not db_ready:
+            st.info("ℹ️ The interactive row browser and live SQL console will activate once your database is reachable. The **Benchmark Performance Analytics** dashboard remains fully accessible.")
+        else:
+            # 2. Table Data Browser
+            st.markdown("#### 📋 Interactive Table Record Browser")
+            col_t1, col_t2 = st.columns([2, 1])
+            with col_t1:
+                inspect_table = st.selectbox("Select Table to View:", ["Student", "Course", "Enrollment", "Attendance"])
+            with col_t2:
+                row_limit = st.select_slider("Rows to Preview:", options=[10, 25, 50, 100, 250, 500], value=50)
 
-        with st.spinner(f"Querying `{inspect_table}` from cloud database..."):
-            df_preview, fetch_ms = run_readonly_sql(f"SELECT * FROM `{inspect_table}` LIMIT {row_limit};")
-            if df_preview is not None:
-                st.caption(f"⚡ Fetched {len(df_preview)} records from `{inspect_table}` in **{fetch_ms:.1f} ms**.")
-                st.dataframe(df_preview, use_container_width=True)
-            else:
-                st.error(f"Error querying table: {fetch_ms}")
+            with st.spinner(f"Querying `{inspect_table}` from database..."):
+                df_preview, fetch_ms = run_readonly_sql(f"SELECT * FROM `{inspect_table}` LIMIT {row_limit};")
+                if df_preview is not None:
+                    st.caption(f"⚡ Fetched {len(df_preview)} records from `{inspect_table}` in **{fetch_ms:.1f} ms**.")
+                    st.dataframe(df_preview, use_container_width=True)
+                else:
+                    st.error(f"Error querying table: {fetch_ms}")
 
-        # 3. Active Physical Indexes & Schema Inspector
-        with st.expander(f"⚙️ View Physical Indexes & Schema for `{inspect_table}`"):
-            col_i1, col_i2 = st.columns([1, 1])
-            with col_i1:
-                st.markdown(f"**Physical Indexes on `{inspect_table}`:**")
-                df_idx, _ = run_readonly_sql(f"SHOW INDEX FROM `{inspect_table}`;")
-                if df_idx is not None and not df_idx.empty:
-                    st.dataframe(df_idx[["Key_name", "Column_name", "Seq_in_index", "Index_type", "Non_unique"]], use_container_width=True)
-            with col_i2:
-                st.markdown(f"**DDL Schema definition:**")
-                df_create, _ = run_readonly_sql(f"SHOW CREATE TABLE `{inspect_table}`;")
-                if df_create is not None and not df_create.empty:
-                    create_sql = df_create.iloc[0, 1]
-                    st.code(create_sql, language="sql")
+            # 3. Active Physical Indexes & Schema Inspector
+            with st.expander(f"⚙️ View Physical Indexes & Schema for `{inspect_table}`"):
+                col_i1, col_i2 = st.columns([1, 1])
+                with col_i1:
+                    st.markdown(f"**Physical Indexes on `{inspect_table}`:**")
+                    df_idx, _ = run_readonly_sql(f"SHOW INDEX FROM `{inspect_table}`;")
+                    if df_idx is not None and not df_idx.empty:
+                        st.dataframe(df_idx[["Key_name", "Column_name", "Seq_in_index", "Index_type", "Non_unique"]], use_container_width=True)
+                with col_i2:
+                    st.markdown(f"**DDL Schema definition:**")
+                    df_create, _ = run_readonly_sql(f"SHOW CREATE TABLE `{inspect_table}`;")
+                    if df_create is not None and not df_create.empty:
+                        create_sql = df_create.iloc[0, 1]
+                        st.code(create_sql, language="sql")
 
-        st.markdown("---")
+            st.markdown("---")
 
-        # 4. Custom SQL Query Console
-        st.markdown("#### ⚡ Live SQL Query Console")
-        st.markdown("Run custom `SELECT`, `SHOW`, or `EXPLAIN` queries directly against the cloud database:")
-        default_query = f"SELECT * FROM `{inspect_table}` LIMIT 10;"
-        user_query = st.text_area("SQL Statement:", value=default_query, height=85)
+            # 4. Custom SQL Query Console
+            st.markdown("#### ⚡ Live SQL Query Console")
+            st.markdown("Run custom `SELECT`, `SHOW`, `EXPLAIN`, or `DESCRIBE` queries directly against the database:")
+            default_query = f"SELECT * FROM `{inspect_table}` LIMIT 10;"
+            user_query = st.text_area("SQL Statement:", value=default_query, height=85)
 
-        if st.button("▶ Execute SQL Query", key="btn_exec_sql"):
-            clean_q = user_query.strip().rstrip(";")
-            cmd_verb = clean_q.split()[0].upper() if clean_q else ""
-            if cmd_verb not in ("SELECT", "SHOW", "EXPLAIN", "DESCRIBE"):
-                st.warning("⚠️ For database safety, this web console only allows `SELECT`, `SHOW`, `EXPLAIN`, and `DESCRIBE` queries.")
-            else:
-                with st.spinner("Executing on Aiven MySQL..."):
-                    df_custom, q_ms = run_readonly_sql(clean_q)
-                    if df_custom is not None:
-                        st.success(f"✅ Returned {len(df_custom)} rows in **{q_ms:.1f} ms**.")
-                        st.dataframe(df_custom, use_container_width=True)
-                    else:
-                        st.error(f"Query Error: {q_ms}")
+            if st.button("▶ Execute SQL Query", key="btn_exec_sql"):
+                clean_q = user_query.strip().rstrip(";")
+                cmd_verb = clean_q.split()[0].upper() if clean_q else ""
+                if cmd_verb not in ("SELECT", "SHOW", "EXPLAIN", "DESCRIBE"):
+                    st.warning("⚠️ For database safety, this web console only allows `SELECT`, `SHOW`, `EXPLAIN`, and `DESCRIBE` queries.")
+                else:
+                    with st.spinner("Executing query on MySQL..."):
+                        df_custom, q_ms = run_readonly_sql(clean_q)
+                        if df_custom is not None:
+                            st.success(f"✅ Returned {len(df_custom)} rows in **{q_ms:.1f} ms**.")
+                            st.dataframe(df_custom, use_container_width=True)
+                        else:
+                            st.error(f"Query Error: {q_ms}")
 
 
 st.markdown("---")

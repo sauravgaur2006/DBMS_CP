@@ -11,6 +11,7 @@ env/
 # Environment variables & credentials (NEVER commit)
 .env
 .streamlit/credentials.toml
+.streamlit/secrets.toml
 
 # IDE
 .idea/

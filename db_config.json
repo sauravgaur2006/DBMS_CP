@@ -2,7 +2,7 @@
   "host": "localhost",
   "port": 3306,
   "user": "indexrec_user",
-  "password": "",
+  "password": "DBMS_CP",
   "database": "index_recommender",
   "warmup_runs": 1,
   "benchmark_runs": 3
